@@ -122,12 +122,12 @@ Vector3f GeneratePointCloud::quaternionToEuler(Quaternionf q) {
 }
 
 
-vector<string> GeneratePointCloud::generate_pointcloud(const string& rgb_file, const string& depth_file, const Matrix4f& transforms)
+void GeneratePointCloud::generate_pointcloud(const string& rgb_file, const string& depth_file, const Matrix4f& transforms)
 {
     Mat rgb = imread(rgb_file);
     Mat depth = imread(depth_file, cv::IMREAD_UNCHANGED);
 
-    std::vector<std::string> points;
+    Points add_points;
     for (int v = 0; v < rgb.rows; v += 1) {
         for (int u = 0; u < rgb.cols; u += 1) {
             Vec3b color = rgb.at<Vec3b>(v, u);
@@ -139,16 +139,16 @@ vector<string> GeneratePointCloud::generate_pointcloud(const string& rgb_file, c
             double Y = (v - centerY) * Z / focalLength_y;
             Vector4f vec_org(X, Y, Z, 1);
             Vector4f vec_transf = transforms * vec_org;
-            points.push_back(to_string(vec_transf[0]) + " " + to_string(vec_transf[1]) + " " + 
-                to_string(vec_transf[2]) + " " + to_string(color[0]) + " " + to_string(color[1]) 
-                + " " + to_string(color[2]) + "\n");
+
+            add_points={vec_transf[0], vec_transf[1], vec_transf[2], color[0], color[1], color[2]};
+            points.push_back(add_points);
         }
     }
 
-    return points;
+    //return points;
 }
 
-void GeneratePointCloud::write_ply(string ply_file, vector<string> points)
+void GeneratePointCloud::write_ply(string ply_file, vector<Points> points)
 {
     std::ofstream file(ply_file);
     file << "ply\n";
@@ -160,10 +160,10 @@ void GeneratePointCloud::write_ply(string ply_file, vector<string> points)
     file << "property uchar red\n";
     file << "property uchar green\n";
     file << "property uchar blue\n";
-    // file << "property uchar alpha\n";
     file << "end_header\n";
     for (auto point : points) {
-        file << point << "\n";
+        file << to_string(point.x) + " " + to_string(point.y) + " " + to_string(point.z) 
+                + " " + to_string(point.red) + " " + to_string(point.green) + " " + to_string(point.blue) << "\n";
     }
     file.close();
 }
