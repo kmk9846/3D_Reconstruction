@@ -79,14 +79,50 @@ vector<tuple<double, double, double> > GeneratePointCloud::associate_three(vecto
     return rgb_pose_depth;
 }
 
-Matrix4d GeneratePointCloud::toHomogeneousMatrix(const Vector3d& v)
-{
-    Matrix4d m = Matrix4d::Identity();
-    m.block<3,1>(0,3) = v;
-    return m;
+Matrix4f GeneratePointCloud::createTransformMatrix(const Vector3f& position, const Vector3f& eulerAngles) {
+    // Convert Euler angles to radians
+    Vector3f angles = eulerAngles * (M_PI / 180.0f);
+
+    // Create rotation matrix
+    AngleAxisf pitchAngle(angles.x(), Eigen::Vector3f::UnitX());
+    AngleAxisf yawAngle(angles.y(), Eigen::Vector3f::UnitY());
+    AngleAxisf rollAngle(angles.z(), Eigen::Vector3f::UnitZ());
+    Quaternionf q = rollAngle * yawAngle * pitchAngle;
+    Matrix3f rotation = q.matrix();
+
+    // Create transform matrix
+    Eigen::Affine3f transform = Translation3f(position) * Eigen::Affine3f(rotation);
+    Matrix4f transformMatrix = transform.matrix();
+
+    return transformMatrix;
 }
 
-vector<string> GeneratePointCloud::generate_pointcloud(const string& rgb_file, const string& depth_file, const Matrix4d& transforms)
+
+Vector3f GeneratePointCloud::quaternionToEuler(Quaternionf q) {
+    // Quaternion을 회전 행렬로 변환
+    Matrix3f rotMatrix = q.toRotationMatrix();
+
+    float pitch, yaw, roll;
+
+    // pitch 계산
+    pitch = asin(rotMatrix(1, 2));
+    if (cos(pitch) != 0) {
+        // yaw 계산
+        yaw = atan2(-rotMatrix(0, 2), rotMatrix(2, 2));
+        // roll 계산
+        roll = atan2(-rotMatrix(1, 0), rotMatrix(1, 1));
+    } else {
+        // pitch = 90도 경우, yaw = 0으로 가정
+        yaw = 0;
+        // roll = yaw + atan2(m12, m22)로 계산
+        roll = atan2(rotMatrix(0, 1), rotMatrix(0, 0));
+    }
+
+    return Vector3f(pitch, yaw, roll).array() * 180.0 / M_PI;
+}
+
+
+vector<string> GeneratePointCloud::generate_pointcloud(const string& rgb_file, const string& depth_file, const Matrix4f& transforms)
 {
     Mat rgb = imread(rgb_file);
     Mat depth = imread(depth_file, cv::IMREAD_UNCHANGED);
@@ -101,11 +137,11 @@ vector<string> GeneratePointCloud::generate_pointcloud(const string& rgb_file, c
                 continue;
             double X = (u - centerX) * Z / focalLength_x;
             double Y = (v - centerY) * Z / focalLength_y;
-            Vector4d vec_org(X, Y, Z, 1);
-            Vector4d vec_transf = transforms * vec_org;
+            Vector4f vec_org(X, Y, Z, 1);
+            Vector4f vec_transf = transforms * vec_org;
             points.push_back(to_string(vec_transf[0]) + " " + to_string(vec_transf[1]) + " " + 
                 to_string(vec_transf[2]) + " " + to_string(color[0]) + " " + to_string(color[1]) 
-                + " " + to_string(color[2]) + " 1\n");
+                + " " + to_string(color[2]) + "\n");
         }
     }
 
@@ -124,7 +160,7 @@ void GeneratePointCloud::write_ply(string ply_file, vector<string> points)
     file << "property uchar red\n";
     file << "property uchar green\n";
     file << "property uchar blue\n";
-    file << "property uchar alpha\n";
+    // file << "property uchar alpha\n";
     file << "end_header\n";
     for (auto point : points) {
         file << point << "\n";
