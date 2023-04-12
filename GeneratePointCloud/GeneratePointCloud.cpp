@@ -106,21 +106,29 @@ Vector3f GeneratePointCloud::quaternionToEuler(Quaternionf q) {
 
     // pitch 계산
     pitch = asin(rotMatrix(1, 2));
-    if (cos(pitch) != 0) {
+    if (cos(pitch) != 0) 
+    {
         // yaw 계산
         yaw = atan2(-rotMatrix(0, 2), rotMatrix(2, 2));
         // roll 계산
         roll = atan2(-rotMatrix(1, 0), rotMatrix(1, 1));
-    } else {
+    } 
+    else
+    {
         // pitch = 90도 경우, yaw = 0으로 가정
         yaw = 0;
         // roll = yaw + atan2(m12, m22)로 계산
         roll = atan2(rotMatrix(0, 1), rotMatrix(0, 0));
     }
 
-    return Vector3f(pitch, yaw, roll).array() * 180.0 / M_PI;
+    return Vector3f(pitch, yaw, roll).array() * 180.0 / M_PI; //degree
 }
 
+// Matrix4f GeneratePointCloud::ominus(Matrix4f a, Matrix4f b)
+// {
+//     // Compute the relative 3D transformation between a and b
+//     return a.inverse() * b;
+// }
 
 void GeneratePointCloud::generate_pointcloud(const string& rgb_file, const string& depth_file, const Matrix4f& transforms)
 {
@@ -133,8 +141,7 @@ void GeneratePointCloud::generate_pointcloud(const string& rgb_file, const strin
             Vec3b color = rgb.at<Vec3b>(v, u);
             ushort depth_value = depth.at<ushort>(v, u);
             double Z = static_cast<double>(depth_value) / scalingFactor;
-            if (Z == 0)
-                continue;
+            if (Z == 0) continue;
             double X = (u - centerX) * Z / focalLength_x;
             double Y = (v - centerY) * Z / focalLength_y;
             Vector4f vec_org(X, Y, Z, 1);

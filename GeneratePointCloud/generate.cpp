@@ -21,7 +21,6 @@ int main(int argc, char* argv[])
     GeneratePointCloud generatePointCloud;
     Vector3f euler = generatePointCloud.quaternionToEuler(q);
     Matrix4f m = generatePointCloud.createTransformMatrix(point3d, euler);
-    //vector<string> points = generatePointCloud.generate_pointcloud(rgbImg + ".png", depthImg + ".png", m);
     generatePointCloud.generate_pointcloud(rgbImg + ".png", depthImg + ".png", m);
     generatePointCloud.write_ply(outputfile + ".ply", generatePointCloud.points);
 

@@ -40,6 +40,8 @@ public :
                                                         vector<pair<double, double> > pose_depth);
     Matrix4f createTransformMatrix(const Vector3f& position, const Vector3f& eulerAngles);
     Vector3f quaternionToEuler(Quaternionf q);
+    // Matrix4f ominus(Matrix4f a, Matrix4f b)
+    //make point cloud and make ply file
     void generate_pointcloud(const string& rgb_file, const string& depth_file, const Matrix4f& transforms);
     void write_ply(string ply_file, vector<Points> points);
 
