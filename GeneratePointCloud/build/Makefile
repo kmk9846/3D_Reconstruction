@@ -117,66 +117,24 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named Associate
+# Target rules for targets named main
 
 # Build rule for target.
-Associate: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Associate
-.PHONY : Associate
+main: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 main
+.PHONY : main
 
 # fast build rule for target.
-Associate/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Associate.dir/build.make CMakeFiles/Associate.dir/build
-.PHONY : Associate/fast
-
-#=============================================================================
-# Target rules for targets named Generate
-
-# Build rule for target.
-Generate: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Generate
-.PHONY : Generate
-
-# fast build rule for target.
-Generate/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Generate.dir/build.make CMakeFiles/Generate.dir/build
-.PHONY : Generate/fast
-
-#=============================================================================
-# Target rules for targets named Conver
-
-# Build rule for target.
-Conver: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Conver
-.PHONY : Conver
-
-# fast build rule for target.
-Conver/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Conver.dir/build.make CMakeFiles/Conver.dir/build
-.PHONY : Conver/fast
-
-#=============================================================================
-# Target rules for targets named test
-
-# Build rule for target.
-test: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test
-.PHONY : test
-
-# fast build rule for target.
-test/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/build
-.PHONY : test/fast
+main/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
+.PHONY : main/fast
 
 GeneratePointCloud.o: GeneratePointCloud.cpp.o
 .PHONY : GeneratePointCloud.o
 
 # target to build an object file
 GeneratePointCloud.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Associate.dir/build.make CMakeFiles/Associate.dir/GeneratePointCloud.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Generate.dir/build.make CMakeFiles/Generate.dir/GeneratePointCloud.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Conver.dir/build.make CMakeFiles/Conver.dir/GeneratePointCloud.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/GeneratePointCloud.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/GeneratePointCloud.cpp.o
 .PHONY : GeneratePointCloud.cpp.o
 
 GeneratePointCloud.i: GeneratePointCloud.cpp.i
@@ -184,10 +142,7 @@ GeneratePointCloud.i: GeneratePointCloud.cpp.i
 
 # target to preprocess a source file
 GeneratePointCloud.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Associate.dir/build.make CMakeFiles/Associate.dir/GeneratePointCloud.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Generate.dir/build.make CMakeFiles/Generate.dir/GeneratePointCloud.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Conver.dir/build.make CMakeFiles/Conver.dir/GeneratePointCloud.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/GeneratePointCloud.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/GeneratePointCloud.cpp.i
 .PHONY : GeneratePointCloud.cpp.i
 
 GeneratePointCloud.s: GeneratePointCloud.cpp.s
@@ -195,107 +150,32 @@ GeneratePointCloud.s: GeneratePointCloud.cpp.s
 
 # target to generate assembly for a file
 GeneratePointCloud.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Associate.dir/build.make CMakeFiles/Associate.dir/GeneratePointCloud.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Generate.dir/build.make CMakeFiles/Generate.dir/GeneratePointCloud.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Conver.dir/build.make CMakeFiles/Conver.dir/GeneratePointCloud.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/GeneratePointCloud.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/GeneratePointCloud.cpp.s
 .PHONY : GeneratePointCloud.cpp.s
 
-associate.o: associate.cpp.o
-.PHONY : associate.o
+main.o: main.cpp.o
+.PHONY : main.o
 
 # target to build an object file
-associate.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Associate.dir/build.make CMakeFiles/Associate.dir/associate.cpp.o
-.PHONY : associate.cpp.o
+main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.o
+.PHONY : main.cpp.o
 
-associate.i: associate.cpp.i
-.PHONY : associate.i
-
-# target to preprocess a source file
-associate.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Associate.dir/build.make CMakeFiles/Associate.dir/associate.cpp.i
-.PHONY : associate.cpp.i
-
-associate.s: associate.cpp.s
-.PHONY : associate.s
-
-# target to generate assembly for a file
-associate.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Associate.dir/build.make CMakeFiles/Associate.dir/associate.cpp.s
-.PHONY : associate.cpp.s
-
-conver.o: conver.cpp.o
-.PHONY : conver.o
-
-# target to build an object file
-conver.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Conver.dir/build.make CMakeFiles/Conver.dir/conver.cpp.o
-.PHONY : conver.cpp.o
-
-conver.i: conver.cpp.i
-.PHONY : conver.i
+main.i: main.cpp.i
+.PHONY : main.i
 
 # target to preprocess a source file
-conver.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Conver.dir/build.make CMakeFiles/Conver.dir/conver.cpp.i
-.PHONY : conver.cpp.i
+main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.i
+.PHONY : main.cpp.i
 
-conver.s: conver.cpp.s
-.PHONY : conver.s
-
-# target to generate assembly for a file
-conver.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Conver.dir/build.make CMakeFiles/Conver.dir/conver.cpp.s
-.PHONY : conver.cpp.s
-
-generate.o: generate.cpp.o
-.PHONY : generate.o
-
-# target to build an object file
-generate.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Generate.dir/build.make CMakeFiles/Generate.dir/generate.cpp.o
-.PHONY : generate.cpp.o
-
-generate.i: generate.cpp.i
-.PHONY : generate.i
-
-# target to preprocess a source file
-generate.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Generate.dir/build.make CMakeFiles/Generate.dir/generate.cpp.i
-.PHONY : generate.cpp.i
-
-generate.s: generate.cpp.s
-.PHONY : generate.s
+main.s: main.cpp.s
+.PHONY : main.s
 
 # target to generate assembly for a file
-generate.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Generate.dir/build.make CMakeFiles/Generate.dir/generate.cpp.s
-.PHONY : generate.cpp.s
-
-test.o: test.cpp.o
-.PHONY : test.o
-
-# target to build an object file
-test.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/test.cpp.o
-.PHONY : test.cpp.o
-
-test.i: test.cpp.i
-.PHONY : test.i
-
-# target to preprocess a source file
-test.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/test.cpp.i
-.PHONY : test.cpp.i
-
-test.s: test.cpp.s
-.PHONY : test.s
-
-# target to generate assembly for a file
-test.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/test.cpp.s
-.PHONY : test.cpp.s
+main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.s
+.PHONY : main.cpp.s
 
 # Help Target
 help:
@@ -305,25 +185,13 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... Associate"
-	@echo "... Conver"
-	@echo "... Generate"
-	@echo "... test"
+	@echo "... main"
 	@echo "... GeneratePointCloud.o"
 	@echo "... GeneratePointCloud.i"
 	@echo "... GeneratePointCloud.s"
-	@echo "... associate.o"
-	@echo "... associate.i"
-	@echo "... associate.s"
-	@echo "... conver.o"
-	@echo "... conver.i"
-	@echo "... conver.s"
-	@echo "... generate.o"
-	@echo "... generate.i"
-	@echo "... generate.s"
-	@echo "... test.o"
-	@echo "... test.i"
-	@echo "... test.s"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
 .PHONY : help
 
 

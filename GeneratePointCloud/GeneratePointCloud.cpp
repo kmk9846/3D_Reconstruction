@@ -79,56 +79,108 @@ vector<tuple<double, double, double> > GeneratePointCloud::associate_three(vecto
     return rgb_pose_depth;
 }
 
-Matrix4f GeneratePointCloud::createTransformMatrix(const Vector3f& position, const Vector3f& eulerAngles) {
-    // Convert Euler angles to radians
-    Vector3f angles = eulerAngles * (M_PI / 180.0f);
+// Matrix4f GeneratePointCloud::createTransformMatrix(const Vector3f& position, const Vector3f& eulerAngles) {
+//     // Convert Euler angles to radians
+//     Vector3f angles = eulerAngles * (M_PI / 180.0f);
 
-    // Create rotation matrix
-    AngleAxisf pitchAngle(angles.x(), Eigen::Vector3f::UnitX());
-    AngleAxisf yawAngle(angles.y(), Eigen::Vector3f::UnitY());
-    AngleAxisf rollAngle(angles.z(), Eigen::Vector3f::UnitZ());
-    Quaternionf q = rollAngle * yawAngle * pitchAngle;
-    Matrix3f rotation = q.matrix();
+//     // Create rotation matrix
+//     AngleAxisf pitchAngle(angles.x(), Eigen::Vector3f::UnitX());
+//     AngleAxisf yawAngle(angles.y(), Eigen::Vector3f::UnitY());
+//     AngleAxisf rollAngle(angles.z(), Eigen::Vector3f::UnitZ());
+//     Quaternionf q = rollAngle * yawAngle * pitchAngle;
+//     Matrix3f rotation = q.matrix();
 
-    // Create transform matrix
-    Eigen::Affine3f transform = Translation3f(position) * Eigen::Affine3f(rotation);
-    Matrix4f transformMatrix = transform.matrix();
+//     // Create transform matrix
+//     Eigen::Affine3f transform = Translation3f(position) * Eigen::Affine3f(rotation);
+//     Matrix4f transformMatrix = transform.matrix();
 
-    return transformMatrix;
-}
+//     return transformMatrix;
+// }
 
 
-Vector3f GeneratePointCloud::quaternionToEuler(Quaternionf q) {
-    // Quaternion을 회전 행렬로 변환
-    Matrix3f rotMatrix = q.toRotationMatrix();
+// Vector3f GeneratePointCloud::quaternionToEuler(Quaternionf q) {
+//     // Quaternion을 회전 행렬로 변환
+//     Matrix3f rotMatrix = q.toRotationMatrix();
 
-    float pitch, yaw, roll;
+//     float pitch, yaw, roll;
 
-    // pitch 계산
-    pitch = asin(rotMatrix(1, 2));
-    if (cos(pitch) != 0) 
-    {
-        // yaw 계산
-        yaw = atan2(-rotMatrix(0, 2), rotMatrix(2, 2));
-        // roll 계산
-        roll = atan2(-rotMatrix(1, 0), rotMatrix(1, 1));
-    } 
-    else
-    {
-        // pitch = 90도 경우, yaw = 0으로 가정
-        yaw = 0;
-        // roll = yaw + atan2(m12, m22)로 계산
-        roll = atan2(rotMatrix(0, 1), rotMatrix(0, 0));
-    }
+//     // pitch 계산
+//     pitch = asin(rotMatrix(1, 2));
+//     if (cos(pitch) != 0) 
+//     {
+//         // yaw 계산
+//         yaw = atan2(-rotMatrix(0, 2), rotMatrix(2, 2));
+//         // roll 계산
+//         roll = atan2(-rotMatrix(1, 0), rotMatrix(1, 1));
+//     } 
+//     else
+//     {
+//         // pitch = 90도 경우, yaw = 0으로 가정
+//         yaw = 0;
+//         // roll = yaw + atan2(m12, m22)로 계산
+//         roll = atan2(rotMatrix(0, 1), rotMatrix(0, 0));
+//     }
 
-    return Vector3f(pitch, yaw, roll).array() * 180.0 / M_PI; //degree
-}
+//     return Vector3f(pitch, yaw, roll).array() * 180.0 / M_PI; //degree
+// }
 
 // Matrix4f GeneratePointCloud::ominus(Matrix4f a, Matrix4f b)
 // {
 //     // Compute the relative 3D transformation between a and b
 //     return a.inverse() * b;
 // }
+Matrix4d GeneratePointCloud::transform44(const vector<double>& v)
+{
+    Matrix4d T = Matrix4d::Identity();
+    T.block(0, 3, 3, 1) = Vector3d(v[1], v[2], v[3]);
+    Quaterniond q(v[7], v[4], v[5], v[6]);
+    T.block(0, 0, 3, 3) = q.toRotationMatrix();
+    return T;
+}
+
+// Read a trajectory from a text file
+PoseMap GeneratePointCloud::read_trajectory(const std::string& filename)
+{
+    std::ifstream file(filename);
+    if (!file.is_open()) {
+        std::cerr << "Error: could not open file '" << filename << "'" << std::endl;
+        exit(1);
+    }
+
+    PoseMap traj;
+
+    std::string line;
+    while (std::getline(file, line)) {
+        if (line.empty() || line[0] == '#') {
+            continue;
+        }
+
+        std::istringstream iss(line);
+        std::vector<double> values((std::istream_iterator<double>(iss)), std::istream_iterator<double>());
+
+        if (values.size() != 8) {
+            std::cerr << "Warning: line has " << values.size() << " values, expected 8" << std::endl;
+            continue;
+        }
+
+        if (values[4] == 0 && values[5] == 0 && values[6] == 0 && values[7] == 0) {
+            std::cerr << "Warning: quaternion values are all zero" << std::endl;
+            continue;
+        }
+
+        if (std::any_of(values.begin(), values.end(), [](double v) { return std::isnan(v); })) {
+            std::cerr << "Warning: line contains NaN values" << std::endl;
+            continue;
+        }
+
+        traj[values[0]] = transform44(values);
+    }
+
+    file.close();
+
+    return traj;
+}
+
 
 void GeneratePointCloud::generate_pointcloud(const string& rgb_file, const string& depth_file, const Matrix4f& transforms)
 {
