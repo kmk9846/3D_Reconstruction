@@ -1,5 +1,7 @@
 #include "GeneratePointCloud.h"
 
+// 초기 카메라 parameter setting
+// ROS default 값을 이용
 GeneratePointCloud::GeneratePointCloud()
 {
     offset = 0.0;
@@ -12,6 +14,7 @@ GeneratePointCloud::GeneratePointCloud()
     focalLength_y = 525;
 }
 
+//txt 파일을 읽어와서 timestamp 를 double type로 받아서 저장해서 map<double, vector<string> > lst 를 반환하는 함수
 map<double, vector<string> > GeneratePointCloud::read_file_list(string filename)
 {
     map<double, vector<string> > lst;
@@ -38,6 +41,9 @@ map<double, vector<string> > GeneratePointCloud::read_file_list(string filename)
     return lst;
 }
 
+// read_file_list(string filename) 에서 나온 결과 list 두 개의 timestamp 를 확인하여, 오차가 0.02 안의 것들은 
+// 하나의 pair 로 반드는 함수
+// ex) rgb.txt 와 depth.txt 파일의 timestamp 차이가 0.02 미만일 경우 둘을 하나의 pair 로 만든다.
 vector<pair<double, double> > GeneratePointCloud::associate_two(map<double, vector<string> > first_list,
                                              map<double, vector<string> > second_list)
 {
@@ -64,6 +70,8 @@ vector<pair<double, double> > GeneratePointCloud::associate_two(map<double, vect
     return matches;
 }
 
+// associate_two 에서 만든 pair 를 depth 를 기준으로 tuple type 로 만들어서 저장
+// <rgb, depth> 와 <depth, ground.txt> 에서 같은 값의 depth 만 추출하여 <rgb, depth, groundtruth> 의 tuple로 만든다.
 vector<tuple<double, double, double> > GeneratePointCloud::associate_three(vector<pair<double, double> > rgb_depth, 
                                                         vector<pair<double, double> > pose_depth)
 {
@@ -79,56 +87,11 @@ vector<tuple<double, double, double> > GeneratePointCloud::associate_three(vecto
     return rgb_pose_depth;
 }
 
-// Matrix4f GeneratePointCloud::createTransformMatrix(const Vector3f& position, const Vector3f& eulerAngles) {
-//     // Convert Euler angles to radians
-//     Vector3f angles = eulerAngles * (M_PI / 180.0f);
-
-//     // Create rotation matrix
-//     AngleAxisf pitchAngle(angles.x(), Eigen::Vector3f::UnitX());
-//     AngleAxisf yawAngle(angles.y(), Eigen::Vector3f::UnitY());
-//     AngleAxisf rollAngle(angles.z(), Eigen::Vector3f::UnitZ());
-//     Quaternionf q = rollAngle * yawAngle * pitchAngle;
-//     Matrix3f rotation = q.matrix();
-
-//     // Create transform matrix
-//     Eigen::Affine3f transform = Translation3f(position) * Eigen::Affine3f(rotation);
-//     Matrix4f transformMatrix = transform.matrix();
-
-//     return transformMatrix;
-// }
-
-
-// Vector3f GeneratePointCloud::quaternionToEuler(Quaternionf q) {
-//     // Quaternion을 회전 행렬로 변환
-//     Matrix3f rotMatrix = q.toRotationMatrix();
-
-//     float pitch, yaw, roll;
-
-//     // pitch 계산
-//     pitch = asin(rotMatrix(1, 2));
-//     if (cos(pitch) != 0) 
-//     {
-//         // yaw 계산
-//         yaw = atan2(-rotMatrix(0, 2), rotMatrix(2, 2));
-//         // roll 계산
-//         roll = atan2(-rotMatrix(1, 0), rotMatrix(1, 1));
-//     } 
-//     else
-//     {
-//         // pitch = 90도 경우, yaw = 0으로 가정
-//         yaw = 0;
-//         // roll = yaw + atan2(m12, m22)로 계산
-//         roll = atan2(rotMatrix(0, 1), rotMatrix(0, 0));
-//     }
-
-//     return Vector3f(pitch, yaw, roll).array() * 180.0 / M_PI; //degree
-// }
-
-// Matrix4f GeneratePointCloud::ominus(Matrix4f a, Matrix4f b)
-// {
-//     // Compute the relative 3D transformation between a and b
-//     return a.inverse() * b;
-// }
+//transform44, read_trajectory 설명
+//read_trajectory에서 groundtruth.txt의 timestamp 와 x,y,z, qx,qy,qw,qz 를 읽는다.
+//transform44 함수에 pose와 quternion 값을 인자로 넣어서 4x4 행렬을 만든다.
+//q.toRotationMatrix()는 쿼터니언 q를 회전 행렬(rotation matrix)로 변환한다. 
+//쿼터니언 q를 회전 행렬로 변환하여, T 행렬의 첫 번째 열부터 세 번째 열까지를 회전 행렬로 설정하여 T를 반환한다.
 Matrix4d GeneratePointCloud::transform44(const vector<double>& v)
 {
     Matrix4d T = Matrix4d::Identity();
@@ -138,7 +101,6 @@ Matrix4d GeneratePointCloud::transform44(const vector<double>& v)
     return T;
 }
 
-// Read a trajectory from a text file
 PoseMap GeneratePointCloud::read_trajectory(const std::string& filename)
 {
     std::ifstream file(filename);
@@ -181,7 +143,14 @@ PoseMap GeneratePointCloud::read_trajectory(const std::string& filename)
     return traj;
 }
 
-
+//비슷한 timestamp 때의 rgb.png 와 depth.png 와 4x4 matrix를 인자로 받아서 
+// double Z = static_cast<double>(depth_value) / scalingFactor;
+// if (Z == 0) continue;
+// double X = (u - centerX) * Z / focalLength_x;
+// double Y = (v - centerY) * Z / focalLength_y;
+// Vector4f vec_org(X, Y, Z, 1);
+// Vector4f vec_transf = transforms * vec_org;
+// 식을 통해서 point 를 생성하고 맴버변수인 points vextor 에 push_back한다.
 void GeneratePointCloud::generate_pointcloud(const string& rgb_file, const string& depth_file, const Matrix4f& transforms)
 {
     Mat rgb = imread(rgb_file);
@@ -203,10 +172,9 @@ void GeneratePointCloud::generate_pointcloud(const string& rgb_file, const strin
             points.push_back(add_points);
         }
     }
-
-    //return points;
 }
 
+//push_back 한 맴버 변수 points vector를 인자로 받아 이를 .ply 파일로 변경해준다.
 void GeneratePointCloud::write_ply(string ply_file, vector<Points> points)
 {
     std::ofstream file(ply_file);

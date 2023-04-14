@@ -34,15 +34,12 @@ struct Points{
 class GeneratePointCloud{
 public :
     GeneratePointCloud();
-    vector<Points> points;
-    PoseMap poseMatrix;
+    vector<Points> points; // ply 파일에 넣을 point 구조체 vector
+    PoseMap poseMatrix; // grountruth.txt 파일의 pose를 4x4 matrix 로 저장하는 변수
     map<double, vector<string> > read_file_list(string filename);
     vector<pair<double, double> > associate_two(map<double, vector<string> > first_list, map<double, vector<string> > second_list);
     vector<tuple<double, double, double> > associate_three(vector<pair<double, double> > rgb_depth, 
                                                         vector<pair<double, double> > pose_depth);
-    // Matrix4f createTransformMatrix(const Vector3f& position, const Vector3f& eulerAngles);
-    // Vector3f quaternionToEuler(Quaternionf q);
-    // // Matrix4f ominus(Matrix4f a, Matrix4f b)
     PoseMap read_trajectory(const string& filename);
     Matrix4d transform44(const vector<double>& v);
 

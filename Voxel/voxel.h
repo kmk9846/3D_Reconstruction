@@ -1,26 +1,30 @@
-#pragma once
-#ifndef VOXEL_H
-#define VOXEL_H
+#include <iostream>
+#include <vector>
+#include <opencv2/opencv.hpp>
 
-const int Voxel_Grid = 32;
-const int Voxel_Leaf = 1;
-const int VoxelNuum = Voxel_Grid/Voxel_Leaf;
+const int VoxelSize = 512;
 
 typedef struct _Voxel{
     float weight;
     float sdf;
-    float red;
-    float green;
-    float blue;
+    uchar red;
+    uchar green;
+    uchar blue;
 }Voxel;
+
+typedef struct _Point{
+    float x;
+    float y;
+    float z;
+}Point;
 
 class Voxel{
 public:
-    Voxel();
-    
+    Voxel() {};
+    Voxel voxel[VoxelSize][VoxelSize][VoxelSize];
     //index로 voxel 정보 불러오기
-
+    Voxel voxelInfo(int index_x, int index_y, int index_z);
+    Point getVertex(int index_x, int index_y, int index_z, int vertex_num);
     //voxel 정보로 index 찾기
-};
 
-#endif
+};
