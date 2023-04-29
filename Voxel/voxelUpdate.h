@@ -1,16 +1,23 @@
+#pragma once
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include <opencv2/opencv.hpp>
 #include "voxel.h"
 
-class VoxelUpdate{
+using namespace std;
+
+const float weight = 1.0;
+const float weightMax = 10.0;
+
+class VoxelUpdate : public VoxelGrid {
 public:
-    VoxelUpdate() {};
-    Voxel voxel;
+    VoxelUpdate() : VoxelGrid() {};
 
     //update sdf
-    void updateSDF(int index_x, int index_y, int index_z);
-    void updateWeight(int index_x, int index_y, int index_z);
-    void updateColor(int index_x, int index_y, int index_z);
+    float calDistance(Point point);
+    void updateSDF(Point point);
+    void updateWeight(Point point);
+    void updateColor(Point point);
 
 };

@@ -1,7 +1,13 @@
 #include "voxel.h"
 
-Voxel::Voxel()
+VoxelGrid::VoxelGrid()
 {
+    for(int i = 0; i < VoxelSize; i++) 
+    {
+        voxel[i] = new Voxel*[VoxelSize];
+        for(int j = 0; j < VoxelSize; j++) voxel[i][j] = new Voxel[VoxelSize];
+    }
+
     for(int i = 0; i < VoxelSize; i++)
     {
         for(int j = 0; j < VoxelSize; j++)
@@ -18,14 +24,26 @@ Voxel::Voxel()
     }
 }
 
-Voxel_info Voxel::voxelInfo(int index_x, int index_y, int index_z)
+VoxelGrid::~VoxelGrid()
 {
-    Voxel_info info;
-    info = voxel[index_x][index_y][index_z];
-    return info;
+    for(int i = 0; i < VoxelSize; i++) 
+    {
+        for(int j = 0; j < VoxelSize; j++) delete[] voxel[i][j];
+        delete[] voxel[i];
+    }
+    delete[] voxel;
 }
 
-Point Voxel::getVertex(int index_x, int index_y, int index_z, int vertex_num)
+Index VoxelGrid::findIndex(Point point)
+{
+    Index index;
+    index.index_x = (int)point.x;
+    index.index_y = (int)point.y;
+    index.index_z = (int)point.z;
+    return index;
+}
+
+Point VoxelGrid::getVertex(int index_x, int index_y, int index_z, int vertex_num)
 {
     Point vertex;
     if(vertex_num == 1)
