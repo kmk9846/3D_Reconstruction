@@ -10,7 +10,7 @@ typedef struct _Voxel{
     uchar red;
     uchar green;
     uchar blue;
-}Voxel;
+}Voxel_info;
 
 typedef struct _Point{
     float x;
@@ -20,11 +20,11 @@ typedef struct _Point{
 
 class Voxel{
 public:
-    Voxel() {};
-    Voxel voxel[VoxelSize][VoxelSize][VoxelSize];
+    //init voxel data
+    Voxel();
+    Voxel_info voxel[VoxelSize][VoxelSize][VoxelSize];
     //index로 voxel 정보 불러오기
-    Voxel voxelInfo(int index_x, int index_y, int index_z);
-    Point getVertex(int index_x, int index_y, int index_z, int vertex_num);
+    Voxel_info voxelInfo(int index_x, int index_y, int index_z);
     //voxel 정보로 index 찾기
-
+    Point getVertex(int index_x, int index_y, int index_z, int vertex_num);
 };

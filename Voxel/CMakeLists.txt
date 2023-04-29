@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0)
 project(Voxel)
 find_package(OpenCV REQUIRED)
-add_executable(voxel Voxel.cpp main.cpp)
+add_executable(voxel voxel.cpp voxelUpdate.cpp  main.cpp)
 target_link_libraries(voxel ${OpenCV_LIBS})
