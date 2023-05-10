@@ -1,4 +1,4 @@
-#include "GeneratePointCloud.h"
+#include "./include/GeneratePointCloud.h"
 
 int main(int argc, char* argv[])
 {
@@ -24,17 +24,25 @@ int main(int argc, char* argv[])
     
 
     //size 만큼의 timestamp를 건너뛰면서 gernerate_pointcloud 함수를 실행
-    for (int i = 0; i < rgb_pose_depth_list.size(); i += size) 
+    // for (int i = 0; i < rgb_pose_depth_list.size(); i += size) 
+    // {
+    //     string rgbPNG = filePath + rgbfile + to_string(get<0>(rgb_pose_depth_list[i])) + ".png";
+    //     string depthPNG = filePath + depthfile + to_string(get<1>(rgb_pose_depth_list[i])) + ".png";
+    //     Matrix4f matrixPose = generatePointCloud.poseMatrix[get<2>(rgb_pose_depth_list[i])].cast<float>();
+    //     generatePointCloud.generate_pointcloud(rgbPNG, depthPNG, matrixPose);
+    // }
+
+    for (int i = 0; i < rgb_pose_depth_list.size() - 730; i += size) 
     {
         string rgbPNG = filePath + rgbfile + to_string(get<0>(rgb_pose_depth_list[i])) + ".png";
         string depthPNG = filePath + depthfile + to_string(get<1>(rgb_pose_depth_list[i])) + ".png";
-        Matrix4f matrixPose = generatePointCloud.poseMatrix[get<2>(rgb_pose_depth_list[i])].cast<float>();
+        Eigen::Matrix4f matrixPose = generatePointCloud.poseMatrix[get<2>(rgb_pose_depth_list[i])].cast<float>();
         generatePointCloud.generate_pointcloud(rgbPNG, depthPNG, matrixPose);
     }
 
     //generate_pointcloud 함수가 끝난 후에 맴버변수인 points 를 .ply 파일을 result 라는 이름으로 생성
     //build 파일에 result.ply 파일이 생성된다.
-    generatePointCloud.write_ply("result.ply", generatePointCloud.points);
+    generatePointCloud.write_ply("result_test.ply", generatePointCloud.points);
     return 0;
 }
 

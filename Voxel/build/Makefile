@@ -129,30 +129,6 @@ voxel/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/voxel.dir/build.make CMakeFiles/voxel.dir/build
 .PHONY : voxel/fast
 
-RayCast.o: RayCast.cpp.o
-.PHONY : RayCast.o
-
-# target to build an object file
-RayCast.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/voxel.dir/build.make CMakeFiles/voxel.dir/RayCast.cpp.o
-.PHONY : RayCast.cpp.o
-
-RayCast.i: RayCast.cpp.i
-.PHONY : RayCast.i
-
-# target to preprocess a source file
-RayCast.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/voxel.dir/build.make CMakeFiles/voxel.dir/RayCast.cpp.i
-.PHONY : RayCast.cpp.i
-
-RayCast.s: RayCast.cpp.s
-.PHONY : RayCast.s
-
-# target to generate assembly for a file
-RayCast.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/voxel.dir/build.make CMakeFiles/voxel.dir/RayCast.cpp.s
-.PHONY : RayCast.cpp.s
-
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -177,53 +153,77 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/voxel.dir/build.make CMakeFiles/voxel.dir/main.cpp.s
 .PHONY : main.cpp.s
 
-voxel.o: voxel.cpp.o
-.PHONY : voxel.o
+src/RayCast.o: src/RayCast.cpp.o
+.PHONY : src/RayCast.o
 
 # target to build an object file
-voxel.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/voxel.dir/build.make CMakeFiles/voxel.dir/voxel.cpp.o
-.PHONY : voxel.cpp.o
+src/RayCast.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/voxel.dir/build.make CMakeFiles/voxel.dir/src/RayCast.cpp.o
+.PHONY : src/RayCast.cpp.o
 
-voxel.i: voxel.cpp.i
-.PHONY : voxel.i
+src/RayCast.i: src/RayCast.cpp.i
+.PHONY : src/RayCast.i
 
 # target to preprocess a source file
-voxel.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/voxel.dir/build.make CMakeFiles/voxel.dir/voxel.cpp.i
-.PHONY : voxel.cpp.i
+src/RayCast.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/voxel.dir/build.make CMakeFiles/voxel.dir/src/RayCast.cpp.i
+.PHONY : src/RayCast.cpp.i
 
-voxel.s: voxel.cpp.s
-.PHONY : voxel.s
+src/RayCast.s: src/RayCast.cpp.s
+.PHONY : src/RayCast.s
 
 # target to generate assembly for a file
-voxel.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/voxel.dir/build.make CMakeFiles/voxel.dir/voxel.cpp.s
-.PHONY : voxel.cpp.s
+src/RayCast.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/voxel.dir/build.make CMakeFiles/voxel.dir/src/RayCast.cpp.s
+.PHONY : src/RayCast.cpp.s
 
-voxelUpdate.o: voxelUpdate.cpp.o
-.PHONY : voxelUpdate.o
+src/voxel.o: src/voxel.cpp.o
+.PHONY : src/voxel.o
 
 # target to build an object file
-voxelUpdate.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/voxel.dir/build.make CMakeFiles/voxel.dir/voxelUpdate.cpp.o
-.PHONY : voxelUpdate.cpp.o
+src/voxel.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/voxel.dir/build.make CMakeFiles/voxel.dir/src/voxel.cpp.o
+.PHONY : src/voxel.cpp.o
 
-voxelUpdate.i: voxelUpdate.cpp.i
-.PHONY : voxelUpdate.i
+src/voxel.i: src/voxel.cpp.i
+.PHONY : src/voxel.i
 
 # target to preprocess a source file
-voxelUpdate.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/voxel.dir/build.make CMakeFiles/voxel.dir/voxelUpdate.cpp.i
-.PHONY : voxelUpdate.cpp.i
+src/voxel.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/voxel.dir/build.make CMakeFiles/voxel.dir/src/voxel.cpp.i
+.PHONY : src/voxel.cpp.i
 
-voxelUpdate.s: voxelUpdate.cpp.s
-.PHONY : voxelUpdate.s
+src/voxel.s: src/voxel.cpp.s
+.PHONY : src/voxel.s
 
 # target to generate assembly for a file
-voxelUpdate.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/voxel.dir/build.make CMakeFiles/voxel.dir/voxelUpdate.cpp.s
-.PHONY : voxelUpdate.cpp.s
+src/voxel.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/voxel.dir/build.make CMakeFiles/voxel.dir/src/voxel.cpp.s
+.PHONY : src/voxel.cpp.s
+
+src/voxelUpdate.o: src/voxelUpdate.cpp.o
+.PHONY : src/voxelUpdate.o
+
+# target to build an object file
+src/voxelUpdate.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/voxel.dir/build.make CMakeFiles/voxel.dir/src/voxelUpdate.cpp.o
+.PHONY : src/voxelUpdate.cpp.o
+
+src/voxelUpdate.i: src/voxelUpdate.cpp.i
+.PHONY : src/voxelUpdate.i
+
+# target to preprocess a source file
+src/voxelUpdate.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/voxel.dir/build.make CMakeFiles/voxel.dir/src/voxelUpdate.cpp.i
+.PHONY : src/voxelUpdate.cpp.i
+
+src/voxelUpdate.s: src/voxelUpdate.cpp.s
+.PHONY : src/voxelUpdate.s
+
+# target to generate assembly for a file
+src/voxelUpdate.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/voxel.dir/build.make CMakeFiles/voxel.dir/src/voxelUpdate.cpp.s
+.PHONY : src/voxelUpdate.cpp.s
 
 # Help Target
 help:
@@ -234,18 +234,18 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... voxel"
-	@echo "... RayCast.o"
-	@echo "... RayCast.i"
-	@echo "... RayCast.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... voxel.o"
-	@echo "... voxel.i"
-	@echo "... voxel.s"
-	@echo "... voxelUpdate.o"
-	@echo "... voxelUpdate.i"
-	@echo "... voxelUpdate.s"
+	@echo "... src/RayCast.o"
+	@echo "... src/RayCast.i"
+	@echo "... src/RayCast.s"
+	@echo "... src/voxel.o"
+	@echo "... src/voxel.i"
+	@echo "... src/voxel.s"
+	@echo "... src/voxelUpdate.o"
+	@echo "... src/voxelUpdate.i"
+	@echo "... src/voxelUpdate.s"
 .PHONY : help
 
 

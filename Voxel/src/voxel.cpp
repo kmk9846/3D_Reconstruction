@@ -1,4 +1,4 @@
-#include "voxel.h"
+#include "../include/voxel.h"
 
 VoxelGrid::VoxelGrid()
 {
@@ -34,9 +34,9 @@ VoxelGrid::~VoxelGrid()
     delete[] voxel;
 }
 
-Index VoxelGrid::findIndex(const Point& point)
+VoxelIndex VoxelGrid::findIndex(const Point& point)
 {
-    Index index;
+    VoxelIndex index;
     index.index_x = (int)point(0);
     index.index_y = (int)point(1);
     index.index_z = (int)point(2);

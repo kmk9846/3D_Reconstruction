@@ -1,6 +1,6 @@
-#include "voxelUpdate.h"
+#include "../include/voxelUpdate.h"
 
-float VoxelUpdate::getSDF(const Point& origin, const Point& point, Index centerIndex)
+float VoxelUpdate::getSDF(const Point& origin, const Point& point, VoxelIndex centerIndex)
 {
     Point voxelCenter;
     voxelCenter << static_cast<float>(centerIndex.index_x + VoxelUnit/2), static_cast<float>(centerIndex.index_y + VoxelUnit/2), 
@@ -15,7 +15,7 @@ float VoxelUpdate::getSDF(const Point& origin, const Point& point, Index centerI
     return sdf;
 }
 
-void VoxelUpdate::updateSDF(const Point& origin, const Point& point, Index currentIndex)
+void VoxelUpdate::updateSDF(const Point& origin, const Point& point, VoxelIndex currentIndex)
 {
     //Index currentIndex = findIndex(point);
     float distance = getSDF(origin, point, currentIndex);
@@ -28,7 +28,7 @@ void VoxelUpdate::updateSDF(const Point& origin, const Point& point, Index curre
         (prevWeight * prevWeight + weight*distance)/(prevWeight+weight);
 }
 
-void VoxelUpdate::updateWeight(Index currentIndex)
+void VoxelUpdate::updateWeight(VoxelIndex currentIndex)
 {
     //Index currentIndex = findIndex(point);
     float prevWeight = voxel[currentIndex.index_x][currentIndex.index_y][currentIndex.index_z].weight;
@@ -41,5 +41,5 @@ void VoxelUpdate::updateWeight(Index currentIndex)
 void VoxelUpdate::updateColor(const Point& point)
 {
     //calculate color
-    Index currentIndex = findIndex(point);
+    VoxelIndex currentIndex = findIndex(point);
 }

@@ -69,47 +69,47 @@ include CMakeFiles/voxel.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/voxel.dir/flags.make
 
-CMakeFiles/voxel.dir/voxel.cpp.o: CMakeFiles/voxel.dir/flags.make
-CMakeFiles/voxel.dir/voxel.cpp.o: /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/voxel.cpp
-CMakeFiles/voxel.dir/voxel.cpp.o: CMakeFiles/voxel.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/voxel.dir/voxel.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/voxel.dir/voxel.cpp.o -MF CMakeFiles/voxel.dir/voxel.cpp.o.d -o CMakeFiles/voxel.dir/voxel.cpp.o -c /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/voxel.cpp
+CMakeFiles/voxel.dir/src/voxel.cpp.o: CMakeFiles/voxel.dir/flags.make
+CMakeFiles/voxel.dir/src/voxel.cpp.o: /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp
+CMakeFiles/voxel.dir/src/voxel.cpp.o: CMakeFiles/voxel.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/voxel.dir/src/voxel.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/voxel.dir/src/voxel.cpp.o -MF CMakeFiles/voxel.dir/src/voxel.cpp.o.d -o CMakeFiles/voxel.dir/src/voxel.cpp.o -c /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp
 
-CMakeFiles/voxel.dir/voxel.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/voxel.dir/voxel.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/voxel.cpp > CMakeFiles/voxel.dir/voxel.cpp.i
+CMakeFiles/voxel.dir/src/voxel.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/voxel.dir/src/voxel.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp > CMakeFiles/voxel.dir/src/voxel.cpp.i
 
-CMakeFiles/voxel.dir/voxel.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/voxel.dir/voxel.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/voxel.cpp -o CMakeFiles/voxel.dir/voxel.cpp.s
+CMakeFiles/voxel.dir/src/voxel.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/voxel.dir/src/voxel.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp -o CMakeFiles/voxel.dir/src/voxel.cpp.s
 
-CMakeFiles/voxel.dir/voxelUpdate.cpp.o: CMakeFiles/voxel.dir/flags.make
-CMakeFiles/voxel.dir/voxelUpdate.cpp.o: /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/voxelUpdate.cpp
-CMakeFiles/voxel.dir/voxelUpdate.cpp.o: CMakeFiles/voxel.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/voxel.dir/voxelUpdate.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/voxel.dir/voxelUpdate.cpp.o -MF CMakeFiles/voxel.dir/voxelUpdate.cpp.o.d -o CMakeFiles/voxel.dir/voxelUpdate.cpp.o -c /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/voxelUpdate.cpp
+CMakeFiles/voxel.dir/src/voxelUpdate.cpp.o: CMakeFiles/voxel.dir/flags.make
+CMakeFiles/voxel.dir/src/voxelUpdate.cpp.o: /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp
+CMakeFiles/voxel.dir/src/voxelUpdate.cpp.o: CMakeFiles/voxel.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/voxel.dir/src/voxelUpdate.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/voxel.dir/src/voxelUpdate.cpp.o -MF CMakeFiles/voxel.dir/src/voxelUpdate.cpp.o.d -o CMakeFiles/voxel.dir/src/voxelUpdate.cpp.o -c /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp
 
-CMakeFiles/voxel.dir/voxelUpdate.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/voxel.dir/voxelUpdate.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/voxelUpdate.cpp > CMakeFiles/voxel.dir/voxelUpdate.cpp.i
+CMakeFiles/voxel.dir/src/voxelUpdate.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/voxel.dir/src/voxelUpdate.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp > CMakeFiles/voxel.dir/src/voxelUpdate.cpp.i
 
-CMakeFiles/voxel.dir/voxelUpdate.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/voxel.dir/voxelUpdate.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/voxelUpdate.cpp -o CMakeFiles/voxel.dir/voxelUpdate.cpp.s
+CMakeFiles/voxel.dir/src/voxelUpdate.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/voxel.dir/src/voxelUpdate.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp -o CMakeFiles/voxel.dir/src/voxelUpdate.cpp.s
 
-CMakeFiles/voxel.dir/RayCast.cpp.o: CMakeFiles/voxel.dir/flags.make
-CMakeFiles/voxel.dir/RayCast.cpp.o: /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/RayCast.cpp
-CMakeFiles/voxel.dir/RayCast.cpp.o: CMakeFiles/voxel.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/voxel.dir/RayCast.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/voxel.dir/RayCast.cpp.o -MF CMakeFiles/voxel.dir/RayCast.cpp.o.d -o CMakeFiles/voxel.dir/RayCast.cpp.o -c /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/RayCast.cpp
+CMakeFiles/voxel.dir/src/RayCast.cpp.o: CMakeFiles/voxel.dir/flags.make
+CMakeFiles/voxel.dir/src/RayCast.cpp.o: /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp
+CMakeFiles/voxel.dir/src/RayCast.cpp.o: CMakeFiles/voxel.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/voxel.dir/src/RayCast.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/voxel.dir/src/RayCast.cpp.o -MF CMakeFiles/voxel.dir/src/RayCast.cpp.o.d -o CMakeFiles/voxel.dir/src/RayCast.cpp.o -c /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp
 
-CMakeFiles/voxel.dir/RayCast.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/voxel.dir/RayCast.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/RayCast.cpp > CMakeFiles/voxel.dir/RayCast.cpp.i
+CMakeFiles/voxel.dir/src/RayCast.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/voxel.dir/src/RayCast.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp > CMakeFiles/voxel.dir/src/RayCast.cpp.i
 
-CMakeFiles/voxel.dir/RayCast.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/voxel.dir/RayCast.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/RayCast.cpp -o CMakeFiles/voxel.dir/RayCast.cpp.s
+CMakeFiles/voxel.dir/src/RayCast.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/voxel.dir/src/RayCast.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp -o CMakeFiles/voxel.dir/src/RayCast.cpp.s
 
 CMakeFiles/voxel.dir/main.cpp.o: CMakeFiles/voxel.dir/flags.make
 CMakeFiles/voxel.dir/main.cpp.o: /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/main.cpp
@@ -127,17 +127,17 @@ CMakeFiles/voxel.dir/main.cpp.s: cmake_force
 
 # Object files for target voxel
 voxel_OBJECTS = \
-"CMakeFiles/voxel.dir/voxel.cpp.o" \
-"CMakeFiles/voxel.dir/voxelUpdate.cpp.o" \
-"CMakeFiles/voxel.dir/RayCast.cpp.o" \
+"CMakeFiles/voxel.dir/src/voxel.cpp.o" \
+"CMakeFiles/voxel.dir/src/voxelUpdate.cpp.o" \
+"CMakeFiles/voxel.dir/src/RayCast.cpp.o" \
 "CMakeFiles/voxel.dir/main.cpp.o"
 
 # External object files for target voxel
 voxel_EXTERNAL_OBJECTS =
 
-voxel: CMakeFiles/voxel.dir/voxel.cpp.o
-voxel: CMakeFiles/voxel.dir/voxelUpdate.cpp.o
-voxel: CMakeFiles/voxel.dir/RayCast.cpp.o
+voxel: CMakeFiles/voxel.dir/src/voxel.cpp.o
+voxel: CMakeFiles/voxel.dir/src/voxelUpdate.cpp.o
+voxel: CMakeFiles/voxel.dir/src/RayCast.cpp.o
 voxel: CMakeFiles/voxel.dir/main.cpp.o
 voxel: CMakeFiles/voxel.dir/build.make
 voxel: /opt/homebrew/lib/libopencv_gapi.4.7.0.dylib

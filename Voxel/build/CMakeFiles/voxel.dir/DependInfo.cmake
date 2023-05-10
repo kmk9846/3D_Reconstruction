@@ -8,10 +8,10 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/RayCast.cpp" "CMakeFiles/voxel.dir/RayCast.cpp.o" "gcc" "CMakeFiles/voxel.dir/RayCast.cpp.o.d"
   "/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/main.cpp" "CMakeFiles/voxel.dir/main.cpp.o" "gcc" "CMakeFiles/voxel.dir/main.cpp.o.d"
-  "/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/voxel.cpp" "CMakeFiles/voxel.dir/voxel.cpp.o" "gcc" "CMakeFiles/voxel.dir/voxel.cpp.o.d"
-  "/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/voxelUpdate.cpp" "CMakeFiles/voxel.dir/voxelUpdate.cpp.o" "gcc" "CMakeFiles/voxel.dir/voxelUpdate.cpp.o.d"
+  "/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp" "CMakeFiles/voxel.dir/src/RayCast.cpp.o" "gcc" "CMakeFiles/voxel.dir/src/RayCast.cpp.o.d"
+  "/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp" "CMakeFiles/voxel.dir/src/voxel.cpp.o" "gcc" "CMakeFiles/voxel.dir/src/voxel.cpp.o.d"
+  "/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp" "CMakeFiles/voxel.dir/src/voxelUpdate.cpp.o" "gcc" "CMakeFiles/voxel.dir/src/voxelUpdate.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

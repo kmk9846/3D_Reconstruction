@@ -129,30 +129,6 @@ main/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
 .PHONY : main/fast
 
-GeneratePointCloud.o: GeneratePointCloud.cpp.o
-.PHONY : GeneratePointCloud.o
-
-# target to build an object file
-GeneratePointCloud.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/GeneratePointCloud.cpp.o
-.PHONY : GeneratePointCloud.cpp.o
-
-GeneratePointCloud.i: GeneratePointCloud.cpp.i
-.PHONY : GeneratePointCloud.i
-
-# target to preprocess a source file
-GeneratePointCloud.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/GeneratePointCloud.cpp.i
-.PHONY : GeneratePointCloud.cpp.i
-
-GeneratePointCloud.s: GeneratePointCloud.cpp.s
-.PHONY : GeneratePointCloud.s
-
-# target to generate assembly for a file
-GeneratePointCloud.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/GeneratePointCloud.cpp.s
-.PHONY : GeneratePointCloud.cpp.s
-
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -177,6 +153,30 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+src/GeneratePointCloud.o: src/GeneratePointCloud.cpp.o
+.PHONY : src/GeneratePointCloud.o
+
+# target to build an object file
+src/GeneratePointCloud.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GeneratePointCloud.cpp.o
+.PHONY : src/GeneratePointCloud.cpp.o
+
+src/GeneratePointCloud.i: src/GeneratePointCloud.cpp.i
+.PHONY : src/GeneratePointCloud.i
+
+# target to preprocess a source file
+src/GeneratePointCloud.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GeneratePointCloud.cpp.i
+.PHONY : src/GeneratePointCloud.cpp.i
+
+src/GeneratePointCloud.s: src/GeneratePointCloud.cpp.s
+.PHONY : src/GeneratePointCloud.s
+
+# target to generate assembly for a file
+src/GeneratePointCloud.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GeneratePointCloud.cpp.s
+.PHONY : src/GeneratePointCloud.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -186,12 +186,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... main"
-	@echo "... GeneratePointCloud.o"
-	@echo "... GeneratePointCloud.i"
-	@echo "... GeneratePointCloud.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... src/GeneratePointCloud.o"
+	@echo "... src/GeneratePointCloud.i"
+	@echo "... src/GeneratePointCloud.s"
 .PHONY : help
 
 

@@ -7,10 +7,11 @@
 #include <Eigen/Geometry>
 
 using namespace std;
+using namespace Eigen;
 
 typedef Eigen::Matrix<float, 3, 1> Point;
 const int VoxelSize = 512;
-const float VoxelUnit = 1.0;
+const float VoxelUnit = 0.5;
 
 typedef struct _Voxel{
     float weight;
@@ -20,11 +21,11 @@ typedef struct _Voxel{
     uchar blue;
 }Voxel;
 
-typedef struct _Index{
+typedef struct _VoxelIndex{
     int index_x;
     int index_y;
     int index_z;
-}Index;
+}VoxelIndex;
 
 class VoxelGrid{
 public:
@@ -35,7 +36,7 @@ public:
     Voxel ***voxel = new Voxel**[VoxelSize];
 
     //index로 voxel 정보 불러오기
-    Index findIndex(const Point& point);
+    VoxelIndex findIndex(const Point& point);
     //voxel 정보로 index 찾기
     Eigen::Matrix<float, 3, 1> getVertex(int index_x, int index_y, int index_z, int vertex_num);
 };

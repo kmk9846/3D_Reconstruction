@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/main.dir/GeneratePointCloud.cpp.o"
-  "CMakeFiles/main.dir/GeneratePointCloud.cpp.o.d"
   "CMakeFiles/main.dir/main.cpp.o"
   "CMakeFiles/main.dir/main.cpp.o.d"
+  "CMakeFiles/main.dir/src/GeneratePointCloud.cpp.o"
+  "CMakeFiles/main.dir/src/GeneratePointCloud.cpp.o.d"
   "main"
   "main.pdb"
 )

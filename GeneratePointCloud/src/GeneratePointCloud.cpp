@@ -1,4 +1,4 @@
-#include "GeneratePointCloud.h"
+#include "../include/GeneratePointCloud.h"
 
 // 초기 카메라 parameter setting
 // ROS default 값을 이용
@@ -95,8 +95,8 @@ vector<tuple<double, double, double> > GeneratePointCloud::associate_three(vecto
 Matrix4d GeneratePointCloud::transform44(const vector<double>& v)
 {
     Matrix4d T = Matrix4d::Identity();
-    T.block(0, 3, 3, 1) = Vector3d(v[1], v[2], v[3]);
-    Quaterniond q(v[7], v[4], v[5], v[6]);
+    T.block(0, 3, 3, 1) = Eigen::Vector3d(v[1], v[2], v[3]);
+    Eigen::Quaterniond q(v[7], v[4], v[5], v[6]);
     T.block(0, 0, 3, 3) = q.toRotationMatrix();
     return T;
 }
@@ -151,22 +151,22 @@ PoseMap GeneratePointCloud::read_trajectory(const std::string& filename)
 // Vector4f vec_org(X, Y, Z, 1);
 // Vector4f vec_transf = transforms * vec_org;
 // 식을 통해서 point 를 생성하고 맴버변수인 points vextor 에 push_back한다.
-void GeneratePointCloud::generate_pointcloud(const string& rgb_file, const string& depth_file, const Matrix4f& transforms)
+void GeneratePointCloud::generate_pointcloud(const string& rgb_file, const string& depth_file, const Eigen::Matrix4f& transforms)
 {
-    Mat rgb = imread(rgb_file);
-    Mat depth = imread(depth_file, cv::IMREAD_UNCHANGED);
+    cv::Mat rgb = cv::imread(rgb_file);
+    cv::Mat depth = cv::imread(depth_file, cv::IMREAD_UNCHANGED);
 
-    Points add_points;
+    PointsData add_points;
     for (int v = 0; v < rgb.rows; v += 1) {
         for (int u = 0; u < rgb.cols; u += 1) {
-            Vec3b color = rgb.at<Vec3b>(v, u);
+            cv::Vec3b color = rgb.at<cv::Vec3b>(v, u);
             ushort depth_value = depth.at<ushort>(v, u);
             double Z = static_cast<double>(depth_value) / scalingFactor;
             if (Z == 0) continue;
             double X = (u - centerX) * Z / focalLength_x;
             double Y = (v - centerY) * Z / focalLength_y;
-            Vector4f vec_org(X, Y, Z, 1);
-            Vector4f vec_transf = transforms * vec_org;
+            Eigen::Vector4f vec_org(X, Y, Z, 1);
+            Eigen::Vector4f vec_transf = transforms * vec_org;
 
             add_points={vec_transf[0], vec_transf[1], vec_transf[2], color[0], color[1], color[2]};
             points.push_back(add_points);
@@ -175,7 +175,7 @@ void GeneratePointCloud::generate_pointcloud(const string& rgb_file, const strin
 }
 
 //push_back 한 맴버 변수 points vector를 인자로 받아 이를 .ply 파일로 변경해준다.
-void GeneratePointCloud::write_ply(string ply_file, vector<Points> points)
+void GeneratePointCloud::write_ply(string ply_file, vector<PointsData> points)
 {
     std::ofstream file(ply_file);
     file << "ply\n";

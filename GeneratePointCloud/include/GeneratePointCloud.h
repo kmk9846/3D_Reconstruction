@@ -17,12 +17,10 @@
 #include <Eigen/Geometry>
 
 using namespace std;
-using namespace cv;
-using namespace Eigen;
 
-typedef Matrix<double, 4, 4> Matrix4d;
+typedef Eigen::Matrix<double, 4, 4> Matrix4d;
 typedef map<double, Matrix4d> PoseMap;
-struct Points{
+struct PointsData{
     float x;
     float y;
     float z;
@@ -34,7 +32,7 @@ struct Points{
 class GeneratePointCloud{
 public :
     GeneratePointCloud();
-    vector<Points> points; // ply 파일에 넣을 point 구조체 vector
+    vector<PointsData> points; // ply 파일에 넣을 point 구조체 vector
     PoseMap poseMatrix; // grountruth.txt 파일의 pose를 4x4 matrix 로 저장하는 변수
     map<double, vector<string> > read_file_list(string filename);
     vector<pair<double, double> > associate_two(map<double, vector<string> > first_list, map<double, vector<string> > second_list);
@@ -44,8 +42,8 @@ public :
     Matrix4d transform44(const vector<double>& v);
 
     //make point cloud and make ply file
-    void generate_pointcloud(const string& rgb_file, const string& depth_file, const Matrix4f& transforms);
-    void write_ply(string ply_file, vector<Points> points);
+    void generate_pointcloud(const string& rgb_file, const string& depth_file, const Eigen::Matrix4f& transforms);
+    void write_ply(string ply_file, vector<PointsData> points);
 
 private:
     double offset;
