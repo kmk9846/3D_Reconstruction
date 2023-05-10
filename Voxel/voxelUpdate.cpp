@@ -1,22 +1,25 @@
 #include "voxelUpdate.h"
 
-float VoxelUpdate::calDistance(Point point)
+float VoxelUpdate::getSDF(const Point& origin, const Point& point, Index centerIndex)
 {
     Point voxelCenter;
-    voxelCenter.x = (int)point.x;
-    voxelCenter.y = (int)point.y;
-    voxelCenter.z = (int)point.z;
-    float dx = voxelCenter.x - point.x;
-    float dy = voxelCenter.y - point.y;
-    float dz = voxelCenter.z - point.z;
-    return sqrt(dx * dx + dy * dy + dz * dz);
+    voxelCenter << static_cast<float>(centerIndex.index_x + VoxelUnit/2), static_cast<float>(centerIndex.index_y + VoxelUnit/2), 
+                    static_cast<float>(centerIndex.index_z + VoxelUnit/2);
+    const Point voxelToorigin = voxelCenter - origin;
+    const Point pointToorigin = point - origin;
+
+    const float dist = pointToorigin.norm();
+    const float projectDist = voxelToorigin.dot(pointToorigin)/dist;
+
+    const float sdf = static_cast<float>(dist - projectDist);
+    return sdf;
 }
 
-void VoxelUpdate::updateSDF(Point point)
+void VoxelUpdate::updateSDF(const Point& origin, const Point& point, Index currentIndex)
 {
-    Index currentIndex = findIndex(point);
-    float distance = calDistance(point);
-
+    //Index currentIndex = findIndex(point);
+    float distance = getSDF(origin, point, currentIndex);
+    
     float prevSDF = voxel[currentIndex.index_x][currentIndex.index_y][currentIndex.index_z].sdf;
     float prevWeight = voxel[currentIndex.index_x][currentIndex.index_y][currentIndex.index_z].weight;
 
@@ -25,9 +28,9 @@ void VoxelUpdate::updateSDF(Point point)
         (prevWeight * prevWeight + weight*distance)/(prevWeight+weight);
 }
 
-void VoxelUpdate::updateWeight(Point point)
+void VoxelUpdate::updateWeight(Index currentIndex)
 {
-    Index currentIndex = findIndex(point);
+    //Index currentIndex = findIndex(point);
     float prevWeight = voxel[currentIndex.index_x][currentIndex.index_y][currentIndex.index_z].weight;
 
     //update voxel Weight
@@ -35,7 +38,7 @@ void VoxelUpdate::updateWeight(Point point)
         min(prevWeight + weight, weightMax);
 }
 
-void VoxelUpdate::updateColor(Point point)
+void VoxelUpdate::updateColor(const Point& point)
 {
     //calculate color
     Index currentIndex = findIndex(point);

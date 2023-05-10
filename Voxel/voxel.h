@@ -1,10 +1,16 @@
+#pragma once
 #include <iostream>
 #include <vector>
 #include <opencv2/opencv.hpp>
+#include <Eigen/Dense>
+#include <Eigen/Core>
+#include <Eigen/Geometry>
 
 using namespace std;
 
+typedef Eigen::Matrix<float, 3, 1> Point;
 const int VoxelSize = 512;
+const float VoxelUnit = 1.0;
 
 typedef struct _Voxel{
     float weight;
@@ -13,12 +19,6 @@ typedef struct _Voxel{
     uchar green;
     uchar blue;
 }Voxel;
-
-typedef struct _Point{
-    float x;
-    float y;
-    float z;
-}Point;
 
 typedef struct _Index{
     int index_x;
@@ -33,9 +33,9 @@ public:
     ~VoxelGrid();
     //크기떄문에 동적으로 할당하기
     Voxel ***voxel = new Voxel**[VoxelSize];
-    // Voxel voxel[VoxelSize][VoxelSize][VoxelSize];
+
     //index로 voxel 정보 불러오기
-    Index findIndex(Point point);
+    Index findIndex(const Point& point);
     //voxel 정보로 index 찾기
-    Point getVertex(int index_x, int index_y, int index_z, int vertex_num);
+    Eigen::Matrix<float, 3, 1> getVertex(int index_x, int index_y, int index_z, int vertex_num);
 };

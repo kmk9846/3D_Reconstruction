@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.0)
 project(Voxel)
 find_package(OpenCV REQUIRED)
-add_executable(voxel voxel.cpp voxelUpdate.cpp  main.cpp)
+find_package(Eigen3 REQUIRED)
+add_executable(voxel voxel.cpp voxelUpdate.cpp RayCast.cpp main.cpp)
 target_link_libraries(voxel ${OpenCV_LIBS})
+target_link_libraries(voxel Eigen3::Eigen)

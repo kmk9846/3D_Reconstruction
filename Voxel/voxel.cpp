@@ -34,66 +34,26 @@ VoxelGrid::~VoxelGrid()
     delete[] voxel;
 }
 
-Index VoxelGrid::findIndex(Point point)
+Index VoxelGrid::findIndex(const Point& point)
 {
     Index index;
-    index.index_x = (int)point.x;
-    index.index_y = (int)point.y;
-    index.index_z = (int)point.z;
+    index.index_x = (int)point(0);
+    index.index_y = (int)point(1);
+    index.index_z = (int)point(2);
     return index;
 }
 
-Point VoxelGrid::getVertex(int index_x, int index_y, int index_z, int vertex_num)
+Eigen::Matrix<float, 3, 1> VoxelGrid::getVertex(int index_x, int index_y, int index_z, int vertex_num)
 {
     Point vertex;
-    if(vertex_num == 1)
-    {
-        vertex.x = index_x;
-        vertex.y = index_y;
-        vertex.z = index_z;
-    }
-    else if(vertex_num == 2)
-    {
-        vertex.x = index_x+1;
-        vertex.y = index_y;
-        vertex.z = index_z;
-    }
-    else if(vertex_num == 3)
-    {
-        vertex.x = index_x+1;
-        vertex.y = index_y;
-        vertex.z = index_z+1;
-    }
-    else if(vertex_num == 4)
-    {
-        vertex.x = index_x;
-        vertex.y = index_y;
-        vertex.z = index_z+1;
-    }
-    else if(vertex_num == 5)
-    {
-        vertex.x = index_x;
-        vertex.y = index_y+1;
-        vertex.z = index_z;
-    }
-    else if(vertex_num == 6)
-    {
-        vertex.x = index_x+1;
-        vertex.y = index_y+1;
-        vertex.z = index_z;
-    }
-    else if(vertex_num == 7)
-    {
-        vertex.x = index_x+1;
-        vertex.y = index_y+1;
-        vertex.z = index_z+1;
-    }
-    else if(vertex_num == 8)
-    {
-        vertex.x = index_x;
-        vertex.y = index_y+1;
-        vertex.z = index_z+1;
-    }
+    if(vertex_num == 1) vertex << float(index_x), float(index_y), float(index_z);
+    else if(vertex_num == 2) vertex << float(index_x+1), float(index_y), float(index_z);
+    else if(vertex_num == 3) vertex << float(index_x+1), float(index_y), float(index_z+1);
+    else if(vertex_num == 4) vertex << float(index_x), float(index_y), float(index_z+1);
+    else if(vertex_num == 5) vertex << float(index_x), float(index_y+1), float(index_z);
+    else if(vertex_num == 6) vertex << float(index_x+1), float(index_y+1), float(index_z);
+    else if(vertex_num == 7) vertex << float(index_x+1), float(index_y+1), float(index_z+1);
+    else if(vertex_num == 8) vertex << float(index_x), float(index_y+1), float(index_z+1);
 
     return vertex;
 }

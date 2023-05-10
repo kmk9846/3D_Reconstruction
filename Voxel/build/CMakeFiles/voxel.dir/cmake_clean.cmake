@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/voxel.dir/RayCast.cpp.o"
+  "CMakeFiles/voxel.dir/RayCast.cpp.o.d"
   "CMakeFiles/voxel.dir/main.cpp.o"
   "CMakeFiles/voxel.dir/main.cpp.o.d"
   "CMakeFiles/voxel.dir/voxel.cpp.o"

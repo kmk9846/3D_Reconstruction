@@ -129,6 +129,30 @@ voxel/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/voxel.dir/build.make CMakeFiles/voxel.dir/build
 .PHONY : voxel/fast
 
+RayCast.o: RayCast.cpp.o
+.PHONY : RayCast.o
+
+# target to build an object file
+RayCast.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/voxel.dir/build.make CMakeFiles/voxel.dir/RayCast.cpp.o
+.PHONY : RayCast.cpp.o
+
+RayCast.i: RayCast.cpp.i
+.PHONY : RayCast.i
+
+# target to preprocess a source file
+RayCast.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/voxel.dir/build.make CMakeFiles/voxel.dir/RayCast.cpp.i
+.PHONY : RayCast.cpp.i
+
+RayCast.s: RayCast.cpp.s
+.PHONY : RayCast.s
+
+# target to generate assembly for a file
+RayCast.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/voxel.dir/build.make CMakeFiles/voxel.dir/RayCast.cpp.s
+.PHONY : RayCast.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -210,6 +234,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... voxel"
+	@echo "... RayCast.o"
+	@echo "... RayCast.i"
+	@echo "... RayCast.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
