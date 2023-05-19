@@ -24,17 +24,8 @@ int main(int argc, char* argv[])
     
     // groundtruth.txt 파일의 pose 를 모두 4x4 matrix 로 변경하여 poseMatrix 에 저장
     generatePointCloud.poseMatrix = generatePointCloud.read_trajectory(filePath + "/groundtruth.txt");
-    
 
-    //size 만큼의 timestamp를 건너뛰면서 gernerate_pointcloud 함수를 실행
-    // for (int i = 0; i < rgb_pose_depth_list.size(); i += size) 
-    // {
-    //     string rgbPNG = filePath + rgbfile + to_string(get<0>(rgb_pose_depth_list[i])) + ".png";
-    //     string depthPNG = filePath + depthfile + to_string(get<1>(rgb_pose_depth_list[i])) + ".png";
-    //     Matrix4f matrixPose = generatePointCloud.poseMatrix[get<2>(rgb_pose_depth_list[i])].cast<float>();
-    //     generatePointCloud.generate_pointcloud(rgbPNG, depthPNG, matrixPose);
-    // }
-
+    //20 프레임만 사용한다.
     for (int i = 0; i < rgb_pose_depth_list.size() - 730; i += size) 
     {
         string rgbPNG = filePath + rgbfile + to_string(get<0>(rgb_pose_depth_list[i])) + ".png";
@@ -52,6 +43,7 @@ int main(int argc, char* argv[])
 
     for (auto point : generatePointCloud.points) 
     {
+        //m 단위를 cm 단위로 변경
         colPoint << point.x * 100, point.y * 100, point.z* 100;
         findIndex = rayCast.rayCasting(Origin, colPoint);
 
