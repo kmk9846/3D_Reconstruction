@@ -1,6 +1,6 @@
 #include "../include/RayCast.h"
 
- vector<VoxelIndex> RayCast::rayCasting(const Point& origin, const Point& point)
+vector<VoxelIndex> RayCast::rayCasting(const Point& origin, const Point& point)
 {
     vector<VoxelIndex> findVoxelIndex;
 
@@ -76,6 +76,7 @@ bool RayCast::endRay(float currentX, float currentY, float currentZ, const Point
     float distX = (currentX + 0.5f) * VoxelUnit - origin(0);
     float distY = (currentY + 0.5f) * VoxelUnit - origin(1);
     float distZ = (currentZ + 0.5f) * VoxelUnit - origin(2);
-    if (distX * rayDirection(0) >= point(0) || distY * rayDirection(1) >= point(1) || distZ * rayDirection(2) >= point(2)) return false;
+    if (distX * rayDirection(0) >= point(0) || distY * rayDirection(1) >= point(1) 
+            || distZ * rayDirection(2) >= point(2)) return false;
     else return true;
 }

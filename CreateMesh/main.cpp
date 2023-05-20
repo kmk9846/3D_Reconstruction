@@ -24,7 +24,6 @@ int main(int argc, char* argv[])
     
     // groundtruth.txt 파일의 pose 를 모두 4x4 matrix 로 변경하여 poseMatrix 에 저장
     generatePointCloud.poseMatrix = generatePointCloud.read_trajectory(filePath + "/groundtruth.txt");
-
     //20 프레임만 사용한다.
     for (int i = 0; i < rgb_pose_depth_list.size() - 730; i += size) 
     {
@@ -33,7 +32,6 @@ int main(int argc, char* argv[])
         Eigen::Matrix4f matrixPose = generatePointCloud.poseMatrix[get<2>(rgb_pose_depth_list[i])].cast<float>();
         generatePointCloud.generate_pointcloud(rgbPNG, depthPNG, matrixPose);
     }
-
     Point colPoint, Origin;
     Origin << 0.0f, 0.0f, 0.0f;
 
@@ -51,10 +49,10 @@ int main(int argc, char* argv[])
         {
             voxelUpdate.updateSDF(Origin, colPoint, voxelIndex);
             voxelUpdate.updateWeight(voxelIndex);
-            cout << voxelIndex.index_x << " , " << voxelIndex.index_y << " , " << voxelIndex.index_z << endl;
-            printf("update sdf = [%f]\n", voxelUpdate.voxel[voxelIndex.index_x][voxelIndex.index_y][voxelIndex.index_z].sdf);
-            printf("update weight = [%f]\n", voxelUpdate.voxel[voxelIndex.index_x][voxelIndex.index_y][voxelIndex.index_z].weight);
-            printf("============================\n");
+            // cout << voxelIndex.index_x << " , " << voxelIndex.index_y << " , " << voxelIndex.index_z << endl;
+            // printf("update sdf = [%f]\n", voxelUpdate.voxel[voxelIndex.index_x][voxelIndex.index_y][voxelIndex.index_z].sdf);
+            // printf("update weight = [%f]\n", voxelUpdate.voxel[voxelIndex.index_x][voxelIndex.index_y][voxelIndex.index_z].weight);
+            // printf("============================\n");
         }
     }
 
