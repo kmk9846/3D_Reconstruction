@@ -13,7 +13,7 @@ int main()
     vector<VoxelIndex> findIndex;
     VoxelUpdate voxelUpdate;
     findIndex = rayCast.rayCasting(Origin, colPoint);
-
+    
     for (const auto& voxelIndex : findIndex)
     {
         // cout << voxelIndex.index_x << " , " << voxelIndex.index_y << " , " << voxelIndex.index_z << endl;

@@ -53,10 +53,10 @@ RM = /opt/homebrew/Cellar/cmake/3.26.3/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/CreateMesh
+CMAKE_SOURCE_DIR = /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/CreateMesh
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/CreateMesh/build
+CMAKE_BINARY_DIR = /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/CreateMesh/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/mesh.dir/depend.make
@@ -69,91 +69,107 @@ include CMakeFiles/mesh.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/mesh.dir/flags.make
 
-CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/src/GeneratePointCloud.cpp.o: CMakeFiles/mesh.dir/flags.make
-CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/src/GeneratePointCloud.cpp.o: /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/src/GeneratePointCloud.cpp
-CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/src/GeneratePointCloud.cpp.o: CMakeFiles/mesh.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/CreateMesh/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/src/GeneratePointCloud.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/src/GeneratePointCloud.cpp.o -MF CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/src/GeneratePointCloud.cpp.o.d -o CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/src/GeneratePointCloud.cpp.o -c /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/src/GeneratePointCloud.cpp
+CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/src/GeneratePointCloud.cpp.o: CMakeFiles/mesh.dir/flags.make
+CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/src/GeneratePointCloud.cpp.o: /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/src/GeneratePointCloud.cpp
+CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/src/GeneratePointCloud.cpp.o: CMakeFiles/mesh.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/CreateMesh/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/src/GeneratePointCloud.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/src/GeneratePointCloud.cpp.o -MF CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/src/GeneratePointCloud.cpp.o.d -o CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/src/GeneratePointCloud.cpp.o -c /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/src/GeneratePointCloud.cpp
 
-CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/src/GeneratePointCloud.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/src/GeneratePointCloud.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/src/GeneratePointCloud.cpp > CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/src/GeneratePointCloud.cpp.i
+CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/src/GeneratePointCloud.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/src/GeneratePointCloud.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/src/GeneratePointCloud.cpp > CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/src/GeneratePointCloud.cpp.i
 
-CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/src/GeneratePointCloud.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/src/GeneratePointCloud.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/src/GeneratePointCloud.cpp -o CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/src/GeneratePointCloud.cpp.s
+CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/src/GeneratePointCloud.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/src/GeneratePointCloud.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/src/GeneratePointCloud.cpp -o CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/src/GeneratePointCloud.cpp.s
 
-CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp.o: CMakeFiles/mesh.dir/flags.make
-CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp.o: /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp
-CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp.o: CMakeFiles/mesh.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/CreateMesh/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp.o -MF CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp.o.d -o CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp.o -c /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp
+CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp.o: CMakeFiles/mesh.dir/flags.make
+CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp.o: /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp
+CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp.o: CMakeFiles/mesh.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/CreateMesh/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp.o -MF CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp.o.d -o CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp.o -c /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp
 
-CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp > CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp.i
+CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp > CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp.i
 
-CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp -o CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp.s
+CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp -o CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp.s
 
-CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp.o: CMakeFiles/mesh.dir/flags.make
-CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp.o: /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp
-CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp.o: CMakeFiles/mesh.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/CreateMesh/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp.o -MF CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp.o.d -o CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp.o -c /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp
+CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp.o: CMakeFiles/mesh.dir/flags.make
+CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp.o: /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp
+CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp.o: CMakeFiles/mesh.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/CreateMesh/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp.o -MF CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp.o.d -o CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp.o -c /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp
 
-CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp > CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp.i
+CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp > CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp.i
 
-CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp -o CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp.s
+CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp -o CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp.s
 
-CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp.o: CMakeFiles/mesh.dir/flags.make
-CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp.o: /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp
-CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp.o: CMakeFiles/mesh.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/CreateMesh/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp.o -MF CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp.o.d -o CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp.o -c /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp
+CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp.o: CMakeFiles/mesh.dir/flags.make
+CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp.o: /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp
+CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp.o: CMakeFiles/mesh.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/CreateMesh/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp.o -MF CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp.o.d -o CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp.o -c /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp
 
-CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp > CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp.i
+CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp > CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp.i
 
-CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp -o CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp.s
+CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp -o CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp.s
+
+CMakeFiles/mesh.dir/src/CreateMesh.cpp.o: CMakeFiles/mesh.dir/flags.make
+CMakeFiles/mesh.dir/src/CreateMesh.cpp.o: /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/CreateMesh/src/CreateMesh.cpp
+CMakeFiles/mesh.dir/src/CreateMesh.cpp.o: CMakeFiles/mesh.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/CreateMesh/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/mesh.dir/src/CreateMesh.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/mesh.dir/src/CreateMesh.cpp.o -MF CMakeFiles/mesh.dir/src/CreateMesh.cpp.o.d -o CMakeFiles/mesh.dir/src/CreateMesh.cpp.o -c /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/CreateMesh/src/CreateMesh.cpp
+
+CMakeFiles/mesh.dir/src/CreateMesh.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mesh.dir/src/CreateMesh.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/CreateMesh/src/CreateMesh.cpp > CMakeFiles/mesh.dir/src/CreateMesh.cpp.i
+
+CMakeFiles/mesh.dir/src/CreateMesh.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mesh.dir/src/CreateMesh.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/CreateMesh/src/CreateMesh.cpp -o CMakeFiles/mesh.dir/src/CreateMesh.cpp.s
 
 CMakeFiles/mesh.dir/main.cpp.o: CMakeFiles/mesh.dir/flags.make
-CMakeFiles/mesh.dir/main.cpp.o: /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/CreateMesh/main.cpp
+CMakeFiles/mesh.dir/main.cpp.o: /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/CreateMesh/main.cpp
 CMakeFiles/mesh.dir/main.cpp.o: CMakeFiles/mesh.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/CreateMesh/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/mesh.dir/main.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/mesh.dir/main.cpp.o -MF CMakeFiles/mesh.dir/main.cpp.o.d -o CMakeFiles/mesh.dir/main.cpp.o -c /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/CreateMesh/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/CreateMesh/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/mesh.dir/main.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/mesh.dir/main.cpp.o -MF CMakeFiles/mesh.dir/main.cpp.o.d -o CMakeFiles/mesh.dir/main.cpp.o -c /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/CreateMesh/main.cpp
 
 CMakeFiles/mesh.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mesh.dir/main.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/CreateMesh/main.cpp > CMakeFiles/mesh.dir/main.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/CreateMesh/main.cpp > CMakeFiles/mesh.dir/main.cpp.i
 
 CMakeFiles/mesh.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mesh.dir/main.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/CreateMesh/main.cpp -o CMakeFiles/mesh.dir/main.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/CreateMesh/main.cpp -o CMakeFiles/mesh.dir/main.cpp.s
 
 # Object files for target mesh
 mesh_OBJECTS = \
-"CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/src/GeneratePointCloud.cpp.o" \
-"CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp.o" \
-"CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp.o" \
-"CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp.o" \
+"CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/src/GeneratePointCloud.cpp.o" \
+"CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp.o" \
+"CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp.o" \
+"CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp.o" \
+"CMakeFiles/mesh.dir/src/CreateMesh.cpp.o" \
 "CMakeFiles/mesh.dir/main.cpp.o"
 
 # External object files for target mesh
 mesh_EXTERNAL_OBJECTS =
 
-mesh: CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/src/GeneratePointCloud.cpp.o
-mesh: CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp.o
-mesh: CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp.o
-mesh: CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp.o
+mesh: CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/src/GeneratePointCloud.cpp.o
+mesh: CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxel.cpp.o
+mesh: CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/voxelUpdate.cpp.o
+mesh: CMakeFiles/mesh.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/Voxel/src/RayCast.cpp.o
+mesh: CMakeFiles/mesh.dir/src/CreateMesh.cpp.o
 mesh: CMakeFiles/mesh.dir/main.cpp.o
 mesh: CMakeFiles/mesh.dir/build.make
 mesh: /opt/homebrew/lib/libopencv_gapi.4.7.0.dylib
@@ -213,7 +229,7 @@ mesh: /opt/homebrew/lib/libopencv_photo.4.7.0.dylib
 mesh: /opt/homebrew/lib/libopencv_imgproc.4.7.0.dylib
 mesh: /opt/homebrew/lib/libopencv_core.4.7.0.dylib
 mesh: CMakeFiles/mesh.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/CreateMesh/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable mesh"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/CreateMesh/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable mesh"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/mesh.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -225,6 +241,6 @@ CMakeFiles/mesh.dir/clean:
 .PHONY : CMakeFiles/mesh.dir/clean
 
 CMakeFiles/mesh.dir/depend:
-	cd /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/CreateMesh/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/CreateMesh /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/CreateMesh /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/CreateMesh/build /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/CreateMesh/build /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/CreateMesh/build/CMakeFiles/mesh.dir/DependInfo.cmake --color=$(COLOR)
+	cd /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/CreateMesh/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/CreateMesh /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/CreateMesh /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/CreateMesh/build /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/CreateMesh/build /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/CreateMesh/build/CMakeFiles/mesh.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/mesh.dir/depend
 

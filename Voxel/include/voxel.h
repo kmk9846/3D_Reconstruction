@@ -27,6 +27,7 @@ typedef struct _VoxelIndex{
     int index_z;
 }VoxelIndex;
 
+
 class VoxelGrid{
 public:
     //init voxel data
@@ -38,5 +39,5 @@ public:
     //index로 voxel 정보 불러오기
     VoxelIndex findIndex(const Point& point);
     //voxel 정보로 index 찾기
-    Eigen::Matrix<float, 3, 1> getVertex(int index_x, int index_y, int index_z, int vertex_num);
+    Point getVertex(int index_x, int index_y, int index_z, int vertex_num);
 };
