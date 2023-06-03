@@ -9,7 +9,7 @@
 #include "meshTable.h"
 
 typedef struct _Triangle {
-    int v0, v1, v2;
+    int e0, e1, e2;
     VoxelIndex index;
 }Triangle;
 
@@ -21,9 +21,11 @@ public:
     float vertexSDF[8];
     int maxIndex;
     int minIndex;
+    int checkCreate;
     void getVertexSDF(int x, int y, int z);
     int checkSDFSign(int isoLevel);
     bool checkSDFVoxel(int x, int y, int z);
+    int getVertexNum(int e0, int e1, int e2);
     std::vector<Triangle> generateMesh(int voxelSize, VoxelIndex maxIndex, VoxelIndex minIndex, float isolevel);
     void writePLY(const std::vector<Triangle>& triangles);
 };

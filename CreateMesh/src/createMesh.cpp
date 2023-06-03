@@ -61,14 +61,49 @@ void CreateMesh::getVertexSDF(int x, int y, int z)
 int CreateMesh::checkSDFSign(int isolevel)
 {
     int cubeIndex = 0;
-    if (vertexSDF[0] < isolevel) cubeIndex |= 1;
-    if (vertexSDF[1] < isolevel) cubeIndex |= 2;
-    if (vertexSDF[2] < isolevel) cubeIndex |= 4;
-    if (vertexSDF[3] < isolevel) cubeIndex |= 8;
-    if (vertexSDF[4] < isolevel) cubeIndex |= 16;
-    if (vertexSDF[5] < isolevel) cubeIndex |= 32;
-    if (vertexSDF[6] < isolevel) cubeIndex |= 64;
-    if (vertexSDF[7] < isolevel) cubeIndex |= 128;
+    checkCreate = 0;
+    // for(int i = 0; i < 8; i++) printf("[%d]%lf ", i, vertexSDF[i]);
+    // printf("\n");
+    if (vertexSDF[0] < isolevel) 
+    {
+        checkCreate += 1;
+        cubeIndex |= 1;
+    }
+    if (vertexSDF[1] < isolevel) 
+    {
+        checkCreate += 1;
+        cubeIndex |= 2;
+    }
+    if (vertexSDF[2] < isolevel) 
+    {
+        checkCreate += 1;
+        cubeIndex |= 4;
+    }
+    if (vertexSDF[3] < isolevel) 
+    {
+        checkCreate += 1;
+        cubeIndex |= 8;
+    }
+    if (vertexSDF[4] < isolevel) 
+    {
+        checkCreate += 1;
+        cubeIndex |= 16;
+    }
+    if (vertexSDF[5] < isolevel) 
+    {
+        checkCreate += 1;
+        cubeIndex |= 32;
+    }
+    if (vertexSDF[6] < isolevel) 
+    {
+        checkCreate += 1;
+        cubeIndex |= 64;
+    }
+    if (vertexSDF[7] < isolevel) 
+    {
+        checkCreate += 1;
+        cubeIndex |= 128;
+    }
     return cubeIndex;
 }
 
@@ -76,25 +111,65 @@ bool CreateMesh::checkSDFVoxel(int x, int y, int z)
 {
     if(x == 0 || y == 0 || z == 0) return false;
     float checksdf = voxelUpdate.voxel[x][y][z].sdf;
-    checksdf *= voxelUpdate.voxel[x+1][y][z].sdf;
-    checksdf *= voxelUpdate.voxel[x][y+1][z].sdf;
-    checksdf *= voxelUpdate.voxel[x][y][z+1].sdf;
-    checksdf *= voxelUpdate.voxel[x+1][y+1][z].sdf;
-    checksdf *= voxelUpdate.voxel[x][y+1][z+1].sdf;
-    checksdf *= voxelUpdate.voxel[x+1][y][z+1].sdf;
-    checksdf *= voxelUpdate.voxel[x+1][y+1][z+1].sdf;
+    // checksdf *= voxelUpdate.voxel[x+1][y][z].sdf;
+    // checksdf *= voxelUpdate.voxel[x][y+1][z].sdf;
+    // checksdf *= voxelUpdate.voxel[x][y][z+1].sdf;
+    // checksdf *= voxelUpdate.voxel[x+1][y+1][z].sdf;
+    // checksdf *= voxelUpdate.voxel[x][y+1][z+1].sdf;
+    // checksdf *= voxelUpdate.voxel[x+1][y][z+1].sdf;
+    // checksdf *= voxelUpdate.voxel[x+1][y+1][z+1].sdf;
 
-    checksdf *= voxelUpdate.voxel[x-1][y][z].sdf;
-    checksdf *= voxelUpdate.voxel[x][y-1][z].sdf;
-    checksdf *= voxelUpdate.voxel[x][y][z-1].sdf;
-    checksdf *= voxelUpdate.voxel[x-1][y-1][z].sdf;
-    checksdf *= voxelUpdate.voxel[x][y-1][z-1].sdf;
-    checksdf *= voxelUpdate.voxel[x-1][y][z-1].sdf;
-    checksdf *= voxelUpdate.voxel[x-1][y-1][z-1].sdf;
+    // checksdf *= voxelUpdate.voxel[x-1][y][z].sdf;
+    // checksdf *= voxelUpdate.voxel[x][y-1][z].sdf;
+    // checksdf *= voxelUpdate.voxel[x][y][z-1].sdf;
+    // checksdf *= voxelUpdate.voxel[x-1][y-1][z].sdf;
+    // checksdf *= voxelUpdate.voxel[x][y-1][z-1].sdf;
+    // checksdf *= voxelUpdate.voxel[x-1][y][z-1].sdf;
+    // checksdf *= voxelUpdate.voxel[x-1][y-1][z-1].sdf;
     if(checksdf < 0) return true;
     else return false;
 }
 
+int CreateMesh::getVertexNum(int e0, int e1, int e2)
+{
+    int e_1 = e0 + 1;
+    int e_2 = e1 + 1;
+    int e_3 = e2 + 1;
+    int checkSum = e_1 + e_2 + e_3;
+    if(checkSum == 14) return 1;
+    if(checkSum == 13) return 2;
+    if(checkSum == 16) return 3;
+    if(checkSum == 19) return 4;
+    if(checkSum == 22) return 5;
+    if(checkSum == 21) return 6;
+    if(checkSum == 24) return 7;
+    if(checkSum == 27) return 8;
+
+    // if((e0 == 0 && e1 == 3 && e2 == 8) || (e0 == 0 && e1 == 8 && e2 == 3) || 
+    //     (e0 == 3 && e1 == 8 && e2 == 0) || (e0 == 3 && e1 == 0 && e2 == 8) ||
+    //     (e0 == 8 && e1 == 0 && e2 == 3) || (e0 == 8 && e1 == 3 && e2 == 0)) return 1;
+    // if((e0 == 0 && e1 == 1 && e2 == 9) || (e0 == 0 && e1 == 9 && e2 == 1) || 
+    //     (e0 == 1 && e1 == 0 && e2 == 9) || (e0 == 1 && e1 == 9 && e2 == 0) ||
+    //     (e0 == 9 && e1 == 0 && e2 == 1) || (e0 == 9 && e1 == 1 && e2 == 0)) return 2;
+    // if((e0 == 1 && e1 == 2 && e2 == 10) || (e0 == 1 && e1 == 10 && e2 == 2) || 
+    //     (e0 == 2 && e1 == 1 && e2 == 10) || (e0 == 2 && e1 == 10 && e2 == 1) ||
+    //     (e0 == 10 && e1 == 1 && e2 == 2) || (e0 == 10 && e1 == 2 && e2 == 1)) return 3;
+    // if((e0 == 2 && e1 == 3 && e2 == 11) || (e0 == 2 && e1 == 11 && e2 == 3) || 
+    //     (e0 == 3 && e1 == 2 && e2 == 11) || (e0 == 3 && e1 == 11 && e2 == 2) ||
+    //     (e0 == 11 && e1 == 2 && e2 == 3) || (e0 == 11 && e1 == 3 && e2 == 2)) return 4;
+    // if((e0 == 4 && e1 == 7 && e2 == 8) || (e0 == 4 && e1 == 8 && e2 == 7) || 
+    //     (e0 == 7 && e1 == 8 && e2 == 4) || (e0 == 7 && e1 == 4 && e2 == 8) ||
+    //     (e0 == 8 && e1 == 4 && e2 == 7) || (e0 == 8 && e1 == 7 && e2 == 4)) return 5;
+    // if((e0 == 4 && e1 == 5 && e2 == 9) || (e0 == 4 && e1 == 9 && e2 == 5) || 
+    //     (e0 == 5 && e1 == 4 && e2 == 9) || (e0 == 5 && e1 == 9 && e2 == 4) ||
+    //     (e0 == 9 && e1 == 4 && e2 == 5) || (e0 == 9 && e1 == 5 && e2 == 4)) return 6;
+    // if((e0 == 5 && e1 == 6 && e2 == 10) || (e0 == 5 && e1 == 10 && e2 == 6) || 
+    //     (e0 == 6 && e1 == 5 && e2 == 10) || (e0 == 6 && e1 == 10 && e2 == 5) ||
+    //     (e0 == 10 && e1 == 5 && e2 == 6) || (e0 == 10 && e1 == 6 && e2 == 5)) return 7;
+    // if((e0 == 6 && e1 == 7 && e2 == 11) || (e0 == 6 && e1 == 11 && e2 == 7) || 
+    //     (e0 == 7 && e1 == 6 && e2 == 11) || (e0 == 7 && e1 == 11 && e2 == 6) ||
+    //     (e0 == 11 && e1 == 6 && e2 == 7) || (e0 == 11 && e1 == 7 && e2 == 6)) return 8;
+}
 
 std::vector<Triangle> CreateMesh::generateMesh(int voxelSize, VoxelIndex maxIndex, VoxelIndex minIndex, float isolevel)
 {
@@ -106,7 +181,7 @@ std::vector<Triangle> CreateMesh::generateMesh(int voxelSize, VoxelIndex maxInde
         {
             for (int z = minIndex.index_z; z < maxIndex.index_z; z++) 
             {
-                printf("x[%d] y[%d] z[%d]\n", x, y, z);
+                // printf("x[%d] y[%d] z[%d]\n", x, y, z);
                 // 현재 voxel의 인덱스 계산
                 // int voxelIndex = x + y * gridSizeX + z * gridSizeX * gridSizeY;
 
@@ -121,34 +196,39 @@ std::vector<Triangle> CreateMesh::generateMesh(int voxelSize, VoxelIndex maxInde
                 //     voxelIndex + gridSizeX * gridSizeY + gridSizeX + 1,
                 //     voxelIndex + gridSizeX * gridSizeY + gridSizeX
                 // };
-                if(checkSDFVoxel(x, y, z) == true)
+                getVertexSDF(x, y, z);
+                int cubeIndex = 0;
+                cubeIndex = checkSDFSign(isolevel);
+                if(checkCreate < 8 && checkCreate >= 1)
                 {
-                    getVertexSDF(x, y, z);
-                    int cubeIndex = 0;
-                    cubeIndex = checkSDFSign(isolevel);
-                    // 현재 votriangleIndicesxel에서 생성되는 삼각형 정보 가져오기
-                    int triangleIndices[16];
-                    *triangleIndices = *kTriangleTable[cubeIndex];
-                    int i = 0;
+                    printf("x[%d] y[%d] z[%d]\n", x, y, z);
+                    printf("cubeindex : %d\n", cubeIndex);
+                    // int triangleIndices[16];
+                    // *triangleIndices = *kTriangleTable[cubeIndex];
+                    // for(int k = 0; k < 16; k++) printf("%d ", triangleIndices[k]);
+                    // printf("\n");
+                    // for(int l = 0; l < 16; l++) printf("%d ", kTriangleTable[cubeIndex][l]);
+                    // printf("\n");
                     // 삼각형 생성
-                    for (int i = 0; triangleIndices[i] != -1; i += 3) 
+                    for (int i = 0; kTriangleTable[cubeIndex][i] != -1; i += 3) 
                     {
                         // i+=1;
-                        // printf("asdadsasd32 [%d]\n", i);
-                        int vertexIndex1 = triangleIndices[i];
-                        int vertexIndex2 = triangleIndices[i + 1];
-                        int vertexIndex3 = triangleIndices[i + 2];
+                        // printf("index [%d, %d, %d]\n", triangleIndices[i], triangleIndices[i+1], triangleIndices[i+2]);
+                        int vertexIndex1 = kTriangleTable[cubeIndex][i];
+                        int vertexIndex2 = kTriangleTable[cubeIndex][i+1];
+                        int vertexIndex3 = kTriangleTable[cubeIndex][i+2];
 
                         Triangle triangle;
-                        triangle.v0 = vertexIndex1;
-                        triangle.v1 = vertexIndex2;
-                        triangle.v2 = vertexIndex3;
+                        triangle.e0 = vertexIndex1;
+                        triangle.e1 = vertexIndex2;
+                        triangle.e2 = vertexIndex3;
                         triangle.index.index_x = x;
                         triangle.index.index_y = y;
                         triangle.index.index_z = z;
 
                         triangles.push_back(triangle);
                     }
+                    printf("=====================\n");
                 }else continue;
             }
         }
@@ -187,17 +267,12 @@ void CreateMesh::writePLY(const std::vector<Triangle>& triangles)
     for (const Triangle& triangle : triangles) 
     {
         i+=1;
-        printf("triangle size [%d / %ld]\n", i, triangles.size());
+        // printf("triangle size [%d / %ld]\n", i, triangles.size());
         Point vertex;
-        vertex = voxelUpdate.getVertex(triangle.index.index_x, triangle.index.index_y, triangle.index.index_z, triangle.v0);
-        // file << "3 " << triangle.v0 << " " << triangle.v1 << " " << triangle.v2 << std::endl;
+        int vertexNum = getVertexNum(triangle.e0, triangle.e1, triangle.e2);
+        vertex = voxelUpdate.getVertex(triangle.index.index_x, triangle.index.index_y, triangle.index.index_z, vertexNum);
         file << vertex(0) << " " << vertex(1) << " " << vertex(2) << std::endl;
-        vertex = voxelUpdate.getVertex(triangle.index.index_x, triangle.index.index_y, triangle.index.index_z, triangle.v1);
-        // file << "3 " << triangle.v0 << " " << triangle.v1 << " " << triangle.v2 << std::endl;
-        file << vertex(0) << " " << vertex(1) << " " << vertex(2) << std::endl;
-        vertex = voxelUpdate.getVertex(triangle.index.index_x, triangle.index.index_y, triangle.index.index_z, triangle.v2);
-        // file << "3 " << triangle.v0 << " " << triangle.v1 << " " << triangle.v2 << std::endl;
-        file << vertex(0) << " " << vertex(1) << " " << vertex(2) << std::endl;
+       
     }
 
     file.close();

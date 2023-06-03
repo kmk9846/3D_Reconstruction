@@ -31,8 +31,8 @@ int main(int argc, char* argv[])
     //     Matrix4f matrixPose = generatePointCloud.poseMatrix[get<2>(rgb_pose_depth_list[i])].cast<float>();
     //     generatePointCloud.generate_pointcloud(rgbPNG, depthPNG, matrixPose);
     // }
-
-    for (int i = 0; i < rgb_pose_depth_list.size() - 730; i += size) 
+    printf("size : %d\n", rgb_pose_depth_list.size());
+    for (int i = 0; i < 1; i += size) 
     {
         string rgbPNG = filePath + rgbfile + to_string(get<0>(rgb_pose_depth_list[i])) + ".png";
         string depthPNG = filePath + depthfile + to_string(get<1>(rgb_pose_depth_list[i])) + ".png";

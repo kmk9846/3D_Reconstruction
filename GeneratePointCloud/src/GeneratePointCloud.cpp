@@ -157,8 +157,8 @@ void GeneratePointCloud::generate_pointcloud(const string& rgb_file, const strin
     cv::Mat depth = cv::imread(depth_file, cv::IMREAD_UNCHANGED);
 
     PointsData add_points;
-    for (int v = 0; v < rgb.rows; v += 5) {
-        for (int u = 0; u < rgb.cols; u += 5) {
+    for (int v = 0; v < rgb.rows; v += 1) {
+        for (int u = 0; u < rgb.cols; u += 1) {
             cv::Vec3b color = rgb.at<cv::Vec3b>(v, u);
             ushort depth_value = depth.at<ushort>(v, u);
             double Z = static_cast<double>(depth_value) / scalingFactor;
