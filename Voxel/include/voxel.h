@@ -10,8 +10,8 @@ using namespace std;
 using namespace Eigen;
 
 typedef Eigen::Matrix<float, 3, 1> Point;
-const int VoxelSize = 1024;
-const float VoxelUnit = 0.5;
+const int VoxelSize = 512;
+const float VoxelUnit = 0.01;
 
 typedef struct _Voxel{
     float weight;

@@ -19,23 +19,29 @@ void VoxelUpdate::updateSDF(const Point& origin, const Point& point, VoxelIndex 
 {
     //Index currentIndex = findIndex(point);
     float distance = getSDF(origin, point, currentIndex);
-    
-    float prevSDF = voxel[currentIndex.index_x][currentIndex.index_y][currentIndex.index_z].sdf;
-    float prevWeight = voxel[currentIndex.index_x][currentIndex.index_y][currentIndex.index_z].weight;
-
-    //update current sdf
-    voxel[currentIndex.index_x][currentIndex.index_y][currentIndex.index_z].sdf = 
+    if(currentIndex.index_x <= 0 || currentIndex.index_y <= 0 || currentIndex.index_z <= 0) return;
+    else
+    {
+        float prevSDF = voxel[currentIndex.index_x][currentIndex.index_y][currentIndex.index_z].sdf;
+        float prevWeight = voxel[currentIndex.index_x][currentIndex.index_y][currentIndex.index_z].weight;
+        //update current sdf
+        voxel[currentIndex.index_x][currentIndex.index_y][currentIndex.index_z].sdf = 
         (prevWeight * prevWeight + weight*distance)/(prevWeight+weight);
+    }
 }
 
 void VoxelUpdate::updateWeight(VoxelIndex currentIndex)
 {
     //Index currentIndex = findIndex(point);
-    float prevWeight = voxel[currentIndex.index_x][currentIndex.index_y][currentIndex.index_z].weight;
+    if(currentIndex.index_x <= 0 || currentIndex.index_y <= 0 || currentIndex.index_z <= 0) return;
+    else
+    {
+        float prevWeight = voxel[currentIndex.index_x][currentIndex.index_y][currentIndex.index_z].weight;
 
-    //update voxel Weight
-    voxel[currentIndex.index_x][currentIndex.index_y][currentIndex.index_z].weight =
-        min(prevWeight + weight, weightMax);
+        //update voxel Weight
+        voxel[currentIndex.index_x][currentIndex.index_y][currentIndex.index_z].weight =
+            min(prevWeight + weight, weightMax);
+    }
 }
 
 void VoxelUpdate::updateColor(const Point& point)

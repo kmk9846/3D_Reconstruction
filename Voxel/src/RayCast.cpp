@@ -69,6 +69,7 @@ vector<VoxelIndex> RayCast::rayCasting(const Point& origin, const Point& point)
     return findVoxelIndex;
 }
 
+// 뒤에 어느정도 더 해주기 voxel 의 4배 정도
 bool RayCast::endRay(float currentX, float currentY, float currentZ, const Point& origin, const Point& rayDirection, 
                     const Point& point, float rayLength)
 {
@@ -76,7 +77,7 @@ bool RayCast::endRay(float currentX, float currentY, float currentZ, const Point
     float distX = (currentX + 0.5f) * VoxelUnit - origin(0);
     float distY = (currentY + 0.5f) * VoxelUnit - origin(1);
     float distZ = (currentZ + 0.5f) * VoxelUnit - origin(2);
-    if (distX * rayDirection(0) >= point(0) || distY * rayDirection(1) >= point(1) 
-            || distZ * rayDirection(2) >= point(2)) return false;
+    if (distX * rayDirection(0) >= point(0) + VoxelUnit*4 || distY * rayDirection(1) >= point(1) + VoxelUnit*4
+            || distZ * rayDirection(2) >= point(2) + VoxelUnit*4) return false;
     else return true;
 }

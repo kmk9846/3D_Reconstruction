@@ -174,6 +174,7 @@ int CreateMesh::getVertexNum(int e0, int e1, int e2)
 std::vector<Triangle> CreateMesh::generateMesh(int voxelSize, VoxelIndex maxIndex, VoxelIndex minIndex, float isolevel)
 {
     std::vector<Triangle> triangles;
+    //vertex point
     // voxel 그리드 순회
     for (int x = minIndex.index_x ; x < maxIndex.index_x; x++) 
     {
@@ -181,39 +182,19 @@ std::vector<Triangle> CreateMesh::generateMesh(int voxelSize, VoxelIndex maxInde
         {
             for (int z = minIndex.index_z; z < maxIndex.index_z; z++) 
             {
-                // printf("x[%d] y[%d] z[%d]\n", x, y, z);
-                // 현재 voxel의 인덱스 계산
-                // int voxelIndex = x + y * gridSizeX + z * gridSizeX * gridSizeY;
-
-                // // voxel 그리드의 꼭짓점 인덱스 계산
-                // int vertexIndices[8] = {
-                //     voxelIndex,
-                //     voxelIndex + 1,
-                //     voxelIndex + gridSizeX + 1,
-                //     voxelIndex + gridSizeX,
-                //     voxelIndex + gridSizeX * gridSizeY,
-                //     voxelIndex + gridSizeX * gridSizeY + 1,
-                //     voxelIndex + gridSizeX * gridSizeY + gridSizeX + 1,
-                //     voxelIndex + gridSizeX * gridSizeY + gridSizeX
-                // };
                 getVertexSDF(x, y, z);
                 int cubeIndex = 0;
                 cubeIndex = checkSDFSign(isolevel);
-                if(checkCreate < 8 && checkCreate >= 1)
+                if(checkCreate < 8 && checkCreate >= 3)
                 {
                     printf("x[%d] y[%d] z[%d]\n", x, y, z);
                     printf("cubeindex : %d\n", cubeIndex);
-                    // int triangleIndices[16];
-                    // *triangleIndices = *kTriangleTable[cubeIndex];
-                    // for(int k = 0; k < 16; k++) printf("%d ", triangleIndices[k]);
-                    // printf("\n");
-                    // for(int l = 0; l < 16; l++) printf("%d ", kTriangleTable[cubeIndex][l]);
-                    // printf("\n");
                     // 삼각형 생성
                     for (int i = 0; kTriangleTable[cubeIndex][i] != -1; i += 3) 
                     {
                         // i+=1;
                         // printf("index [%d, %d, %d]\n", triangleIndices[i], triangleIndices[i+1], triangleIndices[i+2]);
+                        //vertexonce edge 
                         int vertexIndex1 = kTriangleTable[cubeIndex][i];
                         int vertexIndex2 = kTriangleTable[cubeIndex][i+1];
                         int vertexIndex3 = kTriangleTable[cubeIndex][i+2];
@@ -258,21 +239,12 @@ void CreateMesh::writePLY(const std::vector<Triangle>& triangles)
     // file << "property list uchar int vertex_indices" << std::endl;
     file << "end_header" << std::endl;
 
-    // // 정점 데이터 작성
-    // for (const Vertex& vertex : vertices) {
-    //     file << vertex.x << " " << vertex.y << " " << vertex.z << std::endl;
-    // }
-    int i = 0;
-    // 삼각형 데이터 작성
     for (const Triangle& triangle : triangles) 
     {
-        i+=1;
-        // printf("triangle size [%d / %ld]\n", i, triangles.size());
         Point vertex;
         int vertexNum = getVertexNum(triangle.e0, triangle.e1, triangle.e2);
         vertex = voxelUpdate.getVertex(triangle.index.index_x, triangle.index.index_y, triangle.index.index_z, vertexNum);
-        file << vertex(0) << " " << vertex(1) << " " << vertex(2) << std::endl;
-       
+        file << vertex(0) << " " << vertex(1) << " " << vertex(2) << std::endl;  
     }
 
     file.close();

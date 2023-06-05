@@ -26,67 +26,72 @@ int main(int argc, char* argv[])
     generatePointCloud.poseMatrix = generatePointCloud.read_trajectory(filePath + "/groundtruth.txt");
     //20 프레임만 사용한다.
     // for (int i = 0; i < rgb_pose_depth_list.size() - 740; i += size)
+    VoxelIndex minIndex;
+    VoxelIndex maxIndex;
+    
+    RayCast rayCast;
+    vector<VoxelIndex> findIndex;
+    CreateMesh createMesh;
     for (int i = 0; i < 1; i += size)
     {
         string rgbPNG = filePath + rgbfile + to_string(get<0>(rgb_pose_depth_list[i])) + ".png";
         string depthPNG = filePath + depthfile + to_string(get<1>(rgb_pose_depth_list[i])) + ".png";
         Eigen::Matrix4f matrixPose = generatePointCloud.poseMatrix[get<2>(rgb_pose_depth_list[i])].cast<float>();
         generatePointCloud.generate_pointcloud(rgbPNG, depthPNG, matrixPose);
-    }
-    Point colPoint, Origin;
-    Origin << 0.0f, 0.0f, 0.0f;
+    
+        Point colPoint, Origin;
+        //
+        Origin << matrixPose(0, 3), matrixPose(1, 3), matrixPose(2, 3);
+        // Origin << 0.0f, 0.0f, 0.0f;
+    
+        // VoxelUpdate voxelUpdate;
 
-    RayCast rayCast;
-    vector<VoxelIndex> findIndex;
-    CreateMesh createMesh;
-    // VoxelUpdate voxelUpdate;
+        // int maxIndex = 0;
+        // int minIndex = 1024;
 
-    // int maxIndex = 0;
-    // int minIndex = 1024;
-    VoxelIndex minIndex;
-    VoxelIndex maxIndex;
-    minIndex.index_x = 1024;
-    minIndex.index_y = 1024;
-    minIndex.index_z = 1024;
-    maxIndex.index_x = 0;
-    maxIndex.index_y = 0;
-    maxIndex.index_z = 0;
-    for (auto point : generatePointCloud.points) 
-    {
-        //m 단위를 cm 단위로 변경
-        colPoint << point.x * 100, point.y * 100, point.z* 100;
-        findIndex = rayCast.rayCasting(Origin, colPoint);
-
-        for (const auto& voxelIndex : findIndex)
+        minIndex.index_x = 512;
+        minIndex.index_y = 512;
+        minIndex.index_z = 512;
+        maxIndex.index_x = 0;
+        maxIndex.index_y = 0;
+        maxIndex.index_z = 0;
+        for (auto point : generatePointCloud.points) 
         {
-            createMesh.voxelUpdate.updateSDF(Origin, colPoint, voxelIndex);
-            createMesh.voxelUpdate.updateWeight(voxelIndex);
-            
-            if (voxelIndex.index_x < minIndex.index_x)
-                minIndex.index_x = voxelIndex.index_x;
-            if (voxelIndex.index_y < minIndex.index_y)
-                minIndex.index_y = voxelIndex.index_y;
-            if (voxelIndex.index_z < minIndex.index_z)
-                minIndex.index_z = voxelIndex.index_z;
+            //m 단위를 cm 단위로 변경 -> m 단위로 통일
+            colPoint << point.x, point.y, point.z;
+            findIndex = rayCast.rayCasting(Origin, colPoint);
+            for (const auto& voxelIndex : findIndex)
+            {
+                createMesh.voxelUpdate.updateSDF(Origin, colPoint, voxelIndex);
+                createMesh.voxelUpdate.updateWeight(voxelIndex);
+                if (voxelIndex.index_x < minIndex.index_x)
+                    minIndex.index_x = voxelIndex.index_x;
+                if (voxelIndex.index_y < minIndex.index_y)
+                    minIndex.index_y = voxelIndex.index_y;
+                if (voxelIndex.index_z < minIndex.index_z)
+                    minIndex.index_z = voxelIndex.index_z;
 
-            if (voxelIndex.index_x > maxIndex.index_x)
-                maxIndex.index_x = voxelIndex.index_x;
-            if (voxelIndex.index_y > maxIndex.index_y)
-                maxIndex.index_y = voxelIndex.index_y;
-            if (voxelIndex.index_z > maxIndex.index_z)
-                maxIndex.index_z = voxelIndex.index_z;
-            // cout << voxelIndex.index_x << " , " << voxelIndex.index_y << " , " << voxelIndex.index_z << endl;
-            // printf("update sdf = [%f]\n", createMesh.voxelUpdate.voxel[voxelIndex.index_x][voxelIndex.index_y][voxelIndex.index_z].sdf);
-            // printf("update weight = [%f]\n", createMesh.voxelUpdate.voxel[voxelIndex.index_x][voxelIndex.index_y][voxelIndex.index_z].weight);
-            // printf("============================\n");
+                if (voxelIndex.index_x > maxIndex.index_x)
+                    maxIndex.index_x = voxelIndex.index_x;
+                if (voxelIndex.index_y > maxIndex.index_y)
+                    maxIndex.index_y = voxelIndex.index_y;
+                if (voxelIndex.index_z > maxIndex.index_z)
+                    maxIndex.index_z = voxelIndex.index_z;
+                // cout << voxelIndex.index_x << " , " << voxelIndex.index_y << " , " << voxelIndex.index_z << endl;
+                // printf("update sdf = [%f]\n", createMesh.voxelUpdate.voxel[voxelIndex.index_x][voxelIndex.index_y][voxelIndex.index_z].sdf);
+                // printf("update weight = [%f]\n", createMesh.voxelUpdate.voxel[voxelIndex.index_x][voxelIndex.index_y][voxelIndex.index_z].weight);
+                // printf("============================\n");
+            }
         }
     }
-
+    if(minIndex.index_x < 0) minIndex.index_x = 0;
+    if(minIndex.index_y < 0) minIndex.index_y = 0;
+    if(minIndex.index_z < 0) minIndex.index_z = 0;
     printf("max x[%d] y[%d] z[%d], min x[%d] y[%d] z[%d]\n", maxIndex.index_x, maxIndex.index_y, maxIndex.index_z,
-                                         minIndex.index_x, minIndex.index_y, minIndex.index_z);
+                                            minIndex.index_x, minIndex.index_y, minIndex.index_z);
     std::vector<Triangle> triangleVertex;
     triangleVertex = createMesh.generateMesh(VoxelSize, maxIndex, minIndex, 0);
     createMesh.writePLY(triangleVertex);
-
+    
     return 0;
 }
