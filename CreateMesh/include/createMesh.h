@@ -10,8 +10,8 @@
 
 typedef struct _Triangle {
     int e0, e1, e2;
-    VoxelIndex index;
 }Triangle;
+
 
 class CreateMesh
 {
@@ -22,11 +22,13 @@ public:
     int maxIndex;
     int minIndex;
     int checkCreate;
-    void getVertexSDF(int x, int y, int z);
-    int checkSDFSign(int isoLevel);
-    bool checkSDFVoxel(int x, int y, int z);
+    std::vector<Point> PointVector;
+    std::vector<Triangle> triangleVertex;
+    void getSDFArray(int x, int y, int z);
+    int checkSDFSign(int isolevel);
     int getVertexNum(int e0, int e1, int e2);
-    std::vector<Triangle> generateMesh(int voxelSize, VoxelIndex maxIndex, VoxelIndex minIndex, float isolevel);
-    void writePLY(const std::vector<Triangle>& triangles);
+    Point getVertex(int edge_num, const Point& voxelOrigin);
+    void generateMesh(int voxelSize, VoxelIndex maxIndex, VoxelIndex minIndex, float isolevel);
+    void writePLY();
 };
 

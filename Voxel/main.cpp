@@ -16,13 +16,16 @@ int main()
     
     for (const auto& voxelIndex : findIndex)
     {
-        // cout << voxelIndex.index_x << " , " << voxelIndex.index_y << " , " << voxelIndex.index_z << endl;
-        voxelUpdate.updateSDF(Origin, colPoint, voxelIndex);
-        voxelUpdate.updateWeight(voxelIndex);
-        printf("Index : x[%d], y[%d], z[%d]\n", voxelIndex.index_x , voxelIndex.index_y, voxelIndex.index_z);
-        printf("update sdf = [%f]\n", voxelUpdate.voxel[voxelIndex.index_x][voxelIndex.index_y][voxelIndex.index_z].sdf);
-        printf("update weight = [%f]\n", voxelUpdate.voxel[voxelIndex.index_x][voxelIndex.index_y][voxelIndex.index_z].weight);
-        printf("================================\n");
+        if(voxelIndex.index_x >=0 && voxelIndex.index_y >=0 && voxelIndex.index_z >= 0)
+        {
+            // cout << voxelIndex.index_x << " , " << voxelIndex.index_y << " , " << voxelIndex.index_z << endl;
+            voxelUpdate.updateSDF(Origin, colPoint, voxelIndex);
+            voxelUpdate.updateWeight(voxelIndex);
+            printf("Index : x[%d], y[%d], z[%d]\n", voxelIndex.index_x , voxelIndex.index_y, voxelIndex.index_z);
+            printf("update sdf = [%f]\n", voxelUpdate.voxel[voxelIndex.index_x][voxelIndex.index_y][voxelIndex.index_z].sdf);
+            printf("update weight = [%f]\n", voxelUpdate.voxel[voxelIndex.index_x][voxelIndex.index_y][voxelIndex.index_z].weight);
+            printf("================================\n");
+        }
     }
 
     return 0;

@@ -32,7 +32,7 @@ int main(int argc, char* argv[])
     //     generatePointCloud.generate_pointcloud(rgbPNG, depthPNG, matrixPose);
     // }
     printf("size : %d\n", rgb_pose_depth_list.size());
-    for (int i = 0; i < 1; i += size) 
+    for (int i = 0; i < 20; i += size) 
     {
         string rgbPNG = filePath + rgbfile + to_string(get<0>(rgb_pose_depth_list[i])) + ".png";
         string depthPNG = filePath + depthfile + to_string(get<1>(rgb_pose_depth_list[i])) + ".png";

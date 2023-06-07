@@ -77,10 +77,23 @@ int main(int argc, char* argv[])
                     maxIndex.index_y = voxelIndex.index_y;
                 if (voxelIndex.index_z > maxIndex.index_z)
                     maxIndex.index_z = voxelIndex.index_z;
+                // cout << "origin : " << Origin(0) << " , " << Origin(1) << " , " << Origin(2) << endl;
+                // cout << "point : " << colPoint(0) << " , " << colPoint(1) << " , " << colPoint(2) << endl;
                 // cout << voxelIndex.index_x << " , " << voxelIndex.index_y << " , " << voxelIndex.index_z << endl;
-                // printf("update sdf = [%f]\n", createMesh.voxelUpdate.voxel[voxelIndex.index_x][voxelIndex.index_y][voxelIndex.index_z].sdf);
-                // printf("update weight = [%f]\n", createMesh.voxelUpdate.voxel[voxelIndex.index_x][voxelIndex.index_y][voxelIndex.index_z].weight);
-                // printf("============================\n");
+                // if(voxelIndex.index_x > 0 && voxelIndex.index_y > 0 && voxelIndex.index_z > 0)
+                // {
+                //     if(createMesh.voxelUpdate.voxel[voxelIndex.index_x][voxelIndex.index_y][voxelIndex.index_z].sdf < 0)
+                //     {
+
+                //     cout << "origin : " << Origin(0) << " , " << Origin(1) << " , " << Origin(2) << endl;
+                //     cout << "point : " << colPoint(0) << " , " << colPoint(1) << " , " << colPoint(2) << endl;
+                //     cout << voxelIndex.index_x << " , " << voxelIndex.index_y << " , " << voxelIndex.index_z << endl;
+                    
+                //     printf("update sdf = [%f]\n", createMesh.voxelUpdate.voxel[voxelIndex.index_x][voxelIndex.index_y][voxelIndex.index_z].sdf);
+                //     printf("update weight = [%f]\n", createMesh.voxelUpdate.voxel[voxelIndex.index_x][voxelIndex.index_y][voxelIndex.index_z].weight);
+                //     printf("============================\n");
+                //     }
+                // }
             }
         }
     }
@@ -89,9 +102,8 @@ int main(int argc, char* argv[])
     if(minIndex.index_z < 0) minIndex.index_z = 0;
     printf("max x[%d] y[%d] z[%d], min x[%d] y[%d] z[%d]\n", maxIndex.index_x, maxIndex.index_y, maxIndex.index_z,
                                             minIndex.index_x, minIndex.index_y, minIndex.index_z);
-    std::vector<Triangle> triangleVertex;
-    triangleVertex = createMesh.generateMesh(VoxelSize, maxIndex, minIndex, 0);
-    createMesh.writePLY(triangleVertex);
+    createMesh.generateMesh(VoxelSize, maxIndex, minIndex, 0);
+    createMesh.writePLY();
     
     return 0;
 }

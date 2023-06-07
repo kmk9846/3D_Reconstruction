@@ -3,16 +3,27 @@
 float VoxelUpdate::getSDF(const Point& origin, const Point& point, VoxelIndex centerIndex)
 {
     Point voxelCenter;
-    voxelCenter << static_cast<float>(centerIndex.index_x + VoxelUnit/2), static_cast<float>(centerIndex.index_y + VoxelUnit/2), 
-                    static_cast<float>(centerIndex.index_z + VoxelUnit/2);
-    const Point voxelToorigin = voxelCenter - origin;
-    const Point pointToorigin = point - origin;
+    if(centerIndex.index_x <= 0 || centerIndex.index_y <= 0 || centerIndex.index_z <= 0) return 0;
+    else
+    {
+        voxelCenter << static_cast<float>(centerIndex.index_x*VoxelUnit + VoxelUnit/2), static_cast<float>(centerIndex.index_y*VoxelUnit + VoxelUnit/2), 
+                    static_cast<float>(centerIndex.index_z*VoxelUnit + VoxelUnit/2);
+        const Point voxelToorigin = voxelCenter - origin;
+        const Point pointToorigin = point - origin;
 
-    const float dist = pointToorigin.norm();
-    const float projectDist = voxelToorigin.dot(pointToorigin)/dist;
+        const float dist = pointToorigin.norm();
+        const float projectDist = voxelToorigin.dot(pointToorigin);
 
-    const float sdf = static_cast<float>(dist - projectDist);
-    return sdf;
+        const float sdf = static_cast<float>(dist - projectDist);
+        // if(sdf< 0)
+        // {
+        //     printf("center : [%d]%f [%d]%f [%d]%f\n", centerIndex.index_x, voxelCenter(0), centerIndex.index_y, voxelCenter(1),
+        //         centerIndex.index_z, voxelCenter(2));
+        //     printf("point : [%d]%f [%d]%f [%d]%f %f\n", centerIndex.index_x, point(0), centerIndex.index_y, point(1),
+        //         centerIndex.index_z, point(2), sdf);
+        // }
+        return sdf;
+    }
 }
 
 void VoxelUpdate::updateSDF(const Point& origin, const Point& point, VoxelIndex currentIndex)
