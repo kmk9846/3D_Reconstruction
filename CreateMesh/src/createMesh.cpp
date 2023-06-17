@@ -1,4 +1,5 @@
 #include "../include/createMesh.h"
+#include <cmath>
 
 void CreateMesh::getSDFArray(int x, int y, int z)
 { 
@@ -13,149 +14,98 @@ void CreateMesh::getSDFArray(int x, int y, int z)
     vertexSDF[7] = voxelUpdate.voxel[x][y+1][z+1].sdf;
 }
 
-//여기를 thread 로 구현하자
-// 생각해보니 음수에서 양수로 바뀌는 부분만 따지면 되는거 아닌가?
 int CreateMesh::checkSDFSign(int isolevel)
 {
     int cubeIndex = 0;
     checkCreate = 0;
-    // for(int i = 0; i < 8; i++) printf("[%d]%lf ", i, vertexSDF[i]);
-    // printf("\n");
-    if (vertexSDF[0] < isolevel) 
+    int error = 0;
+    for(int i = 0; i < 8; i++)
     {
-        checkCreate += 1;
-        cubeIndex |= 1;
-    }
-    if (vertexSDF[1] < isolevel) 
-    {
-        checkCreate += 1;
-        cubeIndex |= 2;
-    }
-    if (vertexSDF[2] < isolevel) 
-    {
-        checkCreate += 1;
-        cubeIndex |= 4;
-    }
-    if (vertexSDF[3] < isolevel) 
-    {
-        checkCreate += 1;
-        cubeIndex |= 8;
-    }
-    if (vertexSDF[4] < isolevel) 
-    {
-        checkCreate += 1;
-        cubeIndex |= 16;
-    }
-    if (vertexSDF[5] < isolevel) 
-    {
-        checkCreate += 1;
-        cubeIndex |= 32;
-    }
-    if (vertexSDF[6] < isolevel) 
-    {
-        checkCreate += 1;
-        cubeIndex |= 64;
-    }
-    if (vertexSDF[7] < isolevel) 
-    {
-        checkCreate += 1;
-        cubeIndex |= 128;
+        if(vertexSDF[i] < isolevel)
+        {
+            int num = std::pow(2, i);
+            checkCreate += 1;
+            cubeIndex |= num;
+        }
     }
     return cubeIndex;
 }
 
-
-int CreateMesh::getVertexNum(int e0, int e1, int e2)
-{
-    int e_1 = e0 + 1;
-    int e_2 = e1 + 1;
-    int e_3 = e2 + 1;
-    int checkSum = e_1 + e_2 + e_3;
-    if(checkSum == 14) return 1;
-    if(checkSum == 13) return 2;
-    if(checkSum == 16) return 3;
-    if(checkSum == 19) return 4;
-    if(checkSum == 22) return 5;
-    if(checkSum == 21) return 6;
-    if(checkSum == 24) return 7;
-    if(checkSum == 27) return 8;
-}
-
-Point CreateMesh::getVertex(int edge_num, const Point& voxelOrigin)
+Point CreateMesh::getVertex(int edge_num, const Point& voxelCenter)
 {
     Point vertex;
     float bound = 2.0;
     if(edge_num == 0)
     {
-        vertex <<   (voxelOrigin(0) + voxelOrigin(0) + VoxelUnit)/bound,
-                    (voxelOrigin(1) + voxelOrigin(1))/bound,
-                    (voxelOrigin(2) + voxelOrigin(2))/bound;
+        vertex <<   (voxelCenter(0) + voxelCenter(0) + VoxelUnit)/bound,
+                    (voxelCenter(1) + voxelCenter(1))/bound,
+                    (voxelCenter(2) + voxelCenter(2))/bound;
     }
     else if(edge_num == 1)
     {
-        vertex <<   (voxelOrigin(0) + VoxelUnit + voxelOrigin(0) + VoxelUnit)/bound,
-                    (voxelOrigin(1) + voxelOrigin(1))/bound,
-                    (voxelOrigin(2) + voxelOrigin(2) + VoxelUnit)/bound;
+        vertex <<   (voxelCenter(0) + VoxelUnit + voxelCenter(0) + VoxelUnit)/bound,
+                    (voxelCenter(1) + voxelCenter(1))/bound,
+                    (voxelCenter(2) + voxelCenter(2) + VoxelUnit)/bound;
     }
     else if(edge_num == 2)
     {   
-        vertex <<   (voxelOrigin(0) + VoxelUnit + voxelOrigin(0) + VoxelUnit)/bound,
-                    (voxelOrigin(1) + voxelOrigin(1))/bound,
-                    (voxelOrigin(2) + VoxelUnit + voxelOrigin(2) + VoxelUnit)/bound;
+        vertex <<   (voxelCenter(0) + voxelCenter(0) + VoxelUnit)/bound,
+                    (voxelCenter(1) + voxelCenter(1))/bound,
+                    (voxelCenter(2) + VoxelUnit + voxelCenter(2) + VoxelUnit)/bound;
     }
     else if(edge_num == 3)
     {
-        vertex <<   (voxelOrigin(0) + voxelOrigin(0))/bound,
-                    (voxelOrigin(1) + voxelOrigin(1))/bound,
-                    (voxelOrigin(2) + voxelOrigin(2) + VoxelUnit)/bound;
+        vertex <<   (voxelCenter(0) + voxelCenter(0))/bound,
+                    (voxelCenter(1) + voxelCenter(1))/bound,
+                    (voxelCenter(2) + voxelCenter(2) + VoxelUnit)/bound;
     }
     else if(edge_num == 4)
     {
-        vertex <<   (voxelOrigin(0) + voxelOrigin(0) + VoxelUnit)/bound,
-                    (voxelOrigin(1) + VoxelUnit + voxelOrigin(1) + VoxelUnit)/bound,
-                    (voxelOrigin(2) + voxelOrigin(2))/bound;
+        vertex <<   (voxelCenter(0) + voxelCenter(0) + VoxelUnit)/bound,
+                    (voxelCenter(1) + VoxelUnit + voxelCenter(1) + VoxelUnit)/bound,
+                    (voxelCenter(2) + voxelCenter(2))/bound;
     }
     else if(edge_num == 5)
     {
-        vertex <<   (voxelOrigin(0) + VoxelUnit + voxelOrigin(0) + VoxelUnit)/bound,
-                    (voxelOrigin(1) + VoxelUnit + voxelOrigin(1) + VoxelUnit)/bound,
-                    (voxelOrigin(2) + voxelOrigin(2) + VoxelUnit)/bound;
+        vertex <<   (voxelCenter(0) + VoxelUnit + voxelCenter(0) + VoxelUnit)/bound,
+                    (voxelCenter(1) + VoxelUnit + voxelCenter(1) + VoxelUnit)/bound,
+                    (voxelCenter(2) + voxelCenter(2) + VoxelUnit)/bound;
     }
     else if(edge_num == 6)
     {
-        vertex <<   (voxelOrigin(0) + VoxelUnit + voxelOrigin(0))/bound,
-                    (voxelOrigin(1) + VoxelUnit + voxelOrigin(1) + VoxelUnit)/bound,
-                    (voxelOrigin(2) + VoxelUnit + voxelOrigin(2) + VoxelUnit)/bound;
+        vertex <<   (voxelCenter(0) + VoxelUnit + voxelCenter(0))/bound,
+                    (voxelCenter(1) + VoxelUnit + voxelCenter(1) + VoxelUnit)/bound,
+                    (voxelCenter(2) + VoxelUnit + voxelCenter(2) + VoxelUnit)/bound;
     }
     else if(edge_num == 7)
     {
-        vertex <<   (voxelOrigin(0) + voxelOrigin(0))/bound,
-                    (voxelOrigin(1) + VoxelUnit + voxelOrigin(1) + VoxelUnit)/bound,
-                    (voxelOrigin(2) + voxelOrigin(2) + VoxelUnit)/bound;
+        vertex <<   (voxelCenter(0) + voxelCenter(0))/bound,
+                    (voxelCenter(1) + VoxelUnit + voxelCenter(1) + VoxelUnit)/bound,
+                    (voxelCenter(2) + voxelCenter(2) + VoxelUnit)/bound;
     }
     else if(edge_num == 8)
     {
-        vertex <<   (voxelOrigin(0) + voxelOrigin(0))/bound,
-                    (voxelOrigin(1) + voxelOrigin(1) + VoxelUnit)/bound,
-                    (voxelOrigin(2) + voxelOrigin(2))/bound;
+        vertex <<   (voxelCenter(0) + voxelCenter(0))/bound,
+                    (voxelCenter(1) + voxelCenter(1) + VoxelUnit)/bound,
+                    (voxelCenter(2) + voxelCenter(2))/bound;
     }
     else if(edge_num == 9)
     {
-        vertex <<   (voxelOrigin(0) + VoxelUnit + voxelOrigin(0)+ VoxelUnit)/bound,
-                    (voxelOrigin(1) + voxelOrigin(1) + VoxelUnit)/bound,
-                    (voxelOrigin(2) + voxelOrigin(2))/bound;
+        vertex <<   (voxelCenter(0) + VoxelUnit + voxelCenter(0)+ VoxelUnit)/bound,
+                    (voxelCenter(1) + voxelCenter(1) + VoxelUnit)/bound,
+                    (voxelCenter(2) + voxelCenter(2))/bound;
     }
     else if(edge_num == 10)
     {
-        vertex <<   (voxelOrigin(0) + VoxelUnit + voxelOrigin(0)+ VoxelUnit)/bound,
-                    (voxelOrigin(1) + voxelOrigin(1) + VoxelUnit)/bound,
-                    (voxelOrigin(2) + VoxelUnit + voxelOrigin(2) + VoxelUnit)/bound;
+        vertex <<   (voxelCenter(0) + VoxelUnit + voxelCenter(0)+ VoxelUnit)/bound,
+                    (voxelCenter(1) + voxelCenter(1) + VoxelUnit)/bound,
+                    (voxelCenter(2) + VoxelUnit + voxelCenter(2) + VoxelUnit)/bound;
     }
     else if(edge_num == 11)
     {
-        vertex <<   (voxelOrigin(0) + voxelOrigin(0))/bound,
-                    (voxelOrigin(1) + voxelOrigin(1) + VoxelUnit)/bound,
-                    (voxelOrigin(2) + VoxelUnit + voxelOrigin(2) + VoxelUnit)/bound;
+        vertex <<   (voxelCenter(0) + voxelCenter(0))/bound,
+                    (voxelCenter(1) + voxelCenter(1) + VoxelUnit)/bound,
+                    (voxelCenter(2) + VoxelUnit + voxelCenter(2) + VoxelUnit)/bound;
     }
     return vertex;
 }
@@ -164,28 +114,24 @@ void CreateMesh::generateMesh(int voxelSize, VoxelIndex maxIndex, VoxelIndex min
 {
     //vertex point
     // voxel 그리드 순회
-    for (int x = minIndex.index_x ; x < maxIndex.index_x-1; x++) 
+    for (int x = minIndex.index_x; x < maxIndex.index_x; x++) 
     {
-        for (int y = minIndex.index_y; y < maxIndex.index_y-1; y++) 
+        for (int y = minIndex.index_y; y < maxIndex.index_y; y++) 
         {
-            for (int z = minIndex.index_z; z < maxIndex.index_z-1; z++) 
+            for (int z = minIndex.index_z; z < maxIndex.index_z; z++) 
             {
                 getSDFArray(x, y, z);
                 int cubeIndex = 0;
                 cubeIndex = checkSDFSign(isolevel);
                 if(checkCreate < 8 && checkCreate >= 1)
                 {
-                    // printf("x[%d] y[%d] z[%d]\n", x, y, z);
-                    // printf("cubeindex : %d\n", cubeIndex);
                     // 삼각형 생성
                     Triangle triangle;
+                    MeshInfo mesh;
                     Point vertex;
                     Point voxelCenter;
                     for (int i = 0; kTriangleTable[cubeIndex][i] != -1; i += 3) 
-                    {
-                        // i+=1;
-                        // printf("index [%d, %d, %d]\n", triangleIndices[i], triangleIndices[i+1], triangleIndices[i+2]);
-                        //vertexonce edge 
+                    { 
                         int vertexIndex1 = kTriangleTable[cubeIndex][i];
                         int vertexIndex2 = kTriangleTable[cubeIndex][i+1];
                         int vertexIndex3 = kTriangleTable[cubeIndex][i+2];
@@ -197,27 +143,43 @@ void CreateMesh::generateMesh(int voxelSize, VoxelIndex maxIndex, VoxelIndex min
                         voxelCenter <<  static_cast<float>(x*VoxelUnit + VoxelUnit/2), 
                                         static_cast<float>(y*VoxelUnit + VoxelUnit/2), 
                                         static_cast<float>(z*VoxelUnit + VoxelUnit/2);
-                        for(int i = 0; i < 3; i ++)
+                        for(int k = 0; k < 3; k ++)
                         {
-                            if(i == 0)
+                            if(k == 0)
                             {
-                                vertex << getVertex(vertexIndex1, voxelCenter);
-                                PointVector.push_back(vertex);
+                                vertex = getVertex(vertexIndex1, voxelCenter);
+                                mesh.x = vertex(0);
+                                mesh.y = vertex(1);
+                                mesh.z = vertex(2);
+                                mesh.red = voxelUpdate.voxel[x][y][z].red;
+                                mesh.green = voxelUpdate.voxel[x][y][z].green;
+                                mesh.blue = voxelUpdate.voxel[x][y][z].blue;
+                                PointVector.push_back(mesh);
                             }
-                            else if(i == 1)
+                            else if(k == 1)
                             {   
-                                vertex << getVertex(vertexIndex2, voxelCenter);
-                                PointVector.push_back(vertex);
+                                vertex = getVertex(vertexIndex2, voxelCenter);
+                                mesh.x = vertex(0);
+                                mesh.y = vertex(1);
+                                mesh.z = vertex(2);
+                                mesh.red = voxelUpdate.voxel[x][y][z].red;
+                                mesh.green = voxelUpdate.voxel[x][y][z].green;
+                                mesh.blue = voxelUpdate.voxel[x][y][z].blue;
+                                PointVector.push_back(mesh);
                             }
-                            else if(1 == 2)
+                            else if(k == 2)
                             {
-                                vertex << getVertex(vertexIndex3, voxelCenter);
-                                PointVector.push_back(vertex);
+                                vertex = getVertex(vertexIndex3, voxelCenter);
+                                mesh.x = vertex(0);
+                                mesh.y = vertex(1);
+                                mesh.z = vertex(2);
+                                mesh.red = voxelUpdate.voxel[x][y][z].red;
+                                mesh.green = voxelUpdate.voxel[x][y][z].green;
+                                mesh.blue = voxelUpdate.voxel[x][y][z].blue;
+                                PointVector.push_back(mesh);
                             }
-                            
                         }
                     }
-                    // printf("=====================\n");
                 }else continue;
             }
         }
@@ -242,17 +204,23 @@ void CreateMesh::writePLY()
     file << "property float x" << std::endl;
     file << "property float y" << std::endl;
     file << "property float z" << std::endl;
-    // file << "element face " << triangleVertex.size() << std::endl;
-    // file << "property list uint8 int32 vertex_indices" << std::endl;
+    file << "property uchar red" << std::endl;
+    file << "property uchar green" << std::endl;
+    file << "property uchar blue" << std::endl;
+    file << "element face " << triangleVertex.size() << std::endl;
+    file << "property list uint8 int32 vertex_indices" << std::endl;
     file << "end_header" << std::endl;
-
-    for(const Point& vertex : PointVector) file << vertex(0) << " " << vertex(1) << " " << vertex(2) << std::endl;  
-    // int i = 0;
-    // for(const Triangle& triangle : triangleVertex)
-    // {
-    //     file << "3 " << i << " " << i+1 << " " << i + 2 << std::endl;
-    //     i += 3;
-    // }
+    for(const MeshInfo& mesh : PointVector) 
+    {
+        file << mesh.x << " " << mesh.y << " " << mesh.z << " " << to_string(mesh.red)
+         << " " << to_string(mesh.green) << " " << to_string(mesh.blue) << std::endl;
+    }
+    int i = 0;
+    for(const Triangle& triangle : triangleVertex)
+    {
+        file << "3 " << i << " " << i+1 << " " << i + 2 << std::endl;
+        i += 3;
+    }
 
     file.close();
     std::cout << "PLY file created: " << filename << std::endl;

@@ -6,8 +6,8 @@ int main()
 {
     //만약 충돌 좌표가 아래와 같을 경우의 해당 포인트 클라우드가 존재하는 voxel update 하기
     Point colPoint, Origin;
-    colPoint << 1.0f, 0.5f, 1.0f;
-    Origin << 0.0f, 0.0f, 0.0f;
+    colPoint << 0.03f, 0.03f, 0.03f;
+    Origin << -0.01f, -0.01f, -0.01f;
 
     RayCast rayCast;
     vector<VoxelIndex> findIndex;

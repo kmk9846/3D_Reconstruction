@@ -32,12 +32,15 @@ int main(int argc, char* argv[])
     //     generatePointCloud.generate_pointcloud(rgbPNG, depthPNG, matrixPose);
     // }
     printf("size : %d\n", rgb_pose_depth_list.size());
-    for (int i = 0; i < 20; i += size) 
+    for (int i = 0; i < 1; i += size) 
     {
         string rgbPNG = filePath + rgbfile + to_string(get<0>(rgb_pose_depth_list[i])) + ".png";
         string depthPNG = filePath + depthfile + to_string(get<1>(rgb_pose_depth_list[i])) + ".png";
         Eigen::Matrix4f matrixPose = generatePointCloud.poseMatrix[get<2>(rgb_pose_depth_list[i])].cast<float>();
         generatePointCloud.generate_pointcloud(rgbPNG, depthPNG, matrixPose);
+        //
+        Eigen::Vector3f cameraOrigin(matrixPose(0, 3), matrixPose(1, 3), matrixPose(2, 3));
+        cout << "origin : " << cameraOrigin(0) << " , " << cameraOrigin(1) << " , " << cameraOrigin(2) << endl;
     }
 
     //generate_pointcloud 함수가 끝난 후에 맴버변수인 points 를 .ply 파일을 result 라는 이름으로 생성

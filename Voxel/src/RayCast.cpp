@@ -1,83 +1,103 @@
 #include "../include/RayCast.h"
+#include <cfloat>
 
 vector<VoxelIndex> RayCast::rayCasting(const Point& origin, const Point& point)
 {
     vector<VoxelIndex> findVoxelIndex;
+    VoxelIndex currentIndex;
+    VoxelIndex targetIndex;
 
     //Ray 방향
     Point rayDirection;
-    rayDirection = (point - origin).normalized();
-
-    float rayLength = (point - origin).norm();
-
-    Point delta;
-    delta << (VoxelUnit / abs(rayDirection(0))), 
-            (VoxelUnit / abs(rayDirection(1))), 
-            (VoxelUnit / abs(rayDirection(2)));
+    // rayDirection = (point - origin).normalized();
+    rayDirection = (point - origin);
 
     Point step;
     step << ((rayDirection(0) < 0) ? -1 : 1),
             ((rayDirection(1) < 0) ? -1 : 1),
             ((rayDirection(2) < 0) ? -1 : 1);
 
-    Point tMax;
-    tMax << (delta(0) * ((rayDirection(0) > 0) ? floor(origin(0)/VoxelUnit) : ceil(origin(0)/VoxelUnit) + 0.5f)),
-            (delta(1) * ((rayDirection(1) > 0) ? floor(origin(1)/VoxelUnit) : ceil(origin(1)/VoxelUnit) + 0.5f)),
-            (delta(2) * ((rayDirection(2) > 0) ? floor(origin(2)/VoxelUnit) : ceil(origin(2)/VoxelUnit) + 0.5f));
+    currentIndex.index_x = static_cast<int>(origin(0) / VoxelUnit);
+    currentIndex.index_y = static_cast<int>(origin(1) / VoxelUnit);
+    currentIndex.index_z = static_cast<int>(origin(2) / VoxelUnit);
 
-    int currentX = static_cast<int>(origin(0) / VoxelUnit);
-    int currentY = static_cast<int>(origin(1) / VoxelUnit);
-    int currentZ = static_cast<int>(origin(2) / VoxelUnit);   
+    targetIndex.index_x = static_cast<int>(point(0) / VoxelUnit);
+    targetIndex.index_y = static_cast<int>(point(1) / VoxelUnit);
+    targetIndex.index_z = static_cast<int>(point(2) / VoxelUnit); 
 
-    while (endRay(currentX, currentY, currentZ, origin, rayDirection, point, rayLength)) 
-    {
-        VoxelIndex findIndex;
-        findIndex.index_x = currentX;
-        findIndex.index_y = currentY;
-        findIndex.index_z = currentZ;
-                        
-        findVoxelIndex.push_back(findIndex);
+    int truncatedX = (targetIndex.index_x - currentIndex.index_x < 0) ? -1 : 1;
+    int truncatedY = (targetIndex.index_y - currentIndex.index_y < 0) ? -1 : 1;
+    int truncatedZ = (targetIndex.index_z - currentIndex.index_z < 0) ? -1 : 1;
 
-        if (tMax(0) < tMax(1)) 
-        {
-            if (tMax(0) < tMax(2)) 
-            {
-                currentX += step(0);
-                tMax(0) += delta(0);
-            } 
-            else 
-            {
-                currentZ += step(2);
-                tMax(2) += delta(2);
-            }
-        } 
-        else 
-        {
-            if (tMax(1) < tMax(2)) 
-            {
-                currentY += step(1);
-                tMax(1) += delta(1);
-            } 
-            else 
-            {
-                currentZ += step(2);
-                tMax(2) += delta(2);
-            }
-        }
+    double next_voxel_boundary_x = (currentIndex.index_x + step(0)) * VoxelUnit; // correct
+    double next_voxel_boundary_y = (currentIndex.index_y + step(1)) * VoxelUnit; // correct
+    double next_voxel_boundary_z = (currentIndex.index_z + step(2)) * VoxelUnit; // correct
+    // float rayLength = (point - origin).norm();
+
+    double tMaxX = (rayDirection(0) != 0) ? (next_voxel_boundary_x - origin(0))/rayDirection(0) : DBL_MAX; 
+    double tMaxY = (rayDirection(1) != 0) ? (next_voxel_boundary_y - origin(1))/rayDirection(1) : DBL_MAX; 
+    double tMaxZ = (rayDirection(2) != 0) ? (next_voxel_boundary_z - origin(2))/rayDirection(2) : DBL_MAX; 
+
+    Point delta;
+    delta << ((rayDirection(0)!=0) ? VoxelUnit/rayDirection(0) * step(0) : DBL_MAX),
+             ((rayDirection(1)!=0) ? VoxelUnit/rayDirection(1) * step(1) : DBL_MAX),
+             ((rayDirection(2)!=0) ? VoxelUnit/rayDirection(2) * step(2) : DBL_MAX);
+
+    VoxelIndex diff;
+    diff.index_x = 0;
+    diff.index_y = 0;
+    diff.index_z = 0;
+        
+    bool neg_ray=false;
+    if (currentIndex.index_x != targetIndex.index_x && rayDirection(0) < 0) { diff.index_x--; neg_ray=true; }
+    if (currentIndex.index_y != targetIndex.index_y && rayDirection(1) < 0) { diff.index_y--; neg_ray=true; }
+    if (currentIndex.index_z != targetIndex.index_z && rayDirection(2) < 0) { diff.index_z--; neg_ray=true; }
+
+    findVoxelIndex.push_back(currentIndex);
+    if (neg_ray) {
+        currentIndex.index_x += diff.index_x;
+        currentIndex.index_y += diff.index_y;
+        currentIndex.index_z += diff.index_z;
+        findVoxelIndex.push_back(currentIndex);
     }
 
+   
+    while(endRay(currentIndex, targetIndex, truncatedX, truncatedY, truncatedZ))
+    {
+        if (tMaxX < tMaxY) {
+            if (tMaxX < tMaxZ) 
+            {
+                currentIndex.index_x += step(0);
+                tMaxX += delta(0);
+            } else 
+            {
+                currentIndex.index_z += step(2);
+                tMaxZ += delta(2);
+            }
+        } 
+        else {
+            if (tMaxY < tMaxZ) 
+            {
+                currentIndex.index_y += step(1);
+                tMaxY += delta(1);
+            } else 
+            {
+                currentIndex.index_z += step(2);
+                tMaxZ += delta(2);
+            }
+        }
+        findVoxelIndex.push_back(currentIndex);
+    }
     return findVoxelIndex;
 }
 
+
 // 뒤에 어느정도 더 해주기 voxel 의 4배 정도
-bool RayCast::endRay(float currentX, float currentY, float currentZ, const Point& origin, const Point& rayDirection, 
-                    const Point& point, float rayLength)
+bool RayCast::endRay(VoxelIndex currentIndex, VoxelIndex targetIndex, 
+    int truncatedX, int truncatedY, int truncatedZ)
 {
-    // Ray의 종료 조건 확인
-    float distX = (currentX + 0.5f) * VoxelUnit - origin(0);
-    float distY = (currentY + 0.5f) * VoxelUnit - origin(1);
-    float distZ = (currentZ + 0.5f) * VoxelUnit - origin(2);
-    if (distX * rayDirection(0) >= point(0) + VoxelUnit*4 || distY * rayDirection(1) >= point(1) + VoxelUnit*4
-            || distZ * rayDirection(2) >= point(2) + VoxelUnit*4) return false;
-    else return true;
+    if((currentIndex.index_x != targetIndex.index_x + truncatedX * 4) && 
+        (currentIndex.index_y != targetIndex.index_y + truncatedY * 4) &&
+        (currentIndex.index_z != targetIndex.index_z + truncatedZ * 4)) return true;
+    else return false;
 }

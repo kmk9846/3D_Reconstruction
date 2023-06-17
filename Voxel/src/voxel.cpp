@@ -15,7 +15,7 @@ VoxelGrid::VoxelGrid()
             for(int k = 0; k < VoxelSize; k++)
             {
                 voxel[i][j][k].weight = 0;
-                voxel[i][j][k].sdf = 0;
+                voxel[i][j][k].sdf = 0.0;
                 voxel[i][j][k].red = 0;
                 voxel[i][j][k].green = 0;
                 voxel[i][j][k].blue = 0;
