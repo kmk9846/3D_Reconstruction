@@ -4,7 +4,9 @@ int main(int argc, char* argv[])
 {
     //첫번째 인자는 data 가 있는 파일 경로, 두 번째 인자로 받는 size 값은 0.02*size 씩 건너뛰어서 point 생성
     string filePath = argv[1];
-    int size = atoi(argv[2]);
+    int startFile = atoi(argv[2]);
+    int fileNum = atoi(argv[3]);
+    int size = atoi(argv[4]);
     string rgbfile = "/rgb/";
     string depthfile = "/depth/";
 
@@ -32,7 +34,7 @@ int main(int argc, char* argv[])
     //     generatePointCloud.generate_pointcloud(rgbPNG, depthPNG, matrixPose);
     // }
     printf("size : %d\n", rgb_pose_depth_list.size());
-    for (int i = 0; i < 1; i += size) 
+    for (int i = startFile; i < fileNum; i += size) 
     {
         string rgbPNG = filePath + rgbfile + to_string(get<0>(rgb_pose_depth_list[i])) + ".png";
         string depthPNG = filePath + depthfile + to_string(get<1>(rgb_pose_depth_list[i])) + ".png";

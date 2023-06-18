@@ -35,9 +35,4 @@ public:
     ~VoxelGrid();
     //크기떄문에 동적으로 할당하기
     Voxel ***voxel = new Voxel**[VoxelSize];
-
-    //index로 voxel 정보 불러오기
-    VoxelIndex findIndex(const Point& point);
-    //voxel 정보로 index 찾기
-    Point getVertex(int index_x, int index_y, int index_z, int vertex_num);
 };

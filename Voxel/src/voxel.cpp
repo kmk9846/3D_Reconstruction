@@ -33,27 +33,3 @@ VoxelGrid::~VoxelGrid()
     }
     delete[] voxel;
 }
-
-VoxelIndex VoxelGrid::findIndex(const Point& point)
-{
-    VoxelIndex index;
-    index.index_x = (int)point(0);
-    index.index_y = (int)point(1);
-    index.index_z = (int)point(2);
-    return index;
-}
-
-Point VoxelGrid::getVertex(int index_x, int index_y, int index_z, int vertex_num)
-{
-    Point vertex;
-    if(vertex_num == 1) vertex << float(index_x), float(index_y), float(index_z);
-    else if(vertex_num == 2) vertex << float(index_x+VoxelUnit), float(index_y), float(index_z);
-    else if(vertex_num == 3) vertex << float(index_x+VoxelUnit), float(index_y), float(index_z+VoxelUnit);
-    else if(vertex_num == 4) vertex << float(index_x), float(index_y), float(index_z+VoxelUnit);
-    else if(vertex_num == 5) vertex << float(index_x), float(index_y+VoxelUnit), float(index_z);
-    else if(vertex_num == 6) vertex << float(index_x+VoxelUnit), float(index_y+VoxelUnit), float(index_z);
-    else if(vertex_num == 7) vertex << float(index_x+VoxelUnit), float(index_y+VoxelUnit), float(index_z+VoxelUnit);
-    else if(vertex_num == 8) vertex << float(index_x), float(index_y+VoxelUnit), float(index_z+VoxelUnit);
-
-    return vertex;
-}

@@ -1,4 +1,5 @@
 #include "../include/RayCast.h"
+#include <cmath>
 #include <cfloat>
 
 vector<VoxelIndex> RayCast::rayCasting(const Point& origin, const Point& point)
@@ -9,7 +10,6 @@ vector<VoxelIndex> RayCast::rayCasting(const Point& origin, const Point& point)
 
     //Ray 방향
     Point rayDirection;
-    // rayDirection = (point - origin).normalized();
     rayDirection = (point - origin);
 
     Point step;
@@ -17,13 +17,13 @@ vector<VoxelIndex> RayCast::rayCasting(const Point& origin, const Point& point)
             ((rayDirection(1) < 0) ? -1 : 1),
             ((rayDirection(2) < 0) ? -1 : 1);
 
-    currentIndex.index_x = static_cast<int>(origin(0) / VoxelUnit);
-    currentIndex.index_y = static_cast<int>(origin(1) / VoxelUnit);
-    currentIndex.index_z = static_cast<int>(origin(2) / VoxelUnit);
+    currentIndex.index_x = std::floor(origin(0) / VoxelUnit);
+    currentIndex.index_y = std::floor(origin(1) / VoxelUnit);
+    currentIndex.index_z = std::floor(origin(2) / VoxelUnit);
 
-    targetIndex.index_x = static_cast<int>(point(0) / VoxelUnit);
-    targetIndex.index_y = static_cast<int>(point(1) / VoxelUnit);
-    targetIndex.index_z = static_cast<int>(point(2) / VoxelUnit); 
+    targetIndex.index_x = std::floor(point(0) / VoxelUnit);
+    targetIndex.index_y = std::floor(point(1) / VoxelUnit);
+    targetIndex.index_z = std::floor(point(2) / VoxelUnit); 
 
     int truncatedX = (targetIndex.index_x - currentIndex.index_x < 0) ? -1 : 1;
     int truncatedY = (targetIndex.index_y - currentIndex.index_y < 0) ? -1 : 1;
@@ -32,7 +32,6 @@ vector<VoxelIndex> RayCast::rayCasting(const Point& origin, const Point& point)
     double next_voxel_boundary_x = (currentIndex.index_x + step(0)) * VoxelUnit; // correct
     double next_voxel_boundary_y = (currentIndex.index_y + step(1)) * VoxelUnit; // correct
     double next_voxel_boundary_z = (currentIndex.index_z + step(2)) * VoxelUnit; // correct
-    // float rayLength = (point - origin).norm();
 
     double tMaxX = (rayDirection(0) != 0) ? (next_voxel_boundary_x - origin(0))/rayDirection(0) : DBL_MAX; 
     double tMaxY = (rayDirection(1) != 0) ? (next_voxel_boundary_y - origin(1))/rayDirection(1) : DBL_MAX; 
@@ -53,15 +52,23 @@ vector<VoxelIndex> RayCast::rayCasting(const Point& origin, const Point& point)
     if (currentIndex.index_y != targetIndex.index_y && rayDirection(1) < 0) { diff.index_y--; neg_ray=true; }
     if (currentIndex.index_z != targetIndex.index_z && rayDirection(2) < 0) { diff.index_z--; neg_ray=true; }
 
-    findVoxelIndex.push_back(currentIndex);
+    VoxelIndex inputIndex;
+    inputIndex.index_x = currentIndex.index_x + VoxelSize/2;
+    inputIndex.index_y = currentIndex.index_y + VoxelSize/2;
+    inputIndex.index_z = currentIndex.index_z + VoxelSize/2;
+    if(inputIndex.index_x < 512 && inputIndex.index_y < 512 && inputIndex.index_z < 512) findVoxelIndex.push_back(inputIndex);
     if (neg_ray) {
         currentIndex.index_x += diff.index_x;
         currentIndex.index_y += diff.index_y;
         currentIndex.index_z += diff.index_z;
-        findVoxelIndex.push_back(currentIndex);
+        
+        VoxelIndex inputIndex;
+        inputIndex.index_x = currentIndex.index_x + VoxelSize/2;
+        inputIndex.index_y = currentIndex.index_y + VoxelSize/2;
+        inputIndex.index_z = currentIndex.index_z + VoxelSize/2;
+        if(inputIndex.index_x < 512 && inputIndex.index_y < 512 && inputIndex.index_z < 512) findVoxelIndex.push_back(inputIndex);
     }
 
-   
     while(endRay(currentIndex, targetIndex, truncatedX, truncatedY, truncatedZ))
     {
         if (tMaxX < tMaxY) {
@@ -86,7 +93,11 @@ vector<VoxelIndex> RayCast::rayCasting(const Point& origin, const Point& point)
                 tMaxZ += delta(2);
             }
         }
-        findVoxelIndex.push_back(currentIndex);
+        VoxelIndex inputIndex;
+        inputIndex.index_x = currentIndex.index_x + VoxelSize/2;
+        inputIndex.index_y = currentIndex.index_y + VoxelSize/2;
+        inputIndex.index_z = currentIndex.index_z + VoxelSize/2;
+        if(inputIndex.index_x < 512 && inputIndex.index_y < 512 && inputIndex.index_z < 512) findVoxelIndex.push_back(inputIndex);
     }
     return findVoxelIndex;
 }

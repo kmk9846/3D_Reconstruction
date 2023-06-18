@@ -137,9 +137,9 @@ void CreateMesh::generateMesh(int voxelSize, VoxelIndex maxIndex, VoxelIndex min
                         triangle.e1 = vertexIndex2;
                         triangle.e2 = vertexIndex3;
                         triangleVertex.push_back(triangle);
-                        voxelCenter <<  static_cast<float>(x*VoxelUnit + VoxelUnit/2), 
-                                        static_cast<float>(y*VoxelUnit + VoxelUnit/2), 
-                                        static_cast<float>(z*VoxelUnit + VoxelUnit/2);
+                        voxelCenter <<  static_cast<float>((x-VoxelSize/2)*VoxelUnit + VoxelUnit/2), 
+                                        static_cast<float>((y-VoxelSize/2)*VoxelUnit + VoxelUnit/2), 
+                                        static_cast<float>((z-VoxelSize/2)*VoxelUnit + VoxelUnit/2);
                         for(int k = 0; k < 3; k ++)
                         {
                             if(k == 0)

@@ -7,8 +7,9 @@ int main(int argc, char* argv[])
 {
     //첫번째 인자는 data 가 있는 파일 경로, 두 번째 인자로 받는 size 값은 0.02*size 씩 건너뛰어서 point 생성
     string filePath = argv[1];
-    int fileNum = atoi(argv[2]);
-    int size = atoi(argv[3]);
+    int startFile = atoi(argv[2]);
+    int fileNum = atoi(argv[3]);
+    int size = atoi(argv[4]);
     
     string rgbfile = "/rgb/";
     string depthfile = "/depth/";
@@ -39,7 +40,7 @@ int main(int argc, char* argv[])
     maxIndex.index_x = 0;
     maxIndex.index_y = 0;
     maxIndex.index_z = 0;
-    for (int i = 0; i < fileNum; i += size)
+    for (int i = startFile; i < fileNum; i += size)
     {
         string rgbPNG = filePath + rgbfile + to_string(get<0>(rgb_pose_depth_list[i])) + ".png";
         string depthPNG = filePath + depthfile + to_string(get<1>(rgb_pose_depth_list[i])) + ".png";

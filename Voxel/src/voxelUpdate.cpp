@@ -1,4 +1,5 @@
 #include "../include/voxelUpdate.h"
+#include "cmath"
 
 float VoxelUpdate::getSDF(const Point& origin, const Point& point, VoxelIndex centerIndex)
 {
@@ -6,28 +7,15 @@ float VoxelUpdate::getSDF(const Point& origin, const Point& point, VoxelIndex ce
     if(centerIndex.index_x <= 0 || centerIndex.index_y <= 0 || centerIndex.index_z <= 0) return 0;
     else
     {
-        voxelCenter << static_cast<float>(centerIndex.index_x*VoxelUnit + VoxelUnit/2), static_cast<float>(centerIndex.index_y*VoxelUnit + VoxelUnit/2), 
-                    static_cast<float>(centerIndex.index_z*VoxelUnit + VoxelUnit/2);
+        voxelCenter << static_cast<float>((centerIndex.index_x - VoxelSize/2)*VoxelUnit + VoxelUnit/2), 
+                       static_cast<float>((centerIndex.index_y - VoxelSize/2)*VoxelUnit + VoxelUnit/2), 
+                       static_cast<float>((centerIndex.index_z - VoxelSize/2)*VoxelUnit + VoxelUnit/2);
         const Point voxelToorigin = voxelCenter - origin;
         const Point pointToorigin = point - origin;
 
         const float dist = pointToorigin.norm();
         const float projectDist = voxelToorigin.dot(pointToorigin)/dist;
-
-        // printf("target [%d] %f [%d] %f [%d] %f\n", centerIndex.index_x, voxelCenter(0), 
-        //                 centerIndex.index_y, voxelCenter(1), centerIndex.index_z, voxelCenter(2));
-        // printf("origin : %f %f %f\n", origin(0), origin(1), origin(2));
-        // printf("point : %f %f %f\n", point(0), point(1), point(2));
-
         const float sdf = dist - projectDist;
-        // printf("dist : %f - dot : %f = sdf %f\n", dist, projectDist, sdf);
-        // if(sdf< 0)
-        // {
-        //     printf("center : [%d]%f [%d]%f [%d]%f\n", centerIndex.index_x, voxelCenter(0), centerIndex.index_y, voxelCenter(1),
-        //         centerIndex.index_z, voxelCenter(2));
-        //     printf("point : [%d]%f [%d]%f [%d]%f %f\n", centerIndex.index_x, point(0), centerIndex.index_y, point(1),
-        //         centerIndex.index_z, point(2), sdf);
-        // }
         return sdf;
     }
 }
@@ -52,7 +40,6 @@ void VoxelUpdate::updateSDF(const Point& origin, const Point& point, VoxelIndex 
 
 void VoxelUpdate::updateWeight(VoxelIndex currentIndex)
 {
-    //Index currentIndex = findIndex(point);
     if(currentIndex.index_x <= 0 || currentIndex.index_y <= 0 || currentIndex.index_z <= 0) return;
     else
     {
