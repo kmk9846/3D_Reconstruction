@@ -14,7 +14,7 @@ class VoxelUpdate : public VoxelGrid {
 public:
     VoxelUpdate() : VoxelGrid() {};
 
-    //update sdf
+    //update sdf, weight, color
     float getSDF(const Point& origin, const Point& point, VoxelIndex centerIndex);
     void getColor(VoxelIndex centerIndex, uchar red, uchar green, uchar blue);
     void updateSDF(const Point& origin, const Point& point, VoxelIndex currentIndex, float currentSDF);

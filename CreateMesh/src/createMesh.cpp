@@ -17,14 +17,11 @@ void CreateMesh::getSDFArray(int x, int y, int z)
 int CreateMesh::checkSDFSign(int isolevel)
 {
     int cubeIndex = 0;
-    checkCreate = 0;
-    int error = 0;
     for(int i = 0; i < 8; i++)
     {
         if(vertexSDF[i] < isolevel)
         {
             int num = std::pow(2, i);
-            checkCreate += 1;
             cubeIndex |= num;
         }
     }
@@ -123,7 +120,7 @@ void CreateMesh::generateMesh(int voxelSize, VoxelIndex maxIndex, VoxelIndex min
                 getSDFArray(x, y, z);
                 int cubeIndex = 0;
                 cubeIndex = checkSDFSign(isolevel);
-                if(checkCreate < 8 && checkCreate >= 1)
+                if(cubeIndex < 255 && cubeIndex > 0)
                 {
                     // 삼각형 생성
                     Triangle triangle;
