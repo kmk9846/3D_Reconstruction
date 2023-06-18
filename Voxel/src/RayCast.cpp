@@ -53,20 +53,20 @@ vector<VoxelIndex> RayCast::rayCasting(const Point& origin, const Point& point)
     if (currentIndex.index_z != targetIndex.index_z && rayDirection(2) < 0) { diff.index_z--; neg_ray=true; }
 
     VoxelIndex inputIndex;
-    inputIndex.index_x = currentIndex.index_x + VoxelSize/2;
-    inputIndex.index_y = currentIndex.index_y + VoxelSize/2;
-    inputIndex.index_z = currentIndex.index_z + VoxelSize/2;
-    if(inputIndex.index_x < 512 && inputIndex.index_y < 512 && inputIndex.index_z < 512) findVoxelIndex.push_back(inputIndex);
+    inputIndex.index_x = currentIndex.index_x + VoxelSize_X/2;
+    inputIndex.index_y = currentIndex.index_y + VoxelSize_Y/2;
+    inputIndex.index_z = currentIndex.index_z;
+    if(inputIndex.index_x < VoxelSize_X && inputIndex.index_y < VoxelSize_Y && inputIndex.index_z < VoxelSize_Z) findVoxelIndex.push_back(inputIndex);
     if (neg_ray) {
         currentIndex.index_x += diff.index_x;
         currentIndex.index_y += diff.index_y;
         currentIndex.index_z += diff.index_z;
         
         VoxelIndex inputIndex;
-        inputIndex.index_x = currentIndex.index_x + VoxelSize/2;
-        inputIndex.index_y = currentIndex.index_y + VoxelSize/2;
-        inputIndex.index_z = currentIndex.index_z + VoxelSize/2;
-        if(inputIndex.index_x < 512 && inputIndex.index_y < 512 && inputIndex.index_z < 512) findVoxelIndex.push_back(inputIndex);
+        inputIndex.index_x = currentIndex.index_x + VoxelSize_X/2;
+        inputIndex.index_y = currentIndex.index_y + VoxelSize_Y/2;
+        inputIndex.index_z = currentIndex.index_z;
+        if(inputIndex.index_x < VoxelSize_X && inputIndex.index_y < VoxelSize_Y && inputIndex.index_z < VoxelSize_Z) findVoxelIndex.push_back(inputIndex);
     }
 
     while(endRay(currentIndex, targetIndex, truncatedX, truncatedY, truncatedZ))
@@ -76,7 +76,8 @@ vector<VoxelIndex> RayCast::rayCasting(const Point& origin, const Point& point)
             {
                 currentIndex.index_x += step(0);
                 tMaxX += delta(0);
-            } else 
+            } 
+            else 
             {
                 currentIndex.index_z += step(2);
                 tMaxZ += delta(2);
@@ -87,28 +88,28 @@ vector<VoxelIndex> RayCast::rayCasting(const Point& origin, const Point& point)
             {
                 currentIndex.index_y += step(1);
                 tMaxY += delta(1);
-            } else 
+            } 
+            else 
             {
                 currentIndex.index_z += step(2);
                 tMaxZ += delta(2);
             }
         }
         VoxelIndex inputIndex;
-        inputIndex.index_x = currentIndex.index_x + VoxelSize/2;
-        inputIndex.index_y = currentIndex.index_y + VoxelSize/2;
-        inputIndex.index_z = currentIndex.index_z + VoxelSize/2;
-        if(inputIndex.index_x < 512 && inputIndex.index_y < 512 && inputIndex.index_z < 512) findVoxelIndex.push_back(inputIndex);
+        inputIndex.index_x = currentIndex.index_x + VoxelSize_X/2;
+        inputIndex.index_y = currentIndex.index_y + VoxelSize_Y/2;
+        inputIndex.index_z = currentIndex.index_z;
+        if(inputIndex.index_x < VoxelSize_X && inputIndex.index_y < VoxelSize_Y && inputIndex.index_z < VoxelSize_Z) findVoxelIndex.push_back(inputIndex);
     }
     return findVoxelIndex;
 }
-
 
 // 뒤에 어느정도 더 해주기 voxel 의 4배 정도
 bool RayCast::endRay(VoxelIndex currentIndex, VoxelIndex targetIndex, 
     int truncatedX, int truncatedY, int truncatedZ)
 {
-    if((currentIndex.index_x != targetIndex.index_x + truncatedX * 4) && 
-        (currentIndex.index_y != targetIndex.index_y + truncatedY * 4) &&
-        (currentIndex.index_z != targetIndex.index_z + truncatedZ * 4)) return true;
+    if((currentIndex.index_x != targetIndex.index_x + truncatedX * 5) && 
+        (currentIndex.index_y != targetIndex.index_y + truncatedY * 5) &&
+        (currentIndex.index_z != targetIndex.index_z + truncatedZ * 5)) return true;
     else return false;
 }

@@ -7,9 +7,9 @@ float VoxelUpdate::getSDF(const Point& origin, const Point& point, VoxelIndex ce
     if(centerIndex.index_x <= 0 || centerIndex.index_y <= 0 || centerIndex.index_z <= 0) return 0;
     else
     {
-        voxelCenter << static_cast<float>((centerIndex.index_x - VoxelSize/2)*VoxelUnit + VoxelUnit/2), 
-                       static_cast<float>((centerIndex.index_y - VoxelSize/2)*VoxelUnit + VoxelUnit/2), 
-                       static_cast<float>((centerIndex.index_z - VoxelSize/2)*VoxelUnit + VoxelUnit/2);
+        voxelCenter << static_cast<float>((centerIndex.index_x - VoxelSize_X/2)*VoxelUnit + VoxelUnit/2), 
+                       static_cast<float>((centerIndex.index_y - VoxelSize_Y/2)*VoxelUnit + VoxelUnit/2), 
+                       static_cast<float>((centerIndex.index_z)*VoxelUnit + VoxelUnit/2);
         const Point voxelToorigin = voxelCenter - origin;
         const Point pointToorigin = point - origin;
 

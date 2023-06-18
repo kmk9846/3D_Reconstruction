@@ -10,7 +10,9 @@ using namespace std;
 using namespace Eigen;
 
 typedef Eigen::Matrix<float, 3, 1> Point;
-const int VoxelSize = 512;
+const int VoxelSize_X = 1024;
+const int VoxelSize_Y = 1024;
+const int VoxelSize_Z = 512;
 const float VoxelUnit = 0.01;
 
 typedef struct _Voxel{
@@ -34,5 +36,5 @@ public:
     VoxelGrid();
     ~VoxelGrid();
     //크기떄문에 동적으로 할당하기
-    Voxel ***voxel = new Voxel**[VoxelSize];
+    Voxel ***voxel = new Voxel**[VoxelSize_X];
 };

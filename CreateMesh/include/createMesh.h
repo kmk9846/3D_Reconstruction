@@ -33,7 +33,7 @@ public:
     //해당 edge 번호의 좌표를 계산
     Point getVertex(int edge_num, const Point& voxelOrigin);
     //Mesh에 필요한 vertex 와 삼각형 계산 후, ply 파일 생성
-    void generateMesh(int voxelSize, VoxelIndex maxIndex, VoxelIndex minIndex, float isolevel);
-    void writePLY();
+    void generateMesh(int voxelSizeX, int voxelSizeY, int voxelSizeZ, VoxelIndex maxIndex, VoxelIndex minIndex, float isolevel);
+    void writePLY(int num);
 };
 

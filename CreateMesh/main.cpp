@@ -34,9 +34,9 @@ int main(int argc, char* argv[])
     RayCast rayCast;
     vector<VoxelIndex> findIndex;
     CreateMesh createMesh;
-    minIndex.index_x = 512;
-    minIndex.index_y = 512;
-    minIndex.index_z = 512;
+    minIndex.index_x = VoxelSize_X;
+    minIndex.index_y = VoxelSize_Y;
+    minIndex.index_z = VoxelSize_Z;
     maxIndex.index_x = 0;
     maxIndex.index_y = 0;
     maxIndex.index_z = 0;
@@ -86,8 +86,8 @@ int main(int argc, char* argv[])
     if(minIndex.index_z < 0) minIndex.index_z = 0;
     printf("max x[%d] y[%d] z[%d], min x[%d] y[%d] z[%d]\n", maxIndex.index_x, maxIndex.index_y, maxIndex.index_z,
                                             minIndex.index_x, minIndex.index_y, minIndex.index_z);
-    createMesh.generateMesh(VoxelSize, maxIndex, minIndex, 0.0);
-    createMesh.writePLY();
+    createMesh.generateMesh(VoxelSize_X, VoxelSize_Y, VoxelSize_Z, maxIndex, minIndex, 0.0);
+    createMesh.writePLY(startFile);
     
     return 0;
 }
