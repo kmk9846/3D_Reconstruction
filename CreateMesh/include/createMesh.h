@@ -22,16 +22,16 @@ class CreateMesh
 {
 public:
     CreateMesh() {}
+    ~CreateMesh() {}
     VoxelUpdate voxelUpdate;
     float vertexSDF[8];
     std::vector<MeshInfo> PointVector;
     std::vector<Triangle> triangleVertex;
-    std::vector<float> color;
     //sdf 배열을 구하고, 부호 확인
     void getSDFArray(int x, int y, int z);
     int checkSDFSign(int isolevel);
     //해당 edge 번호의 좌표를 계산
-    Point getVertex(int edge_num, const Point& voxelOrigin);
+    Point getVertex(int edge_num, const Point& voxelOrigin, float bound);
     //Mesh에 필요한 vertex 와 삼각형 계산 후, ply 파일 생성
     void generateMesh(int voxelSizeX, int voxelSizeY, int voxelSizeZ, VoxelIndex maxIndex, VoxelIndex minIndex, float isolevel);
     void writePLY(int num);

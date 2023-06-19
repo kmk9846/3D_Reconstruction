@@ -37,4 +37,5 @@ public:
     ~VoxelGrid();
     //크기떄문에 동적으로 할당하기
     Voxel ***voxel = new Voxel**[VoxelSize_X];
+    Point centerVoxel(VoxelIndex voxelIndex);
 };

@@ -33,3 +33,12 @@ VoxelGrid::~VoxelGrid()
     }
     delete[] voxel;
 }
+
+Point VoxelGrid::centerVoxel(VoxelIndex voxelIndex)
+{
+    Point voxelCenter;
+    voxelCenter << static_cast<float>((voxelIndex.index_x - VoxelSize_X/2)*VoxelUnit + VoxelUnit/2), 
+                    static_cast<float>((voxelIndex.index_y - VoxelSize_Y/2)*VoxelUnit + VoxelUnit/2), 
+                    static_cast<float>((voxelIndex.index_z)*VoxelUnit + VoxelUnit/2);
+    return voxelCenter;
+}

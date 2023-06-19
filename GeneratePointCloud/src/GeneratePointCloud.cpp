@@ -168,6 +168,7 @@ void GeneratePointCloud::generate_pointcloud(const string& rgb_file, const strin
             Eigen::Vector4f vec_org(X, Y, Z, 1);
             Eigen::Vector4f vec_transf = transforms * vec_org;
 
+            //openCV = b g r - >rgb 순서로 넣기
             add_points={vec_transf[0], vec_transf[1], vec_transf[2], color[2], color[1], color[0]};
             points.push_back(add_points);
         }

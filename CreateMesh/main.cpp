@@ -1,4 +1,3 @@
-#pragma once
 #include "../GeneratePointCloud/include/GeneratePointCloud.h"
 #include "../Voxel/include/RayCast.h"
 #include "include/createMesh.h"
@@ -47,23 +46,24 @@ int main(int argc, char* argv[])
         Eigen::Matrix4f matrixPose = generatePointCloud.poseMatrix[get<2>(rgb_pose_depth_list[i])].cast<float>();
         generatePointCloud.generate_pointcloud(rgbPNG, depthPNG, matrixPose);
     
-        Point colPoint, Origin;
-        //
-        Origin << matrixPose(0, 3), matrixPose(1, 3), matrixPose(2, 3);
-        cout << "origin : " << Origin(0) << " , " << Origin(1) << " , " << Origin(2) << endl;
-        // VoxelUpdate voxelUpdate;
+        Point PointCloud, Camera;
+        Camera << matrixPose(0, 3), matrixPose(1, 3), matrixPose(2, 3);
+        printf("Camera Origin : x[%f], y[%f],  z[%f]\n", Camera(0), Camera(1), Camera(2));
 
+        //여기 부분을 thread 로 나누어서 작업을 해야한다.
+        //point 의 개수를 나누어서 실행
+        //lock 을 어디다 걸어야할까? sdf 를 update 하는 부분? findIndex 부터 lock?
         for (auto point : generatePointCloud.points) 
         {
             //m 단위를 cm 단위로 변경 -> m 단위로 통일
-            colPoint << point.x, point.y, point.z;
-            findIndex = rayCast.rayCasting(Origin, colPoint);
+            PointCloud << point.x, point.y, point.z;
+            findIndex = rayCast.rayCasting(Camera, PointCloud);
             for (const auto& voxelIndex : findIndex)
             {   
-                float currentSDF = createMesh.voxelUpdate.getSDF(Origin, colPoint, voxelIndex);
+                float currentSDF = createMesh.voxelUpdate.getSDF(Camera, PointCloud, voxelIndex);
                 createMesh.voxelUpdate.getColor(voxelIndex, point.red, point.green, point.blue);
 
-                createMesh.voxelUpdate.updateSDF(Origin, colPoint, voxelIndex, currentSDF);
+                createMesh.voxelUpdate.updateSDF(voxelIndex, currentSDF);
                 createMesh.voxelUpdate.updateWeight(voxelIndex);
                 if (voxelIndex.index_x < minIndex.index_x)
                     minIndex.index_x = voxelIndex.index_x;
@@ -84,6 +84,9 @@ int main(int argc, char* argv[])
     if(minIndex.index_x < 0) minIndex.index_x = 0;
     if(minIndex.index_y < 0) minIndex.index_y = 0;
     if(minIndex.index_z < 0) minIndex.index_z = 0;
+    if(maxIndex.index_x < 0) maxIndex.index_x = VoxelSize_X;
+    if(maxIndex.index_y < 0) maxIndex.index_y = VoxelSize_Y;
+    if(maxIndex.index_z < 0) maxIndex.index_z = VoxelSize_Z;
     printf("max x[%d] y[%d] z[%d], min x[%d] y[%d] z[%d]\n", maxIndex.index_x, maxIndex.index_y, maxIndex.index_z,
                                             minIndex.index_x, minIndex.index_y, minIndex.index_z);
     createMesh.generateMesh(VoxelSize_X, VoxelSize_Y, VoxelSize_Z, maxIndex, minIndex, 0.0);

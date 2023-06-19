@@ -28,10 +28,9 @@ int CreateMesh::checkSDFSign(int isolevel)
     return cubeIndex;
 }
 
-Point CreateMesh::getVertex(int edge_num, const Point& voxelCenter)
+Point CreateMesh::getVertex(int edge_num, const Point& voxelCenter, float bound)
 {
     Point vertex;
-    float bound = 2.0;
     if(edge_num == 0)
     {
         vertex <<   (voxelCenter(0) + voxelCenter(0) + VoxelUnit)/bound,
@@ -117,6 +116,10 @@ void CreateMesh::generateMesh(int voxelSizeX, int voxelSizeY, int voxelSizeZ, Vo
         {
             for (int z = minIndex.index_z; z < maxIndex.index_z; z++) 
             {
+                VoxelIndex voxelIndex;
+                voxelIndex.index_x = x;
+                voxelIndex.index_y = y;
+                voxelIndex.index_z = z;
                 getSDFArray(x, y, z);
                 int cubeIndex = 0;
                 cubeIndex = checkSDFSign(isolevel);
@@ -137,14 +140,12 @@ void CreateMesh::generateMesh(int voxelSizeX, int voxelSizeY, int voxelSizeZ, Vo
                         triangle.e1 = vertexIndex2;
                         triangle.e2 = vertexIndex3;
                         triangleVertex.push_back(triangle);
-                        voxelCenter <<  static_cast<float>((x-voxelSizeX/2)*VoxelUnit + VoxelUnit/2), 
-                                        static_cast<float>((y-voxelSizeY/2)*VoxelUnit + VoxelUnit/2), 
-                                        static_cast<float>((z)*VoxelUnit + VoxelUnit/2);
+                        voxelCenter = voxelUpdate.centerVoxel(voxelIndex);
                         for(int k = 0; k < 3; k ++)
                         {
                             if(k == 0)
                             {
-                                vertex = getVertex(vertexIndex1, voxelCenter);
+                                vertex = getVertex(vertexIndex1, voxelCenter, 2.0);
                                 mesh.x = vertex(0);
                                 mesh.y = vertex(1);
                                 mesh.z = vertex(2);
@@ -155,7 +156,7 @@ void CreateMesh::generateMesh(int voxelSizeX, int voxelSizeY, int voxelSizeZ, Vo
                             }
                             else if(k == 1)
                             {   
-                                vertex = getVertex(vertexIndex2, voxelCenter);
+                                vertex = getVertex(vertexIndex2, voxelCenter, 2.0);
                                 mesh.x = vertex(0);
                                 mesh.y = vertex(1);
                                 mesh.z = vertex(2);
@@ -166,7 +167,7 @@ void CreateMesh::generateMesh(int voxelSizeX, int voxelSizeY, int voxelSizeZ, Vo
                             }
                             else if(k == 2)
                             {
-                                vertex = getVertex(vertexIndex3, voxelCenter);
+                                vertex = getVertex(vertexIndex3, voxelCenter, 2.0);
                                 mesh.x = vertex(0);
                                 mesh.y = vertex(1);
                                 mesh.z = vertex(2);
@@ -210,7 +211,7 @@ void CreateMesh::writePLY(int num)
     for(const MeshInfo& mesh : PointVector) 
     {
         file << mesh.x << " " << mesh.y << " " << mesh.z << " " << to_string(mesh.red)
-         << " " << to_string(mesh.green) << " " << to_string(mesh.blue) << std::endl;
+            << " " << to_string(mesh.green) << " " << to_string(mesh.blue) << std::endl;
     }
     int i = 0;
     for(const Triangle& triangle : triangleVertex)

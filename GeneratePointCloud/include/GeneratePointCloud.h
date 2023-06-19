@@ -32,6 +32,7 @@ struct PointsData{
 class GeneratePointCloud{
 public :
     GeneratePointCloud();
+    ~GeneratePointCloud() {}
     vector<PointsData> points; // ply 파일에 넣을 point 구조체 vector
     PoseMap poseMatrix; // grountruth.txt 파일의 pose를 4x4 matrix 로 저장하는 변수
     map<double, vector<string> > read_file_list(string filename);

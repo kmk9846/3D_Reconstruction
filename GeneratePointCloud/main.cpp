@@ -42,7 +42,7 @@ int main(int argc, char* argv[])
         generatePointCloud.generate_pointcloud(rgbPNG, depthPNG, matrixPose);
         //
         Eigen::Vector3f cameraOrigin(matrixPose(0, 3), matrixPose(1, 3), matrixPose(2, 3));
-        cout << "origin : " << cameraOrigin(0) << " , " << cameraOrigin(1) << " , " << cameraOrigin(2) << endl;
+        cout << "camera : " << cameraOrigin(0) << " , " << cameraOrigin(1) << " , " << cameraOrigin(2) << endl;
     }
 
     //generate_pointcloud 함수가 끝난 후에 맴버변수인 points 를 .ply 파일을 result 라는 이름으로 생성

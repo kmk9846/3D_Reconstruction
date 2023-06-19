@@ -13,10 +13,10 @@ const float weightMax = 100000.0; // 만에서 10만
 class VoxelUpdate : public VoxelGrid {
 public:
     VoxelUpdate() : VoxelGrid() {};
-
+    ~VoxelUpdate() {}
     //update sdf, weight, color
-    float getSDF(const Point& origin, const Point& point, VoxelIndex centerIndex);
+    float getSDF(const Point& camera, const Point& point, VoxelIndex targetIndex);
     void getColor(VoxelIndex centerIndex, uchar red, uchar green, uchar blue);
-    void updateSDF(const Point& origin, const Point& point, VoxelIndex currentIndex, float currentSDF);
+    void updateSDF(VoxelIndex currentIndex, float currentSDF);
     void updateWeight(VoxelIndex currentIndex);
 };
