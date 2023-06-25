@@ -1,4 +1,3 @@
-#include "../GeneratePointCloud/include/GeneratePointCloud.h"
 #include "../Voxel/include/RayCast.h"
 #include "include/createMesh.h"
 
@@ -49,11 +48,13 @@ int main(int argc, char* argv[])
         Point PointCloud, Camera;
         Camera << matrixPose(0, 3), matrixPose(1, 3), matrixPose(2, 3);
         printf("Camera Origin : x[%f], y[%f],  z[%f]\n", Camera(0), Camera(1), Camera(2));
-
+        printf("before grouping : %lu\n", generatePointCloud.points.size());
+        vector<PointsData>rayCasting = rayCast.grouping(generatePointCloud.points);
+        printf("before grouping : %lu\n", rayCasting.size());
         //여기 부분을 thread 로 나누어서 작업을 해야한다.
         //point 의 개수를 나누어서 실행
         //lock 을 어디다 걸어야할까? sdf 를 update 하는 부분? findIndex 부터 lock?
-        for (auto point : generatePointCloud.points) 
+        for (auto point : rayCasting) 
         {
             //m 단위를 cm 단위로 변경 -> m 단위로 통일
             PointCloud << point.x, point.y, point.z;

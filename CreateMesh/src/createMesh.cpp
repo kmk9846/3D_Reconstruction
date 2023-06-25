@@ -14,12 +14,17 @@ void CreateMesh::getSDFArray(int x, int y, int z)
     vertexSDF[7] = voxelUpdate.voxel[x][y+1][z+1].sdf;
 }
 
-int CreateMesh::checkSDFSign(int isolevel)
+int CreateMesh::checkSDFSign()
 {
     int cubeIndex = 0;
     for(int i = 0; i < 8; i++)
     {
-        if(vertexSDF[i] < isolevel)
+        if(vertexSDF[i] == 0)
+        {
+            cubeIndex = 0;
+            return cubeIndex;
+        }
+        if(vertexSDF[i] < 0)
         {
             int num = std::pow(2, i);
             cubeIndex |= num;
@@ -28,82 +33,78 @@ int CreateMesh::checkSDFSign(int isolevel)
     return cubeIndex;
 }
 
-Point CreateMesh::getVertex(int edge_num, const Point& voxelCenter, float bound)
+Point CreateMesh::interpolation(int vertexnum1, int vertexnum2, const Point& voxelOrigin)
 {
-    Point vertex;
-    if(edge_num == 0)
+    Point interpolation;
+    // printf("%f %f\n", vertexSDF[vertexnum1-1], vertexSDF[vertexnum2-1]);
+    if(vertexSDF[vertexnum1-1] == 0) interpolation = getVertex(vertexnum1, voxelOrigin);
+    else if(vertexSDF[vertexnum2-1] == 0) interpolation = getVertex(vertexnum2, voxelOrigin);
+    else
     {
-        vertex <<   (voxelCenter(0) + voxelCenter(0) + VoxelUnit)/bound,
-                    (voxelCenter(1) + voxelCenter(1))/bound,
-                    (voxelCenter(2) + voxelCenter(2))/bound;
+        Point point1 = getVertex(vertexnum1, voxelOrigin);
+        Point point2 = getVertex(vertexnum2, voxelOrigin);
+
+        interpolation = ((getVertex(vertexnum1, voxelOrigin) * abs(vertexSDF[vertexnum2-1])) +
+                        (getVertex(vertexnum2, voxelOrigin) * abs(vertexSDF[vertexnum1-1]))) /
+                        ((abs(vertexSDF[vertexnum1-1])) + (abs(vertexSDF[vertexnum2-1])));
+        // printf("point 1 : %f %f %f\n", point1(0), point1(1), point1(2));
+        // printf("point 2 : %f %f %f\n", point2(0), point2(1), point2(2));
+
+        // printf("inter pol : %f %f %f\n", interpolation(0), interpolation(1), interpolation(2));
     }
-    else if(edge_num == 1)
+    return interpolation;
+}
+
+Point CreateMesh::getVertex(int vertex_num, const Point& voxelOrigin)
+{
+    Point vertex = voxelOrigin;
+    if(vertex_num == 1) return vertex;
+    else if(vertex_num == 2)
     {
-        vertex <<   (voxelCenter(0) + VoxelUnit + voxelCenter(0) + VoxelUnit)/bound,
-                    (voxelCenter(1) + voxelCenter(1))/bound,
-                    (voxelCenter(2) + voxelCenter(2) + VoxelUnit)/bound;
-    }
-    else if(edge_num == 2)
+        vertex(0) += VoxelUnit;
+    }   
+    else if(vertex_num == 3)
     {   
-        vertex <<   (voxelCenter(0) + voxelCenter(0) + VoxelUnit)/bound,
-                    (voxelCenter(1) + voxelCenter(1))/bound,
-                    (voxelCenter(2) + VoxelUnit + voxelCenter(2) + VoxelUnit)/bound;
+        vertex(0) += VoxelUnit;
+        vertex(2) += VoxelUnit;
     }
-    else if(edge_num == 3)
-    {
-        vertex <<   (voxelCenter(0) + voxelCenter(0))/bound,
-                    (voxelCenter(1) + voxelCenter(1))/bound,
-                    (voxelCenter(2) + voxelCenter(2) + VoxelUnit)/bound;
+    else if(vertex_num == 4) vertex(2) += VoxelUnit;
+    else if(vertex_num == 5) vertex(1) += VoxelUnit;
+    else if(vertex_num == 6)
+    {  
+        vertex(0) += VoxelUnit;
+        vertex(1) += VoxelUnit;
     }
-    else if(edge_num == 4)
+    else if(vertex_num == 7)
     {
-        vertex <<   (voxelCenter(0) + voxelCenter(0) + VoxelUnit)/bound,
-                    (voxelCenter(1) + VoxelUnit + voxelCenter(1) + VoxelUnit)/bound,
-                    (voxelCenter(2) + voxelCenter(2))/bound;
+        vertex(0) += VoxelUnit;
+        vertex(1) += VoxelUnit;
+        vertex(2) += VoxelUnit;
     }
-    else if(edge_num == 5)
+    else if(vertex_num == 8)
     {
-        vertex <<   (voxelCenter(0) + VoxelUnit + voxelCenter(0) + VoxelUnit)/bound,
-                    (voxelCenter(1) + VoxelUnit + voxelCenter(1) + VoxelUnit)/bound,
-                    (voxelCenter(2) + voxelCenter(2) + VoxelUnit)/bound;
-    }
-    else if(edge_num == 6)
-    {
-        vertex <<   (voxelCenter(0) + VoxelUnit + voxelCenter(0))/bound,
-                    (voxelCenter(1) + VoxelUnit + voxelCenter(1) + VoxelUnit)/bound,
-                    (voxelCenter(2) + VoxelUnit + voxelCenter(2) + VoxelUnit)/bound;
-    }
-    else if(edge_num == 7)
-    {
-        vertex <<   (voxelCenter(0) + voxelCenter(0))/bound,
-                    (voxelCenter(1) + VoxelUnit + voxelCenter(1) + VoxelUnit)/bound,
-                    (voxelCenter(2) + voxelCenter(2) + VoxelUnit)/bound;
-    }
-    else if(edge_num == 8)
-    {
-        vertex <<   (voxelCenter(0) + voxelCenter(0))/bound,
-                    (voxelCenter(1) + voxelCenter(1) + VoxelUnit)/bound,
-                    (voxelCenter(2) + voxelCenter(2))/bound;
-    }
-    else if(edge_num == 9)
-    {
-        vertex <<   (voxelCenter(0) + VoxelUnit + voxelCenter(0)+ VoxelUnit)/bound,
-                    (voxelCenter(1) + voxelCenter(1) + VoxelUnit)/bound,
-                    (voxelCenter(2) + voxelCenter(2))/bound;
-    }
-    else if(edge_num == 10)
-    {
-        vertex <<   (voxelCenter(0) + VoxelUnit + voxelCenter(0)+ VoxelUnit)/bound,
-                    (voxelCenter(1) + voxelCenter(1) + VoxelUnit)/bound,
-                    (voxelCenter(2) + VoxelUnit + voxelCenter(2) + VoxelUnit)/bound;
-    }
-    else if(edge_num == 11)
-    {
-        vertex <<   (voxelCenter(0) + voxelCenter(0))/bound,
-                    (voxelCenter(1) + voxelCenter(1) + VoxelUnit)/bound,
-                    (voxelCenter(2) + VoxelUnit + voxelCenter(2) + VoxelUnit)/bound;
+        vertex(1) += VoxelUnit;
+        vertex(2) += VoxelUnit;
     }
     return vertex;
+}
+
+Point CreateMesh::getSDFVertex(int edge_num, const Point& voxelCenter)
+{
+    Point SDFvertex;
+    if(edge_num == 0) SDFvertex << interpolation(1, 2, voxelCenter);
+    else if(edge_num == 1) SDFvertex << interpolation(2, 3, voxelCenter);
+    else if(edge_num == 2) SDFvertex << interpolation(3, 4, voxelCenter);
+    else if(edge_num == 3) SDFvertex << interpolation(1, 4, voxelCenter);
+    else if(edge_num == 4) SDFvertex << interpolation(5, 6, voxelCenter);
+    else if(edge_num == 5) SDFvertex << interpolation(6, 7, voxelCenter);
+    else if(edge_num == 6) SDFvertex << interpolation(7, 8, voxelCenter);
+    else if(edge_num == 7) SDFvertex << interpolation(5, 8, voxelCenter);
+    else if(edge_num == 8) SDFvertex << interpolation(1, 5, voxelCenter);
+    else if(edge_num == 9) SDFvertex << interpolation(2, 6, voxelCenter);
+    else if(edge_num == 10) SDFvertex << interpolation(3, 7, voxelCenter);
+    else if(edge_num == 11) SDFvertex << interpolation(4, 8, voxelCenter);
+    return SDFvertex;
 }
 
 void CreateMesh::generateMesh(int voxelSizeX, int voxelSizeY, int voxelSizeZ, VoxelIndex maxIndex, VoxelIndex minIndex, float isolevel)
@@ -122,7 +123,7 @@ void CreateMesh::generateMesh(int voxelSizeX, int voxelSizeY, int voxelSizeZ, Vo
                 voxelIndex.index_z = z;
                 getSDFArray(x, y, z);
                 int cubeIndex = 0;
-                cubeIndex = checkSDFSign(isolevel);
+                cubeIndex = checkSDFSign();
                 if(cubeIndex < 255 && cubeIndex > 0)
                 {
                     // 삼각형 생성
@@ -145,7 +146,7 @@ void CreateMesh::generateMesh(int voxelSizeX, int voxelSizeY, int voxelSizeZ, Vo
                         {
                             if(k == 0)
                             {
-                                vertex = getVertex(vertexIndex1, voxelCenter, 2.0);
+                                vertex = getSDFVertex(vertexIndex1, voxelCenter);
                                 mesh.x = vertex(0);
                                 mesh.y = vertex(1);
                                 mesh.z = vertex(2);
@@ -156,7 +157,7 @@ void CreateMesh::generateMesh(int voxelSizeX, int voxelSizeY, int voxelSizeZ, Vo
                             }
                             else if(k == 1)
                             {   
-                                vertex = getVertex(vertexIndex2, voxelCenter, 2.0);
+                                vertex = getSDFVertex(vertexIndex2, voxelCenter);
                                 mesh.x = vertex(0);
                                 mesh.y = vertex(1);
                                 mesh.z = vertex(2);
@@ -167,7 +168,7 @@ void CreateMesh::generateMesh(int voxelSizeX, int voxelSizeY, int voxelSizeZ, Vo
                             }
                             else if(k == 2)
                             {
-                                vertex = getVertex(vertexIndex3, voxelCenter, 2.0);
+                                vertex = getSDFVertex(vertexIndex3, voxelCenter);
                                 mesh.x = vertex(0);
                                 mesh.y = vertex(1);
                                 mesh.z = vertex(2);

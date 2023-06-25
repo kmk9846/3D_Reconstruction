@@ -3,6 +3,7 @@
 #include <vector>
 #include <Eigen/Core>
 #include "voxel.h"
+#include "../../GeneratePointCloud/include/GeneratePointCloud.h"
 
 using namespace std;
 
@@ -15,6 +16,7 @@ public:
     vector<VoxelIndex> rayCasting(const Point& camera, const Point& point);
     VoxelIndex offsetIndex(VoxelIndex inputIndex);
     VoxelIndex pointToVoxel(const Point& point);
+    vector<PointsData> grouping(vector<PointsData> points);
     // point cloud 뒤의 4개의 voxel 까지 update
     bool endRay(VoxelIndex currentIndex, VoxelIndex targetIndex, int truncatedX, int truncatedY, int truncatedZ);
 };
