@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/main.dir/main.cpp.o"
-  "CMakeFiles/main.dir/main.cpp.o.d"
-  "CMakeFiles/main.dir/src/GeneratePointCloud.cpp.o"
-  "CMakeFiles/main.dir/src/GeneratePointCloud.cpp.o.d"
+  "CMakeFiles/main.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/main.cpp.o"
+  "CMakeFiles/main.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/main.cpp.o.d"
+  "CMakeFiles/main.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/src/GeneratePointCloud.cpp.o"
+  "CMakeFiles/main.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/src/GeneratePointCloud.cpp.o.d"
   "main"
   "main.pdb"
 )

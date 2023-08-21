@@ -1,4 +1,4 @@
-CMakeFiles/main.dir/main.cpp.o: \
+CMakeFiles/main.dir/Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/main.cpp.o: \
   /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/main.cpp \
   /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/./include/GeneratePointCloud.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk/usr/include/c++/v1/iostream \

@@ -36,7 +36,7 @@ int CreateMesh::checkSDFSign()
 Point CreateMesh::interpolation(int vertexnum1, int vertexnum2, const Point& voxelOrigin)
 {
     Point interpolation;
-    // printf("%f %f\n", vertexSDF[vertexnum1-1], vertexSDF[vertexnum2-1]);
+    
     if(vertexSDF[vertexnum1-1] == 0) interpolation = getVertex(vertexnum1, voxelOrigin);
     else if(vertexSDF[vertexnum2-1] == 0) interpolation = getVertex(vertexnum2, voxelOrigin);
     else
@@ -47,10 +47,10 @@ Point CreateMesh::interpolation(int vertexnum1, int vertexnum2, const Point& vox
         interpolation = ((getVertex(vertexnum1, voxelOrigin) * abs(vertexSDF[vertexnum2-1])) +
                         (getVertex(vertexnum2, voxelOrigin) * abs(vertexSDF[vertexnum1-1]))) /
                         ((abs(vertexSDF[vertexnum1-1])) + (abs(vertexSDF[vertexnum2-1])));
-        // printf("point 1 : %f %f %f\n", point1(0), point1(1), point1(2));
-        // printf("point 2 : %f %f %f\n", point2(0), point2(1), point2(2));
-
-        // printf("inter pol : %f %f %f\n", interpolation(0), interpolation(1), interpolation(2));
+        // interpolation = ((getVertex(vertexnum1, voxelOrigin)) +
+        //                 (getVertex(vertexnum2, voxelOrigin) )) /
+        //                 2;
+        
     }
     return interpolation;
 }
@@ -107,6 +107,20 @@ Point CreateMesh::getSDFVertex(int edge_num, const Point& voxelCenter)
     return SDFvertex;
 }
 
+bool CreateMesh::checkDuplicate(const MeshInfo& a, const MeshInfo& b) {
+    return a.x == b.x && a.y == b.y && a.z == b.z;
+}
+
+// 벡터에 요소를 추가할 때 중복 체크
+bool CreateMesh::isDuplicateExists(const std::vector<MeshInfo>& vec, const MeshInfo& newItem) {
+    for (const auto& item : vec) {
+        if (checkDuplicate(item, newItem)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 void CreateMesh::generateMesh(int voxelSizeX, int voxelSizeY, int voxelSizeZ, VoxelIndex maxIndex, VoxelIndex minIndex, float isolevel)
 {
     //vertex point
@@ -126,11 +140,12 @@ void CreateMesh::generateMesh(int voxelSizeX, int voxelSizeY, int voxelSizeZ, Vo
                 cubeIndex = checkSDFSign();
                 if(cubeIndex < 255 && cubeIndex > 0)
                 {
-                    // 삼각형 생성
+                    // 삼각형 생성 
                     Triangle triangle;
                     MeshInfo mesh;
                     Point vertex;
                     Point voxelCenter;
+                    bool trianglePush = false;
                     for (int i = 0; kTriangleTable[cubeIndex][i] != -1; i += 3) 
                     { 
                         int vertexIndex1 = kTriangleTable[cubeIndex][i];
@@ -153,6 +168,11 @@ void CreateMesh::generateMesh(int voxelSizeX, int voxelSizeY, int voxelSizeZ, Vo
                                 mesh.red = voxelUpdate.voxel[x][y][z].red;
                                 mesh.green = voxelUpdate.voxel[x][y][z].green;
                                 mesh.blue = voxelUpdate.voxel[x][y][z].blue;
+                                // if (isDuplicateExists(PointVector, mesh) == false) 
+                                // {
+                                //     PointVector.push_back(mesh);
+                                //     trianglePush = true;
+                                // }
                                 PointVector.push_back(mesh);
                             }
                             else if(k == 1)
@@ -164,6 +184,11 @@ void CreateMesh::generateMesh(int voxelSizeX, int voxelSizeY, int voxelSizeZ, Vo
                                 mesh.red = voxelUpdate.voxel[x][y][z].red;
                                 mesh.green = voxelUpdate.voxel[x][y][z].green;
                                 mesh.blue = voxelUpdate.voxel[x][y][z].blue;
+                                // if (isDuplicateExists(PointVector, mesh)== false) 
+                                // {
+                                //     PointVector.push_back(mesh);
+                                //     trianglePush = true;
+                                // }
                                 PointVector.push_back(mesh);
                             }
                             else if(k == 2)
@@ -175,15 +200,24 @@ void CreateMesh::generateMesh(int voxelSizeX, int voxelSizeY, int voxelSizeZ, Vo
                                 mesh.red = voxelUpdate.voxel[x][y][z].red;
                                 mesh.green = voxelUpdate.voxel[x][y][z].green;
                                 mesh.blue = voxelUpdate.voxel[x][y][z].blue;
+                                // if (isDuplicateExists(PointVector, mesh)== false) 
+                                // {
+                                //     PointVector.push_back(mesh);
+                                //     trianglePush = true;
+                                // }
                                 PointVector.push_back(mesh);
                             }
                         }
+                        // if(trianglePush == true) triangleVertex.push_back(triangle);
+
                     }
                 }else continue;
             }
         }
     }
 }
+
+
 
 void CreateMesh::writePLY(int num) 
 {
@@ -215,6 +249,7 @@ void CreateMesh::writePLY(int num)
             << " " << to_string(mesh.green) << " " << to_string(mesh.blue) << std::endl;
     }
     int i = 0;
+
     for(const Triangle& triangle : triangleVertex)
     {
         file << "3 " << i << " " << i+1 << " " << i + 2 << std::endl;

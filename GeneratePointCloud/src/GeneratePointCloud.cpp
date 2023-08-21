@@ -1,4 +1,5 @@
 #include "../include/GeneratePointCloud.h"
+#include <cmath>
 
 // 초기 카메라 parameter setting
 // ROS default 값을 이용
@@ -153,12 +154,16 @@ PoseMap GeneratePointCloud::read_trajectory(const std::string& filename)
 // 식을 통해서 point 를 생성하고 맴버변수인 points vextor 에 push_back한다.
 void GeneratePointCloud::generate_pointcloud(const string& rgb_file, const string& depth_file, const Eigen::Matrix4f& transforms)
 {
+    points.clear();
     cv::Mat rgb = cv::imread(rgb_file);
     cv::Mat depth = cv::imread(depth_file, cv::IMREAD_UNCHANGED);
 
     PointsData add_points;
-    for (int v = 0; v < rgb.rows; v += 1) {
-        for (int u = 0; u < rgb.cols; u += 1) {
+    int flag = 0;
+    for (int v = 0; v < rgb.rows; v += 1) 
+    {
+        for (int u = 0; u < rgb.cols; u += 1) 
+        {
             cv::Vec3b color = rgb.at<cv::Vec3b>(v, u);
             ushort depth_value = depth.at<ushort>(v, u);
             double Z = static_cast<double>(depth_value) / scalingFactor;
@@ -168,9 +173,16 @@ void GeneratePointCloud::generate_pointcloud(const string& rgb_file, const strin
             Eigen::Vector4f vec_org(X, Y, Z, 1);
             Eigen::Vector4f vec_transf = transforms * vec_org;
 
-            //openCV = b g r - >rgb 순서로 넣기
-            add_points={vec_transf[0], vec_transf[1], vec_transf[2], color[2], color[1], color[0]};
-            points.push_back(add_points);
+            float dx = vec_transf[0] - transforms(0, 3);
+            float dy = vec_transf[1] - transforms(1, 3);
+            float dz = vec_transf[2] - transforms(2, 3);
+            float distance = std::sqrt(dx*dx + dy*dy + dz*dz);
+            if(distance <= 5 && distance > 0)
+            {
+                add_points={vec_transf[0], vec_transf[1], vec_transf[2], color[2], color[1], color[0]};
+                points.push_back(add_points);
+            }
+            else continue;
         }
     }
 }

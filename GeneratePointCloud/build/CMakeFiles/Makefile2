@@ -54,7 +54,7 @@ RM = /opt/homebrew/Cellar/cmake/3.26.3/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud
+CMAKE_SOURCE_DIR = /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/build
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/build

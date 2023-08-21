@@ -1,4 +1,4 @@
-# Install script for directory: /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud
+# Install script for directory: /Users/minkwankim/한양대/졸업프로젝트/3D_Reconstruction/GeneratePointCloud/build
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

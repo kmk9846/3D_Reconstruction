@@ -42,13 +42,6 @@ int main(int argc, char* argv[])
     
 
     //size 만큼의 timestamp를 건너뛰면서 gernerate_pointcloud 함수를 실행
-    // for (int i = 0; i < rgb_pose_depth_list.size(); i += size) 
-    // {
-    //     string rgbPNG = filePath + rgbfile + to_string(get<0>(rgb_pose_depth_list[i])) + ".png";
-    //     string depthPNG = filePath + depthfile + to_string(get<1>(rgb_pose_depth_list[i])) + ".png";
-    //     Matrix4f matrixPose = generatePointCloud.poseMatrix[get<2>(rgb_pose_depth_list[i])].cast<float>();
-    //     generatePointCloud.generate_pointcloud(rgbPNG, depthPNG, matrixPose);
-    // }
     printf("size : %lu\n", rgb_pose_depth_list.size());
     for (int i = startFile; i < fileNum; i += size) 
     {
@@ -63,27 +56,6 @@ int main(int argc, char* argv[])
 
     //generate_pointcloud 함수가 끝난 후에 맴버변수인 points 를 .ply 파일을 result 라는 이름으로 생성
     //build 파일에 result.ply 파일이 생성된다.
-    std::sort(generatePointCloud.points.begin(), generatePointCloud.points.end(), comparePointsX);
-    int index = 0;
-    for(int i = 1; i < generatePointCloud.points.size(); i++)
-    {
-        PointsData p1, p2;
-        if(index + i >= generatePointCloud.points.size()) break;
-        else
-        {
-            p1 = generatePointCloud.points[index];
-            p2 = generatePointCloud.points[index + i];
-            double p1_x = std::floor(p1.x / 0.01) * 0.01;
-            double p2_x = std::floor(p2.x / 0.01) * 0.01;
-            if(p1_x != p2_x)
-            {
-                std::sort(generatePointCloud.points.begin() + index, generatePointCloud.points.begin() + index + i -1, comparePointsY);
-                index = index + i;
-                i = 1;
-            }
-        }
-    }
-
     generatePointCloud.write_ply("result_test.ply", generatePointCloud.points);
     return 0;
 }
