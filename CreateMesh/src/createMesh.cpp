@@ -47,8 +47,9 @@ Point CreateMesh::interpolation(int vertexnum1, int vertexnum2, const Point& vox
         interpolation = ((getVertex(vertexnum1, voxelOrigin) * abs(vertexSDF[vertexnum2-1])) +
                         (getVertex(vertexnum2, voxelOrigin) * abs(vertexSDF[vertexnum1-1]))) /
                         ((abs(vertexSDF[vertexnum1-1])) + (abs(vertexSDF[vertexnum2-1])));
+
         // interpolation = ((getVertex(vertexnum1, voxelOrigin)) +
-        //                 (getVertex(vertexnum2, voxelOrigin) )) /
+        //                 (getVertex(vertexnum2, voxelOrigin))) /
         //                 2;
         
     }
@@ -168,11 +169,6 @@ void CreateMesh::generateMesh(int voxelSizeX, int voxelSizeY, int voxelSizeZ, Vo
                                 mesh.red = voxelUpdate.voxel[x][y][z].red;
                                 mesh.green = voxelUpdate.voxel[x][y][z].green;
                                 mesh.blue = voxelUpdate.voxel[x][y][z].blue;
-                                // if (isDuplicateExists(PointVector, mesh) == false) 
-                                // {
-                                //     PointVector.push_back(mesh);
-                                //     trianglePush = true;
-                                // }
                                 PointVector.push_back(mesh);
                             }
                             else if(k == 1)
@@ -184,11 +180,6 @@ void CreateMesh::generateMesh(int voxelSizeX, int voxelSizeY, int voxelSizeZ, Vo
                                 mesh.red = voxelUpdate.voxel[x][y][z].red;
                                 mesh.green = voxelUpdate.voxel[x][y][z].green;
                                 mesh.blue = voxelUpdate.voxel[x][y][z].blue;
-                                // if (isDuplicateExists(PointVector, mesh)== false) 
-                                // {
-                                //     PointVector.push_back(mesh);
-                                //     trianglePush = true;
-                                // }
                                 PointVector.push_back(mesh);
                             }
                             else if(k == 2)
@@ -200,16 +191,9 @@ void CreateMesh::generateMesh(int voxelSizeX, int voxelSizeY, int voxelSizeZ, Vo
                                 mesh.red = voxelUpdate.voxel[x][y][z].red;
                                 mesh.green = voxelUpdate.voxel[x][y][z].green;
                                 mesh.blue = voxelUpdate.voxel[x][y][z].blue;
-                                // if (isDuplicateExists(PointVector, mesh)== false) 
-                                // {
-                                //     PointVector.push_back(mesh);
-                                //     trianglePush = true;
-                                // }
                                 PointVector.push_back(mesh);
                             }
                         }
-                        // if(trianglePush == true) triangleVertex.push_back(triangle);
-
                     }
                 }else continue;
             }

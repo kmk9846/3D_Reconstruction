@@ -16,12 +16,12 @@ public:
     ~VoxelUpdate() {}
     //update sdf, weight, color
     float getSDF(const Point& camera, const Point& point, VoxelIndex targetIndex);
-    float exponentialWeight(float dist);
-    float linearWeight(float dist);
-    float constantWeight(float dist);
-    float narrowExpWeight(float dist);
-    float narrowLinearWeight(float dist);
-    float normalDistributionWeight(float dist);
+    float exponentialWeight(float dist, int truncateSize);
+    float linearWeight(float dist, int truncateSize);
+    float constantWeight(float dist, int truncateSize);
+    float narrowExpWeight(float dist, int truncateSize);
+    float narrowLinearWeight(float dist, int truncateSize);
+    float normalDistributionWeight(float dist, int truncateSize);
     void getColor(VoxelIndex centerIndex, uchar red, uchar green, uchar blue);
     void updateSDF(VoxelIndex currentIndex, float currentSDF, float weightValue);
     void updateWeight(VoxelIndex currentIndex, float weightValue);

@@ -9,6 +9,7 @@ int main(int argc, char* argv[])
     int fileNum = atoi(argv[3]);
     int size = atoi(argv[4]);
     int weightUpdate = atoi(argv[5]);
+    int truncateSize = atoi(argv[6]);
     
     string rgbfile = "/rgb/";
     string depthfile = "/depth/";
@@ -60,23 +61,23 @@ int main(int argc, char* argv[])
         {
             //m 단위를 cm 단위로 변경 -> m 단위로 통일
             PointCloud << point.x, point.y, point.z;
-            findIndex = rayCast.rayCasting(Camera, PointCloud);
+            findIndex = rayCast.rayCasting(Camera, PointCloud, truncateSize);
             // printf("start raycasting\n");
             for (const auto& voxelIndex : findIndex)
             {   
                 float currentSDF = createMesh.voxelUpdate.getSDF(Camera, PointCloud, voxelIndex);
                 Point voxel = createMesh.voxelUpdate.centerVoxel(voxelIndex);
                 float dist = 0.0;
-                if((PointCloud - Camera).norm() >= (voxel - Camera).norm()) dist = -1*(voxel - PointCloud).norm();
-                else dist = (voxel - PointCloud).norm();
+                if((PointCloud - Camera).norm() >= (voxel - Camera).norm()) dist = (voxel - PointCloud).norm();
+                else dist = -1 * (voxel - PointCloud).norm();
                 
                 float weightValue = 1.0;
-                if(weightUpdate == 0) weightValue = createMesh.voxelUpdate.exponentialWeight(dist);
-                else if(weightUpdate == 1) weightValue = createMesh.voxelUpdate.linearWeight(dist);
-                else if(weightUpdate == 2) weightValue = createMesh.voxelUpdate.constantWeight(dist);
-                else if(weightUpdate == 3) weightValue = createMesh.voxelUpdate.narrowExpWeight(dist);
-                else if(weightUpdate == 4) weightValue = createMesh.voxelUpdate.narrowLinearWeight(dist);
-                else if(weightUpdate == 5) weightValue = createMesh.voxelUpdate.normalDistributionWeight(dist);
+                if(weightUpdate == 0) weightValue = createMesh.voxelUpdate.exponentialWeight(dist, truncateSize);
+                else if(weightUpdate == 1) weightValue = createMesh.voxelUpdate.linearWeight(dist, truncateSize);
+                else if(weightUpdate == 2) weightValue = createMesh.voxelUpdate.constantWeight(dist, truncateSize);
+                else if(weightUpdate == 3) weightValue = createMesh.voxelUpdate.narrowExpWeight(dist, truncateSize);
+                else if(weightUpdate == 4) weightValue = createMesh.voxelUpdate.narrowLinearWeight(dist, truncateSize);
+                else if(weightUpdate == 5) weightValue = createMesh.voxelUpdate.normalDistributionWeight(dist, truncateSize);
                 
                 createMesh.voxelUpdate.getColor(voxelIndex, point.red, point.green, point.blue);
                 createMesh.voxelUpdate.updateSDF(voxelIndex, currentSDF, weightValue);

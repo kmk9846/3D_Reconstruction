@@ -76,7 +76,7 @@ vector<PointsData> RayCast::grouping(vector<PointsData> points)
 }
 
 
-vector<VoxelIndex> RayCast::rayCasting(const Point& camera, const Point& point)
+vector<VoxelIndex> RayCast::rayCasting(const Point& camera, const Point& point, int truncateSize)
 {
     vector<VoxelIndex> findVoxelIndex;
     VoxelIndex currentIndex;
@@ -130,7 +130,7 @@ vector<VoxelIndex> RayCast::rayCasting(const Point& camera, const Point& point)
                     static_cast<float>((inputIndex.index_y - VoxelSize_Y/2)*VoxelUnit + VoxelUnit/2), 
                     static_cast<float>((inputIndex.index_z)*VoxelUnit + VoxelUnit/2);
         Point dist = point - voxelCenter;
-        if(dist.norm() <= 0.05) findVoxelIndex.push_back(inputIndex);
+        if(dist.norm() <= static_cast<float>(truncateSize) * 0.01) findVoxelIndex.push_back(inputIndex);
     }
     if (neg_ray) 
     {
@@ -146,7 +146,7 @@ vector<VoxelIndex> RayCast::rayCasting(const Point& camera, const Point& point)
                         static_cast<float>((inputIndex.index_y - VoxelSize_Y/2)*VoxelUnit + VoxelUnit/2), 
                         static_cast<float>((inputIndex.index_z)*VoxelUnit + VoxelUnit/2);
             Point dist = point - voxelCenter;
-            if(dist.norm() <= 0.05) findVoxelIndex.push_back(inputIndex);
+            if(dist.norm() <= static_cast<float>(truncateSize) * 0.01) findVoxelIndex.push_back(inputIndex);
         }
     }
 
@@ -185,7 +185,7 @@ vector<VoxelIndex> RayCast::rayCasting(const Point& camera, const Point& point)
                         static_cast<float>((inputIndex.index_y - VoxelSize_Y/2)*VoxelUnit + VoxelUnit/2), 
                         static_cast<float>((inputIndex.index_z)*VoxelUnit + VoxelUnit/2);
             Point dist = point - voxelCenter;
-            if(dist.norm() <= 0.05) findVoxelIndex.push_back(inputIndex);
+            if(dist.norm() <= static_cast<float>(truncateSize) * 0.01) findVoxelIndex.push_back(inputIndex);
         }
     }
     return findVoxelIndex;

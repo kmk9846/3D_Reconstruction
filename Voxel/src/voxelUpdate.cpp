@@ -18,52 +18,53 @@ float VoxelUpdate::getSDF(const Point& camera, const Point& point, VoxelIndex ta
     }
 }
 
-float VoxelUpdate::exponentialWeight(float dist)
+float VoxelUpdate::exponentialWeight(float dist, int truncateSize)
 {
-    float epsilon = 0.01;
-    float delta = 0.05;
-    float sigma = 1;
+    float epsilon = 0.03;
+    float delta = static_cast<float>(truncateSize) * 0.01;
+    float sigma = 0.01;
     if (dist < epsilon) return 1.0f;
     else if (dist >= epsilon && dist <= delta) return std::exp(-sigma * std::pow(dist - epsilon, 2));
     else return 0.0f;
 }
 
-float VoxelUpdate::linearWeight(float dist)
+float VoxelUpdate::linearWeight(float dist, int truncateSize)
 {
     float epsilon = 0.01;
-    float delta = 0.05;
+    float delta = static_cast<float>(truncateSize) * 0.01;
     if(dist < epsilon) return 1.0f;
     else if(dist >= epsilon && dist <= delta) return (-25*dist + 1.25);
     else return 0.0f;
 }
 
-float VoxelUpdate::constantWeight(float dist) 
+float VoxelUpdate::constantWeight(float dist, int truncateSize) 
 {
     return 1;
 }
 
-float VoxelUpdate::narrowExpWeight(float dist)
+float VoxelUpdate::narrowExpWeight(float dist, int truncateSize)
 {
-    float epsilon = 0.01;
-    float delta = 0.05;
-    float sigma = 1;
-    if (dist < epsilon && dist > epsilon) return 1.0f;
-    else if(dist <= -epsilon && dist >= -delta) return std::exp(-sigma * std::pow(dist - epsilon, 2));
-    else if (dist >= epsilon && dist <= delta) return std::exp(-sigma * std::pow(-1*dist - epsilon, 2));
+    float epsilon = 0.0;
+    float delta = static_cast<float>(truncateSize) * 0.01;
+    float sigma = 0.01;
+
+    if (dist < epsilon && dist > -1*epsilon) return 1.0f;
+    else if(dist <= -1*epsilon && dist >= -delta) return std::exp(-sigma * std::pow(-1*dist - epsilon, 2));
+    else if (dist >= epsilon && dist <= delta) return std::exp(-sigma * std::pow(dist - epsilon, 2));
     else return 0.0f;   
 }
 
-float VoxelUpdate::narrowLinearWeight(float dist)
+float VoxelUpdate::narrowLinearWeight(float dist, int truncateSize)
 {
     float epsilon = 0.01;
-    float delta = 0.05;
-    if(dist < epsilon && dist > epsilon) return 1.0f;
-    else if(dist <= -epsilon && dist >= -delta) return (25*dist + 1.25);
+    float delta = static_cast<float>(truncateSize) * 0.01;
+    if(dist < epsilon && dist > -1*epsilon) return 1.0f;
+    else if(dist <= -1*epsilon && dist >= -delta) return (25*dist + 1.25);
     else if(dist >= epsilon && dist <= delta) return (-25*dist + 1.25);
     else return 0.0f;
 }
 
-float VoxelUpdate::normalDistributionWeight(float dist)
+float VoxelUpdate::normalDistributionWeight(float dist, int truncateSize)
 {
     float mean = 0;
     float variance = 0.05;
@@ -75,6 +76,7 @@ float VoxelUpdate::normalDistributionWeight(float dist)
 void VoxelUpdate::updateSDF(VoxelIndex currentIndex, float currentSDF, float weightValue)
 {
     if(currentIndex.index_x <= 0 || currentIndex.index_y <= 0 || currentIndex.index_z <= 0) return;
+    else if(weightValue == 0) return;
     else
     {
         float prevSDF = voxel[currentIndex.index_x][currentIndex.index_y][currentIndex.index_z].sdf;
@@ -88,6 +90,7 @@ void VoxelUpdate::updateSDF(VoxelIndex currentIndex, float currentSDF, float wei
 void VoxelUpdate::updateWeight(VoxelIndex currentIndex, float weightValue)
 {
     if(currentIndex.index_x <= 0 || currentIndex.index_y <= 0 || currentIndex.index_z <= 0) return;
+    else if(weightValue == 0) return;
     else
     {
         float prevWeight = voxel[currentIndex.index_x][currentIndex.index_y][currentIndex.index_z].weight;
