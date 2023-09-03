@@ -65,7 +65,6 @@ int main(int argc, char* argv[])
             // printf("start raycasting\n");
             for (const auto& voxelIndex : findIndex)
             {   
-                float currentSDF = createMesh.voxelUpdate.getSDF(Camera, PointCloud, voxelIndex);
                 Point voxel = createMesh.voxelUpdate.centerVoxel(voxelIndex);
                 float dist = 0.0;
                 if((PointCloud - Camera).norm() >= (voxel - Camera).norm()) dist = (voxel - PointCloud).norm();
@@ -79,7 +78,9 @@ int main(int argc, char* argv[])
                 else if(weightUpdate == 4) weightValue = createMesh.voxelUpdate.narrowLinearWeight(dist, truncateSize);
                 else if(weightUpdate == 5) weightValue = createMesh.voxelUpdate.normalDistributionWeight(dist, truncateSize);
                 
-                createMesh.voxelUpdate.getColor(voxelIndex, point.red, point.green, point.blue);
+                float currentSDF = createMesh.voxelUpdate.getSDF(Camera, PointCloud, voxelIndex);
+                // createMesh.voxelUpdate.getColor(voxelIndex, point.red, point.green, point.blue);
+                createMesh.voxelUpdate.updateColor(voxelIndex, point.red, point.green, point.blue, weightValue);
                 createMesh.voxelUpdate.updateSDF(voxelIndex, currentSDF, weightValue);
                 createMesh.voxelUpdate.updateWeight(voxelIndex, weightValue);
 

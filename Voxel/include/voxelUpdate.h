@@ -24,5 +24,6 @@ public:
     float normalDistributionWeight(float dist, int truncateSize);
     void getColor(VoxelIndex centerIndex, uchar red, uchar green, uchar blue);
     void updateSDF(VoxelIndex currentIndex, float currentSDF, float weightValue);
+    void updateColor(VoxelIndex currentIndex, uchar red, uchar green, uchar blue, float weightValue);
     void updateWeight(VoxelIndex currentIndex, float weightValue);
 };

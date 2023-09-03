@@ -110,3 +110,23 @@ void VoxelUpdate::getColor(VoxelIndex centerIndex, uchar red, uchar green, uchar
         voxel[centerIndex.index_x][centerIndex.index_y][centerIndex.index_z].green = green;
     }
 }
+
+void VoxelUpdate::updateColor(VoxelIndex currentIndex, uchar red, uchar green, uchar blue, float weightValue)
+{
+    if(currentIndex.index_x <= 0 || currentIndex.index_y <= 0 || currentIndex.index_z <= 0) return;
+    else if(weightValue == 0) return;
+    else
+    {
+        uchar prevRed = voxel[currentIndex.index_x][currentIndex.index_y][currentIndex.index_z].red;
+        uchar prevBlue = voxel[currentIndex.index_x][currentIndex.index_y][currentIndex.index_z].blue;
+        uchar prevGreen = voxel[currentIndex.index_x][currentIndex.index_y][currentIndex.index_z].green;
+        float prevWeight = voxel[currentIndex.index_x][currentIndex.index_y][currentIndex.index_z].weight;
+        //update color
+        voxel[currentIndex.index_x][currentIndex.index_y][currentIndex.index_z].red = 
+            (prevWeight * prevRed + weightValue*red)/(prevWeight+weightValue);
+        voxel[currentIndex.index_x][currentIndex.index_y][currentIndex.index_z].blue = 
+            (prevWeight * prevBlue + weightValue*blue)/(prevWeight+weightValue);
+        voxel[currentIndex.index_x][currentIndex.index_y][currentIndex.index_z].green = 
+            (prevWeight * prevGreen + weightValue*green)/(prevWeight+weightValue);
+    }
+}
