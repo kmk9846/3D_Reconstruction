@@ -61,6 +61,7 @@ int main(int argc, char* argv[])
         {
             //m 단위를 cm 단위로 변경 -> m 단위로 통일
             PointCloud << point.x, point.y, point.z;
+
             findIndex = rayCast.rayCasting(Camera, PointCloud, truncateSize);
             // printf("start raycasting\n");
             for (const auto& voxelIndex : findIndex)
@@ -98,6 +99,7 @@ int main(int argc, char* argv[])
                 if (voxelIndex.index_z > maxIndex.index_z)
                     maxIndex.index_z = voxelIndex.index_z;
             }
+            generatePointCloud.points.clear();
         }
         clock_t end = clock();
         k+= 1;

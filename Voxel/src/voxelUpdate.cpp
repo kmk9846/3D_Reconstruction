@@ -32,8 +32,10 @@ float VoxelUpdate::linearWeight(float dist, int truncateSize)
 {
     float epsilon = 0.01;
     float delta = static_cast<float>(truncateSize) * 0.01;
+    float inclination = (-1)/(delta - epsilon);
+
     if(dist < epsilon) return 1.0f;
-    else if(dist >= epsilon && dist <= delta) return (-25*dist + 1.25);
+    else if(dist >= epsilon && dist <= delta) return (inclination * (dist - delta));
     else return 0.0f;
 }
 
@@ -58,16 +60,17 @@ float VoxelUpdate::narrowLinearWeight(float dist, int truncateSize)
 {
     float epsilon = 0.01;
     float delta = static_cast<float>(truncateSize) * 0.01;
+    float inclination = (-1)/(delta - epsilon);
     if(dist < epsilon && dist > -1*epsilon) return 1.0f;
-    else if(dist <= -1*epsilon && dist >= -delta) return (25*dist + 1.25);
-    else if(dist >= epsilon && dist <= delta) return (-25*dist + 1.25);
+    else if(dist <= -1*epsilon && dist >= -delta) return (-1 * inclination * (dist - (-1*delta)));
+    else if(dist >= epsilon && dist <= delta) return (inclination * (dist - delta));
     else return 0.0f;
 }
 
 float VoxelUpdate::normalDistributionWeight(float dist, int truncateSize)
 {
     float mean = 0;
-    float variance = 0.05;
+    float variance = 0.001;
     float coefficient = 1.0 / (std::sqrt(2.0 * M_PI * variance));
     float exponent = -((dist - mean) * (dist - mean)) / (2.0 * variance);
     return coefficient * std::exp(exponent);

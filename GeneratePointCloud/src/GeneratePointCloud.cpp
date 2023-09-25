@@ -154,7 +154,6 @@ PoseMap GeneratePointCloud::read_trajectory(const std::string& filename)
 // 식을 통해서 point 를 생성하고 맴버변수인 points vextor 에 push_back한다.
 void GeneratePointCloud::generate_pointcloud(const string& rgb_file, const string& depth_file, const Eigen::Matrix4f& transforms)
 {
-    points.clear();
     cv::Mat rgb = cv::imread(rgb_file);
     cv::Mat depth = cv::imread(depth_file, cv::IMREAD_UNCHANGED);
 
@@ -172,17 +171,18 @@ void GeneratePointCloud::generate_pointcloud(const string& rgb_file, const strin
             double Y = (v - centerY) * Z / focalLength_y;
             Eigen::Vector4f vec_org(X, Y, Z, 1);
             Eigen::Vector4f vec_transf = transforms * vec_org;
-
-            float dx = vec_transf[0] - transforms(0, 3);
-            float dy = vec_transf[1] - transforms(1, 3);
-            float dz = vec_transf[2] - transforms(2, 3);
-            float distance = std::sqrt(dx*dx + dy*dy + dz*dz);
-            if(distance <= 5 && distance > 0)
-            {
-                add_points={vec_transf[0], vec_transf[1], vec_transf[2], color[2], color[1], color[0]};
-                points.push_back(add_points);
-            }
-            else continue;
+            add_points={vec_transf[0], vec_transf[1], vec_transf[2], color[2], color[1], color[0]};
+            points.push_back(add_points);
+            // float dx = vec_transf[0] - transforms(0, 3);
+            // float dy = vec_transf[1] - transforms(1, 3);
+            // float dz = vec_transf[2] - transforms(2, 3);
+            // float distance = std::sqrt(dx*dx + dy*dy + dz*dz);
+            // if(distance <= 5 && distance > 0)
+            // {
+            //     add_points={vec_transf[0], vec_transf[1], vec_transf[2], color[2], color[1], color[0]};
+            //     points.push_back(add_points);
+            // }
+            // else continue;
         }
     }
 }
