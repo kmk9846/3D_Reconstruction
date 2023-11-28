@@ -13,7 +13,7 @@ typedef Eigen::Matrix<float, 3, 1> Point;
 const int VoxelSize_X = 1024;
 const int VoxelSize_Y = 1024;
 const int VoxelSize_Z = 512;
-const float VoxelUnit = 0.01;
+const float VoxelUnit = 0.014;
 
 typedef struct _Voxel{
     float weight;
@@ -32,10 +32,8 @@ typedef struct _VoxelIndex{
 
 class VoxelGrid{
 public:
-    //init voxel data
     VoxelGrid();
     ~VoxelGrid();
-    //크기떄문에 동적으로 할당하기
     Voxel ***voxel = new Voxel**[VoxelSize_X];
     Point centerVoxel(VoxelIndex voxelIndex);
 };

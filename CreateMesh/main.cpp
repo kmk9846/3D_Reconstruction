@@ -53,9 +53,6 @@ int main(int argc, char* argv[])
 
         vector<PointsData>rayCasting = rayCast.grouping(generatePointCloud.points);
         printf("Point size : [%lu]\n", rayCasting.size());
-        //여기 부분을 thread 로 나누어서 작업을 해야한다.
-        //point 의 개수를 나누어서 실행
-        //lock 을 어디다 걸어야할까? sdf 를 update 하는 부분? findIndex 부터 lock?
         clock_t start = clock();
         for (auto point : rayCasting) 
         {
@@ -63,7 +60,6 @@ int main(int argc, char* argv[])
             PointCloud << point.x, point.y, point.z;
 
             findIndex = rayCast.rayCasting(Camera, PointCloud, truncateSize);
-            // printf("start raycasting\n");
             for (const auto& voxelIndex : findIndex)
             {   
                 Point voxel = createMesh.voxelUpdate.centerVoxel(voxelIndex);
@@ -71,7 +67,7 @@ int main(int argc, char* argv[])
                 if((PointCloud - Camera).norm() >= (voxel - Camera).norm()) dist = (voxel - PointCloud).norm();
                 else dist = -1 * (voxel - PointCloud).norm();
                 
-                float weightValue = 1.0;
+                float weightValue = 0.0;
                 if(weightUpdate == 0) weightValue = createMesh.voxelUpdate.exponentialWeight(dist, truncateSize);
                 else if(weightUpdate == 1) weightValue = createMesh.voxelUpdate.linearWeight(dist, truncateSize);
                 else if(weightUpdate == 2) weightValue = createMesh.voxelUpdate.constantWeight(dist, truncateSize);

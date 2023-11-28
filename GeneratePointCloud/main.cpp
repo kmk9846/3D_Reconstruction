@@ -18,7 +18,6 @@ bool comparePointsY(const PointsData& p1, const PointsData& p2)
 
 int main(int argc, char* argv[])
 {
-    //첫번째 인자는 data 가 있는 파일 경로, 두 번째 인자로 받는 size 값은 0.02*size 씩 건너뛰어서 point 생성
     string filePath = argv[1];
     int startFile = atoi(argv[2]);
     int fileNum = atoi(argv[3]);
@@ -59,5 +58,3 @@ int main(int argc, char* argv[])
     generatePointCloud.write_ply("result_test.ply", generatePointCloud.points);
     return 0;
 }
-
-//실행 방법 ./main 파일경로 size 값

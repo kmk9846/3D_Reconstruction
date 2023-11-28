@@ -44,7 +44,6 @@ public :
 
     //make point cloud and make ply file
     void generate_pointcloud(const string& rgb_file, const string& depth_file, const Eigen::Matrix4f& transforms);
-    // bool comparePoints(const PointsData& p1, const PointsData& p2);
     void write_ply(string ply_file, vector<PointsData> points);
 
 private:

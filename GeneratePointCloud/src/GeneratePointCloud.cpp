@@ -173,16 +173,6 @@ void GeneratePointCloud::generate_pointcloud(const string& rgb_file, const strin
             Eigen::Vector4f vec_transf = transforms * vec_org;
             add_points={vec_transf[0], vec_transf[1], vec_transf[2], color[2], color[1], color[0]};
             points.push_back(add_points);
-            // float dx = vec_transf[0] - transforms(0, 3);
-            // float dy = vec_transf[1] - transforms(1, 3);
-            // float dz = vec_transf[2] - transforms(2, 3);
-            // float distance = std::sqrt(dx*dx + dy*dy + dz*dz);
-            // if(distance <= 5 && distance > 0)
-            // {
-            //     add_points={vec_transf[0], vec_transf[1], vec_transf[2], color[2], color[1], color[0]};
-            //     points.push_back(add_points);
-            // }
-            // else continue;
         }
     }
 }

@@ -8,7 +8,7 @@
 using namespace std;
 
 const float weight = 1.0;
-const float weightMax = 100000.0; // 만에서 10만
+const float weightMax = 100000.0;
 
 class VoxelUpdate : public VoxelGrid {
 public:

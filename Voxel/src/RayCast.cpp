@@ -22,7 +22,6 @@ VoxelIndex RayCast::pointToVoxel(const Point& point)
     return index;
 }
 
-// 뒤에 어느정도 더 해주기 voxel 의 4배 정도
 bool RayCast::endRay(VoxelIndex currentIndex, VoxelIndex targetIndex, 
     int truncatedX, int truncatedY, int truncatedZ)
 {

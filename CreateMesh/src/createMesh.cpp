@@ -47,11 +47,6 @@ Point CreateMesh::interpolation(int vertexnum1, int vertexnum2, const Point& vox
         interpolation = ((getVertex(vertexnum1, voxelOrigin) * abs(vertexSDF[vertexnum2-1])) +
                         (getVertex(vertexnum2, voxelOrigin) * abs(vertexSDF[vertexnum1-1]))) /
                         ((abs(vertexSDF[vertexnum1-1])) + (abs(vertexSDF[vertexnum2-1])));
-
-        // interpolation = ((getVertex(vertexnum1, voxelOrigin)) +
-        //                 (getVertex(vertexnum2, voxelOrigin))) /
-        //                 2;
-        
     }
     return interpolation;
 }
@@ -106,20 +101,6 @@ Point CreateMesh::getSDFVertex(int edge_num, const Point& voxelCenter)
     else if(edge_num == 10) SDFvertex << interpolation(3, 7, voxelCenter);
     else if(edge_num == 11) SDFvertex << interpolation(4, 8, voxelCenter);
     return SDFvertex;
-}
-
-bool CreateMesh::checkDuplicate(const MeshInfo& a, const MeshInfo& b) {
-    return a.x == b.x && a.y == b.y && a.z == b.z;
-}
-
-// 벡터에 요소를 추가할 때 중복 체크
-bool CreateMesh::isDuplicateExists(const std::vector<MeshInfo>& vec, const MeshInfo& newItem) {
-    for (const auto& item : vec) {
-        if (checkDuplicate(item, newItem)) {
-            return true;
-        }
-    }
-    return false;
 }
 
 void CreateMesh::generateMesh(int voxelSizeX, int voxelSizeY, int voxelSizeZ, VoxelIndex maxIndex, VoxelIndex minIndex, float isolevel)

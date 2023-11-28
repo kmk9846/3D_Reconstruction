@@ -69,11 +69,16 @@ float VoxelUpdate::narrowLinearWeight(float dist, int truncateSize)
 
 float VoxelUpdate::normalDistributionWeight(float dist, int truncateSize)
 {
-    float mean = 0;
-    float variance = 0.001;
-    float coefficient = 1.0 / (std::sqrt(2.0 * M_PI * variance));
-    float exponent = -((dist - mean) * (dist - mean)) / (2.0 * variance);
-    return coefficient * std::exp(exponent);
+    float sigmoid = 1.0 / (1.0 + exp(-dist));
+    float X = dist * (2/truncateSize);
+
+    float epsilon = 0.03;
+    float delta = static_cast<float>(truncateSize) * 0.01;
+    float sigma = 0.01;
+    if (dist < epsilon) return 1.0f;
+    else if (dist >= epsilon && dist <= delta) return abs(1.0 - tanh(dist) * tanh(dist));
+    else return 0.0f;
+    
 }
 
 void VoxelUpdate::updateSDF(VoxelIndex currentIndex, float currentSDF, float weightValue)
@@ -84,7 +89,6 @@ void VoxelUpdate::updateSDF(VoxelIndex currentIndex, float currentSDF, float wei
     {
         float prevSDF = voxel[currentIndex.index_x][currentIndex.index_y][currentIndex.index_z].sdf;
         float prevWeight = voxel[currentIndex.index_x][currentIndex.index_y][currentIndex.index_z].weight;
-        //update current sdf
         voxel[currentIndex.index_x][currentIndex.index_y][currentIndex.index_z].sdf = 
             (prevWeight * prevSDF + weightValue*currentSDF)/(prevWeight+weightValue);
     }
@@ -97,7 +101,6 @@ void VoxelUpdate::updateWeight(VoxelIndex currentIndex, float weightValue)
     else
     {
         float prevWeight = voxel[currentIndex.index_x][currentIndex.index_y][currentIndex.index_z].weight;
-        //update voxel Weight
         voxel[currentIndex.index_x][currentIndex.index_y][currentIndex.index_z].weight =
             min(prevWeight + weightValue, weightMax);
     }
